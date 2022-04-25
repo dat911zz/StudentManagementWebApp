@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Trường ĐH Lùa Gà</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("https://unicons.iconscout.com/release/v4.0.0/css/line.css");
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -21,7 +22,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home") </li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink( "Intro", "Intro", "Home")</li>
@@ -33,6 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
+            <p>Information about this web</p>
             <p>&copy; 23/04/2022 - Author: Vu Dat</p>
             <p class="text-danger">Do Not Copy - This website is used for Educational purpose only!</p>
         </footer>

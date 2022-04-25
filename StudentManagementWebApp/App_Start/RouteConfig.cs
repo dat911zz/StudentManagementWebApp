@@ -9,6 +9,10 @@ namespace StudentManagementWebApp
 {
     public class RouteConfig
     {
+        /// <summary>
+        /// Register Routes into Route Table
+        /// </summary>
+        /// <param name="routes"></param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
