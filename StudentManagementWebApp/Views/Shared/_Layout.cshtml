@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Trường ĐH Lùa Gà</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("https://unicons.iconscout.com/release/v4.0.0/css/line.css");
+    @Styles.Render("https://unicons.iconscout.com/release/v4.0.0/css/line.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -18,14 +18,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Mã trường: DHLG", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*@Html.ActionLink("Mã trường: DHLG", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }).ToHtmlString();*@
+                <a href="/"><i class="uil uil-atom" style="color: #fff; font-size: 36px; font-weight: 500; padding-top: 20px; "></i></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home") </li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink( "Intro", "Intro", "Home")</li>
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Về chúng tôi", "About", "Home")</li>
+                    <li>@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Khác", "Intro", "Home")</li>
                 </ul>
             </div>
         </div>

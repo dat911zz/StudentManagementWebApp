@@ -4322,6 +4322,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-bottom: 0;
   border-width: 1px 0 0;
 }
+
 .container > .navbar-header,
 .container-fluid > .navbar-header,
 .container > .navbar-collapse,
@@ -4665,9 +4666,11 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #222;
-  border-color: #080808;
+    /*    background-color: #222;
+*/  background-color: #384289;
+    border-color: #080808;
 }
+
 .navbar-inverse .navbar-brand {
   color: #9d9d9d;
 }
@@ -4685,7 +4688,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
   color: #fff;
-  background-color: transparent;
+  /*background-color: transparent;*/
+  background-color: #777;
 }
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
@@ -6621,8 +6625,11 @@ button.close {
 .affix {
   position: fixed;
 }
+.a-rotate-180 {
+    transform: rotate(180deg);
+}
 @-ms-viewport {
-  width: device-width;
+    width: device-width;
 }
 .visible-xs,
 .visible-sm,
