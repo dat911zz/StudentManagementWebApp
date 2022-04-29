@@ -1,0 +1,49 @@
+﻿using StudentManagementWebApp.Interface.IData;
+using StudentManagementWebApp.Interface.IServices;
+using StudentManagementWebApp.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StudentManagementWebApp.Services
+{
+    public class StudentService : IStudentService
+    {
+        private IStudentData _svData;
+        public StudentService(IStudentData svData)
+        {
+            _svData = svData;
+        }
+        public Student Create(string ma, string ten, string gioitinh, DateTime ns, string lop, string khoa)
+        {
+            return new Student(ma, ten, gioitinh, ns, lop, khoa);
+        }
+        public List<Student> GetAll()
+        {
+            return _svData.GetAllSV();
+        }
+        //Lấy thông tin Sinh Viên
+        public void GetInfo(Student sv)
+        {           
+            Console.Write($"\tMSSV: {sv.Id}" + Environment.NewLine +
+                $"\tHọ tên: {sv.Name}" + Environment.NewLine +
+                $"\tGiới tính: {sv.Gender}" + Environment.NewLine +
+                $"\tNgày sinh: {sv.DayOfBirth.ToShortDateString()}" + Environment.NewLine +
+                $"\tLớp: {sv.ClassId}" + Environment.NewLine +
+                $"\tKhóa: {sv.Faculty}" + Environment.NewLine
+                );
+        }
+        //Auto DKHP cho Sinh Viên
+        public void AutoImportCTHP(Student sv, string tenMH, int soTiet, double diemQT, double diemTP)
+        {
+            ResultService kqs = new ResultService();
+            sv.CourseDetail.SubjectList.Add(new Result(new Subject(tenMH, soTiet), new Score(diemQT, diemTP)));
+            foreach (var item in sv.CourseDetail.SubjectList)
+            {
+                kqs.GetInfoAll(item);
+            }
+        }
+    }
+}

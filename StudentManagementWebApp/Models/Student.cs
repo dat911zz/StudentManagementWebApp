@@ -32,11 +32,17 @@ namespace StudentManagementWebApp.Models
         /// Khoa
         /// </summary>
         public virtual string Faculty { get; set; }
-
+        /// <summary>
+        /// Chi tiết học phần
+        /// </summary>
+        public virtual Course CourseDetail { get; set; }
 
         #endregion
         #region Contructors
-        public Student() { }
+        public Student() 
+        {
+            this.CourseDetail = new Course();
+        }
         public Student(string id, string name, string gender, DateTime dayOfBirth, string classId, string faculty)
         {
             Id = id;
@@ -45,6 +51,7 @@ namespace StudentManagementWebApp.Models
             DayOfBirth = dayOfBirth;
             ClassId = classId;
             Faculty = faculty;
+            CourseDetail = new Course();
         }
         public Student(Student x)
         {
@@ -54,6 +61,7 @@ namespace StudentManagementWebApp.Models
             this.DayOfBirth = x.DayOfBirth;
             this.ClassId = x.ClassId;
             this.Faculty = x.Faculty;
+            this.CourseDetail = x.CourseDetail;
         }
         #endregion
     }

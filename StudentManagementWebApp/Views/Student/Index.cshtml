@@ -1,7 +1,73 @@
-﻿@{ 
+﻿@model IEnumerable<StudentManagementWebApp.Models.Student>
+@{
     ViewBag.Title = "Dashboard for Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="text-capitalize text-center">
+    <h1 class="text-capitalize text-info">Trang thông tin sinh viên</h1>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayName("Mã số sinh viên")
+                @*@Html.DisplayNameFor(model => model.Id)*@
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("Họ và tên")
+                @*@Html.DisplayNameFor(model => model.Name)*@
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("Giới tính")
+                @*@Html.DisplayNameFor(model => model.Gender)*@
+            </th>
+            <th class="text-center">
+                @*@Html.DisplayNameFor(model => model.DayOfBirth)*@
+                @Html.DisplayName("Ngày sinh")
+            </th>
+            <th class="text-center">
+                @*@Html.DisplayNameFor(model => model.ClassId)*@
+                @Html.DisplayName("Lớp")
+            </th>
+            <th class="text-center">
+                @*@Html.DisplayNameFor(model => model.Faculty)*@
+                @Html.DisplayName("Khoa")
+            </th>
+            <th></th>
+        </tr>
 
-<div class="text-capitalize text-center text-success">
-    <h1>Trang thông tin sinh viên</h1>
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+
+            @*@Html.DisplayFor(modelItem => item.DayOfBirth, "{00:00:00}")*@
+            @DateTime.Parse(Html.DisplayFor(modelItem => item.DayOfBirth).ToString()).ToShortDateString()
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Faculty)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+        }
+
+    </table>
 </div>

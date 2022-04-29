@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns = "urn:nhibernate-mapping-2.2"
+   assembly = "StudentManagementWebApp" namespace = "StudentManagementWebApp">
+	<class name = "SinhVien">
+		<id name = "MaSV"/>
+		<property name = "TenSV"/>
+		<property name = "GioiTinh"/>
+		<property name = "NgaySinh"/>
+		<property name = "Lop"/>
+		<property name = "Khoa"/>
+	</class>
+	<class name = "MonHoc">
+		<id name = "tenMH"></id>
+		<property name = "soTiet"/>
+	</class>	
+	<class name ="dkhp">
+		<id name ="STT"></id>
+		<property name = "MaSV"/>
+		<property name = "MH1"/>
+		<property name = "MH2"/>
+		<property name = "MH3"/>
+		<property name = "MH4"/>
+		<property name = "MH5"/>
+		<property name = "MH6"/>
+		<property name = "MH7"/>
+	</class>
+</hibernate-mapping>

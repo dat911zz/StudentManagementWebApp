@@ -48,6 +48,15 @@
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.4.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=5.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.5.1.1\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate, Version=3.1.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentNHibernate.3.1.0\lib\net461\FluentNHibernate.dll</HintPath>
     </Reference>
@@ -67,6 +76,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
@@ -138,9 +148,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Data\Database\SQL.cs" />
+    <Compile Include="Data\Database\XML.cs" />
+    <Compile Include="Data\ORM\Dapper.cs" />
+    <Compile Include="Data\ORM\NHibernate_.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Installer\ServicesInstaller.cs" />
+    <Compile Include="Interface\IData\ICourseData.cs" />
+    <Compile Include="Interface\IData\ISubjectData.cs" />
+    <Compile Include="Interface\IData\IStudentData.cs" />
+    <Compile Include="Interface\IServices\ISubjectService.cs" />
+    <Compile Include="Interface\IServices\IStudentService.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\DKHP.cs" />
     <Compile Include="Models\Map\DKHPMap.cs" />
@@ -151,12 +171,20 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ScoreService.cs" />
+    <Compile Include="Services\ResultService.cs" />
+    <Compile Include="Services\SubjectService.cs" />
+    <Compile Include="Services\StudentService.cs" />
+    <Compile Include="Utilites\DatabaseHelper.cs" />
+    <Compile Include="Utilites\Manager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Data\ORM\hibernate.cfg.xml" />
+    <Content Include="Data\ORM\NHibernateOld\SinhVien.hbm.xml" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
