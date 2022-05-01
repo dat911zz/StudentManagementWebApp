@@ -10,12 +10,12 @@ namespace StudentManagementWebApp.Models.Map
     {
         public StudentMap()
         {
-            Id(x => x.Id);
-            Map(x => x.Name);
-            Map(x => x.Gender);
-            Map(x => x.DayOfBirth);
-            Map(x => x.ClassId);
-            Map(x => x.Faculty);
+            Id(x => x.Id).Column("MaSV");  
+            Map(x => x.Name).Column("TenSV");
+            Map(x => x.Gender).Column("GioiTinh");
+            Map(x => x.DayOfBirth).Column("NgaySinh");
+            Map(x => x.ClassId).Column("Lop");
+            Map(x => x.Faculty).Column("Khoa");
 
             Table("SinhVien");
         }

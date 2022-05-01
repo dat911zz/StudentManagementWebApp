@@ -10,8 +10,8 @@ namespace StudentManagementWebApp.Models.Map
     {
         public SubjectMap()
         {
-            Id(x => x.Name);
-            Map(x => x.NumOfLessons);
+            Id(x => x.Name).Column("TenMH");
+            Map(x => x.NumOfLessons).Column("SoTiet");
 
             Table("MonHoc");
         }

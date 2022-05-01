@@ -26,6 +26,12 @@ namespace StudentManagementWebApp.Installer
             container.Register(
                 Component
                     .For<ISubjectData, IStudentData, ICourseData>()
+                    .ImplementedBy<Data.ORM.NHibernate_>()
+                    .DependsOn(Dependency.OnValue("connectionString", DatabaseHelper.GenerateConnectionString("", "SinhVien", "test01", "1234")))
+                    );
+            container.Register(
+                Component
+                    .For<ISubjectData, IStudentData, ICourseData>()
                     .ImplementedBy<Data.ORM.Dapper>()
                     .DependsOn(Dependency.OnValue("connectionString", DatabaseHelper.GenerateConnectionString("", "SinhVien", "test01", "1234")))
                     );
@@ -34,12 +40,7 @@ namespace StudentManagementWebApp.Installer
                     .For<ISubjectData, IStudentData, ICourseData>()
                     .ImplementedBy<SQL>()
                     .LifestyleTransient());
-            //container.Register(
-            //    Component
-            //        .For<ISubjectData, IStudentData, ICourseData>()
-            //        .ImplementedBy<Data.ORM.NHibernate_>()
-            //        .DependsOn(Dependency.OnValue("connectionString", DatabaseHelper.GenerateConnectionString("", "SinhVien", "test01", "1234")))
-            //        );           
+            
             container.Register(
                 Component
                     .For<IStudentService>()

@@ -3,7 +3,7 @@
 	<session-factory>
 		<property name = "connection.connection_string">
 			Data Source = "";
-			Initial Catalog = "SinhVien";
+			Initial Catalog = "Student";
 			Persist Security Info = True;
 			User ID = test01;
 			Password = 1234;

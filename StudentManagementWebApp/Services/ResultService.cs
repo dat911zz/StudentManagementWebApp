@@ -22,15 +22,15 @@ namespace StudentManagementWebApp.Services
         }
         public void GetInfoAll(Result kq)
         {
-            GetInfoMonHoc(kq);
-            GetInfoDiem(kq);         
+            GetInfoSubject(kq);
+            GetInfoScore(kq);         
         }
-        public void GetInfoMonHoc(Result kq)
+        public void GetInfoSubject(Result kq)
         {
             SubjectService mhs = container.Resolve<SubjectService>();
             mhs.GetInfo(kq.SubjectDetail);
         }
-        public void GetInfoDiem(Result kq)
+        public void GetInfoScore(Result kq)
         {
             ScoreService dsv = container.Resolve<ScoreService>();
             dsv.GetInfo(kq.ScoreDetail);

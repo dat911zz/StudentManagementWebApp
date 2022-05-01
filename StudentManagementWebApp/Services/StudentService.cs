@@ -36,10 +36,10 @@ namespace StudentManagementWebApp.Services
                 );
         }
         //Auto DKHP cho Sinh Viên
-        public void AutoImportCTHP(Student sv, string tenMH, int soTiet, double diemQT, double diemTP)
+        public void AutoImportCTHP(Student sv, string tenMH, int soTiet, double ScoreQT, double ScoreTP)
         {
             ResultService kqs = new ResultService();
-            sv.CourseDetail.SubjectList.Add(new Result(new Subject(tenMH, soTiet), new Score(diemQT, diemTP)));
+            sv.CourseDetail.SubjectList.Add(new Result(new Subject(tenMH, soTiet), new Score(ScoreQT, ScoreTP)));
             foreach (var item in sv.CourseDetail.SubjectList)
             {
                 kqs.GetInfoAll(item);

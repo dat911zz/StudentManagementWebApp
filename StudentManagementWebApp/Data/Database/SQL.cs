@@ -36,11 +36,11 @@ namespace StudentManagementWebApp.Data.Database
             return GetConnection(datasource, database, username, password);
         }
 
-        public DataTable SetDataSinhVien()
+        public DataTable SetDataStudent()
         {
             return SetDataTable("dataGridView1", "SELECT * FROM SinhVien");
         }
-        public DataTable SetDataMonHoc()
+        public DataTable SetDataSubject()
         {
             return SetDataTable("dataGridView1", "SELECT * FROM MonHoc");
         }
@@ -65,7 +65,7 @@ namespace StudentManagementWebApp.Data.Database
         //{
         //    SqlConnection conn = GetConnection();
         //    conn.Open();
-        //    cmd = new SqlCommand("SELECT * FROM SinhVien", conn);
+        //    cmd = new SqlCommand("SELECT * FROM Student", conn);
         //    DataTable tbl = new DataTable();
         //    SqlDataAdapter da = new SqlDataAdapter(cmd);
         //    da.Fill(tbl);

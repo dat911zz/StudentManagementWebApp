@@ -58,9 +58,9 @@ namespace StudentManagementWebApp.Utilites
             }
         }
         #region Xuất console thông tin về sv
-        //public void GetInfoForm(List<SinhVien> list_sv)
+        //public void GetInfoForm(List<Student> list_sv)
         //{
-        //    KetQuaService kqs = container.Resolve<KetQuaService>();
+        //    ResultService kqs = container.Resolve<ResultService>();
         //    foreach (var item in list_sv)
         //    {
         //        Console.WriteLine($"- Sinh Viên {item.TenSV}");
@@ -70,9 +70,9 @@ namespace StudentManagementWebApp.Utilites
         //        }
         //    }
         //}
-        //public void GetAllListInfo(List<SinhVien> list_sv)
+        //public void GetAllListInfo(List<Student> list_sv)
         //{
-        //    KetQuaService kqs = container.Resolve<KetQuaService>();
+        //    ResultService kqs = container.Resolve<ResultService>();
         //    list_sv.ForEach(x => {
         //        Console.WriteLine($"- Sinh Viên {x.TenSV}");
         //        for (int i = 0; i < x.CTHP.DSMH.Count; i++)
@@ -81,20 +81,20 @@ namespace StudentManagementWebApp.Utilites
         //        }
         //    });
         //}
-        //public void GetAllMonHoc_SV(List<SinhVien> list_sv)
+        //public void GetAllSubject_SV(List<Student> list_sv)
         //{
-        //    KetQuaService kqs = container.Resolve<KetQuaService>();          
+        //    ResultService kqs = container.Resolve<ResultService>();          
         //    list_sv.ForEach(x => {
         //        Console.WriteLine($"- Sinh Viên {x.TenSV}");
         //        for (int i = 0; i < x.CTHP.DSMH.Count; i++)
         //        {
-        //            kqs.GetInfoMonHoc(x.CTHP.DSMH[i++]);
+        //            kqs.GetInfoSubject(x.CTHP.DSMH[i++]);
         //        }
         //    });
         //}
         #endregion
         #region Tải thông tin lên bảng ảo
-        public DataTable UploadMonHocSVIntoDGV(Student sv)
+        public DataTable UploadSubjectSVIntoDGV(Student sv)
         {
             int stt = 1;
             DataTable dt = new DataTable();
@@ -109,7 +109,7 @@ namespace StudentManagementWebApp.Utilites
             }
             return dt;
         }
-        public DataTable UploadDiemSVIntoDGV(Student sv)
+        public DataTable UploadScoreSVIntoDGV(Student sv)
         {
             int stt = 1;
             ScoreService ds = container.Resolve<ScoreService>();

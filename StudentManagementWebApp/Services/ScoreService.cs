@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 namespace StudentManagementWebApp.Services
 {
     /// <summary>
-    /// Class to interact with Diem 
+    /// Class to interact with Score 
     /// </summary>
     public class ScoreService
     {     
         //Ghi điểm môn học (sinh viên)
-        public virtual void setScore(Score kq, double DiemQT, double DiemTP)
+        public virtual void setScore(Score kq, double ScoreQT, double ScoreTP)
         {
-            if ((DiemQT < 0 || DiemQT > 10) && (DiemTP < 0 || DiemTP > 10))
+            if ((ScoreQT < 0 || ScoreQT > 10) && (ScoreTP < 0 || ScoreTP > 10))
             {
                 throw new Exception("Lỗi gòi: Nhập vượt ngoài phạm vi cho phép (0-10)");
             }
-            kq.QT = DiemQT;
-            kq.TP = DiemTP;
+            kq.QT = ScoreQT;
+            kq.TP = ScoreTP;
         }
         //Tính điểm tổng kết
         public virtual double finnalScore(Score d)

@@ -1,14 +1,13 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Tool.hbm2ddl;
-using StudentManagement.Interface.IData;
-using StudentManagement.Models;
-using StudentManagement.Utilites;
+using StudentManagementWebApp.Interface.IData;
+using StudentManagementWebApp.Models;
+using StudentManagementWebApp.Utilites;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,9 +15,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentManagement.Data.ORM
+namespace StudentManagementWebApp.Data.ORM
 {
-    public class NHibernate_ : ISinhVienData, IMonHocData, ICTHocPhanData
+    public class NHibernate_ : IStudentData, ISubjectData, ICourseData
     {
         private string connectionString;
         public NHibernate_(string connectionString)
@@ -30,24 +29,24 @@ namespace StudentManagement.Data.ORM
         /// Alternative ways for mapping class neither with .hbm.xml
         /// </summary>
         /// <param name="list_sv"></param>
-        public void GetDataSV(List<SinhVien> list_sv)
+        public void GetDataSV(List<Student> list_sv)
         {
-            int count = 0;
+            //int count = 0;
             using (ISession session = OpenSession())
             {
-                list_sv = session.Query<SinhVien>().ToList();
-                foreach (var sv in list_sv)
-                {
-                    Console.WriteLine("{0} \t{1} \t{2}", ++count, sv.MaSV, sv.TenSV);
-                }
+                list_sv = session.Query<Student>().ToList();
+                //foreach (var sv in list_sv)
+                //{
+                //    Console.WriteLine("{0} \t{1} \t{2}", ++count, sv.MaSV, sv.TenSV);
+                //}
             }
 
             #region Cách cũ
             //using (var session = sefact.OpenSession())
             //{
-            //    list_sv = session.Query<SinhVien>().ToList();
+            //    list_sv = session.Query<Student>().ToList();
             //    Console.WriteLine("\nFetch the complete list again\n");
-            //    var lsv = session.CreateCriteria<SinhVien>().List<SinhVien>();
+            //    var lsv = session.CreateCriteria<Student>().List<Student>();
             //    int count = 0;
             //    foreach (var sv in lsv)
             //    {
@@ -69,8 +68,8 @@ namespace StudentManagement.Data.ORM
                 )
                 .Mappings(m =>
                        m.FluentMappings
-                       .AddFromAssemblyOf<SinhVien>()
-                       .AddFromAssemblyOf<MonHoc>()
+                       .AddFromAssemblyOf<Student>()
+                       .AddFromAssemblyOf<Subject>()
                        .AddFromAssemblyOf<DKHP>()
                        )
                 .ExposeConfiguration(cfg => new SchemaExport(cfg)
@@ -80,35 +79,35 @@ namespace StudentManagement.Data.ORM
             return sessionFactory.OpenSession();
 
         }
-        public List<SinhVien> GetAllSV()
+        public List<Student> GetAllSV()
         {
-            List<SinhVien> list_sv = new List<SinhVien>();
-            int count = 0;
+            List<Student> list_sv = new List<Student>();
+            //int count = 0;
             using (ISession session = OpenSession())
             {
-                list_sv = session.Query<SinhVien>().ToList();
-                foreach (var sv in list_sv)
-                {
-                    Console.WriteLine("{0} \t{1} \t{2}", ++count, sv.MaSV, sv.TenSV);
-                }
+                list_sv = session.Query<Student>().ToList();
+                //foreach (var sv in list_sv)
+                //{
+                //    Console.WriteLine("{0} \t{1} \t{2}", ++count, sv.MaSV, sv.TenSV);
+                //}
             }
             return list_sv;
         }
-        public List<MonHoc> GetAllMH()
+        public List<Subject> GetAllMH()
         {
-            List<MonHoc> list_mh = new List<MonHoc>();
-            int count = 0;
+            List<Subject> list_mh = new List<Subject>();
+            //int count = 0;
             using (ISession session = OpenSession())
             {
-                list_mh = session.Query<MonHoc>().ToList();
-                foreach (var mh in list_mh)
-                {
-                    Console.WriteLine("{0} \t{1} \t{2}", ++count, mh.tenMH, mh.soTiet);
-                }
+                list_mh = session.Query<Subject>().ToList();
+                //foreach (var mh in list_mh)
+                //{
+                //    Console.WriteLine("{0} \t{1} \t{2}", ++count, mh.tenMH, mh.soTiet);
+                //}
             }
             return list_mh;
         }
-        public void GetAllCTHP(ref List<SinhVien> list_sv, List<MonHoc> list_mh)
+        public void GetAllCTHP(ref List<Student> list_sv, List<Subject> list_mh)
         {
             int count = 0;
 
@@ -122,8 +121,8 @@ namespace StudentManagement.Data.ORM
                     {
                         if (arr[i] == 1)
                         {
-                            x.CTHP.DSMH.Add(new KetQua(new MonHoc(list_mh[i]), new Diem()));
-                            Console.WriteLine("HP: {0} \t{1} \t{2}", i, list_hp[i].MaSV, list_hp[i].STT);
+                            x.CourseDetail.SubjectList.Add(new Result(new Subject(list_mh[i]), new Score()));
+                            //Console.WriteLine("HP: {0} \t{1} \t{2}", i, list_hp[i].MaSV, list_hp[i].STT);
                         }
                         
                     }
@@ -131,15 +130,15 @@ namespace StudentManagement.Data.ORM
                 
             }
         }
-        public void Add(SinhVien sv)
+        public void Add(Student sv)
         {
             throw new NotImplementedException();
         }
-        public void Add(MonHoc sv)
+        public void Add(Subject sv)
         {
             throw new NotImplementedException();
         }
-        public void Add(CTHocPhan cthp)
+        public void Add(Course cthp)
         {
             throw new NotImplementedException();
         }
@@ -180,7 +179,7 @@ namespace StudentManagement.Data.ORM
 
         //    //cfg.DataBaseIntegration(x =>
         //    //{
-        //    //    x.ConnectionString = DatabaseHelper.GenerateConnectionString("", "SinhVien", "test01", "1234");
+        //    //    x.ConnectionString = DatabaseHelper.GenerateConnectionString("", "Student", "test01", "1234");
         //    //    x.Driver<SqlClientDriver>();
         //    //    x.Dialect<MsSql2012Dialect>();
         //    //    x.LogSqlInConsole = true;//Show các câu lệnh SQL khi thực hiện hàm
@@ -196,7 +195,7 @@ namespace StudentManagement.Data.ORM
         //    //        DateTime date = new DateTime(2000, 7, 19);//yyyy-mm-dd
 
         //    //        //============Example For add sv into Table============
-        //    //        //var sinhvien1 = new SinhVien
+        //    //        //var Student1 = new Student
         //    //        //{
         //    //        //    MaSV = "111121",
         //    //        //    TenSV = "VCD",
@@ -207,14 +206,14 @@ namespace StudentManagement.Data.ORM
         //    //        //};
         //    //        //==================================
         //    //        Console.WriteLine("\nFetch the complete list again\n");
-        //    //        var students = session.CreateCriteria<SinhVien>().List<SinhVien>();
+        //    //        var students = session.CreateCriteria<Student>().List<Student>();
         //    //        int count = 0;
         //    //        foreach (var student in students)
         //    //        {
         //    //            Console.WriteLine("{0} \t{1} \t{2} \t{3}", ++count, student.MaSV, student.TenSV, student.GioiTinh);
 
         //    //        }
-        //    //        //session.Save(sinhvien1);
+        //    //        //session.Save(Student1);
         //    //        tx.CommitAsync();//Exception
         //    //    }
         //    //}

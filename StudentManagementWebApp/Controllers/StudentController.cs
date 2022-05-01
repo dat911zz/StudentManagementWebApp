@@ -1,4 +1,5 @@
 ﻿using Castle.Windsor;
+using StudentManagementWebApp.Installer;
 using StudentManagementWebApp.Interface.IServices;
 using StudentManagementWebApp.Models;
 using StudentManagementWebApp.Utilites;
@@ -24,15 +25,26 @@ namespace StudentManagementWebApp.Controllers
         //    };
 
         WindsorContainer container;
+        Manager mng;
         IStudentService service_sv;
         ISubjectService service_mh;
         static List<Student> studentList = new List<Student>();
         static List<Subject> subjectList = new List<Subject>();
+        public void SetupContainer()
+        {
+            container = new WindsorContainer();
+            container.Install(new ServicesInstaller());
+            mng = container.Resolve<Manager>();
+            service_sv = container.Resolve<IStudentService>();
+            service_mh = container.Resolve<ISubjectService>();
+            container.Dispose();
+        }
         // GET: Student
         public ActionResult Index()
         {
+            SetupContainer();
             //fetch students from the DB using Entity Framework here
-            Manager mng = container.Resolve<Manager>();
+            
             studentList = service_sv.GetAll();
             subjectList = service_mh.GetAll();
 

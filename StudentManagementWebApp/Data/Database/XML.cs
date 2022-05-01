@@ -1,4 +1,4 @@
-﻿using StudentManagement.Models;
+﻿using StudentManagementWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,39 +6,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using StudentManagement.Interface.IData;
+using StudentManagementWebApp.Interface.IData;
 
 namespace StudentManagement.Data.Database
 {
-    //Class for XML Databse (for future)
-    public class XML : ISinhVienData, IMonHocData, ICTHocPhanData
+    //Class for XML Databse (for future)**** double ******* **** *****  
+    public class XML : IStudentData, ISubjectData, ICourseData
     {
-        public void Add(SinhVien sv)
+        public void Add(Student sv)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(MonHoc sv)
+        public void Add(Subject sv)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(CTHocPhan cthp)
+        public void Add(Course cthp)
         {
             throw new NotImplementedException();
         }
 
-        public void GetAllCTHP(ref List<SinhVien> list_sv, List<MonHoc> list_mh)
+        public void GetAllCTHP(ref List<Student> list_sv, List<Subject> list_mh)
         {
             throw new NotImplementedException();
         }
 
-        public List<MonHoc> GetAllMH()
+        public List<Subject> GetAllMH()
         {
             throw new NotImplementedException();
         }
 
-        public List<SinhVien> GetAllSV()
+        public List<Student> GetAllSV()
         {
             throw new NotImplementedException();
         }

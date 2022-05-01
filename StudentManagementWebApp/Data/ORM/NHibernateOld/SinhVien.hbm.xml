@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns = "urn:nhibernate-mapping-2.2"
    assembly = "StudentManagementWebApp" namespace = "StudentManagementWebApp">
-	<class name = "SinhVien">
+	<class name = "Student">
 		<id name = "MaSV"/>
 		<property name = "TenSV"/>
 		<property name = "GioiTinh"/>
@@ -9,7 +9,7 @@
 		<property name = "Lop"/>
 		<property name = "Khoa"/>
 	</class>
-	<class name = "MonHoc">
+	<class name = "Subject">
 		<id name = "tenMH"></id>
 		<property name = "soTiet"/>
 	</class>	
