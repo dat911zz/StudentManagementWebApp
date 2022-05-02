@@ -31,17 +31,24 @@ namespace StudentManagementWebApp.Controllers
             service_mh = container.Resolve<ISubjectService>();
             container.Dispose();
         }
+
+        public ActionResult LoadDB()
+        {
+            SetupContainer();
+            studentList = service_sv.GetAll();
+            subjectList = service_mh.GetAll();
+            mng.AutoWork(ref studentList, subjectList);
+            return RedirectToAction("Index");
+        }
+
         // GET: Student
         public ActionResult Index()
         {
             SetupContainer();
             //fetch students from the DB using Entity Framework here
+                      
             
-            studentList = service_sv.GetAll();
-            subjectList = service_mh.GetAll();
-
-            mng.AutoWork(ref studentList, subjectList);
-            return View(studentList);
+            return View(studentList.OrderBy(s=>s.Id));
         }
 
         //// GET: Student

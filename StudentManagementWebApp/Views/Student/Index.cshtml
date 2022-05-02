@@ -5,9 +5,21 @@
 }
 <div class="text-capitalize text-center">
     <h1 class="text-capitalize text-info">Trang thông tin sinh viên</h1>
-    <p>
+    @*<button class="btn-default" style="text-decoration: none; color: dodgerblue">
         @Html.ActionLink("Create New", "Create")
-    </p>
+    </button>*@
+    @*<button class="btn-default" style="text-decoration: none; color: dodgerblue">
+            @Html.ActionLink("Load DataBase", "LoadDB")
+        </button>*@
+    <div style="padding: 0 0 20px 0">
+    @Html.ActionLink("Create New", "Create", "Student", null,
+    new { @class = "btn btn-default btn-primary" }
+    )
+    @Html.ActionLink("Load Data Base", "LoadDB", "Student", null,
+    new { @class = "btn btn-default btn-primary" }
+    )
+
+    </div>
     <table class="table">
         <tr>
             <th class="text-center">
@@ -39,34 +51,34 @@
 
         @foreach (var item in Model)
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
 
-            @Html.DisplayFor(modelItem => item.DayOfBirth)
-            @*@DateTime.Parse(Html.DisplayFor(modelItem => item.DayOfBirth).ToString()).ToShortDateString()*@
+                    @Html.DisplayFor(modelItem => item.DayOfBirth)
+                    @*@DateTime.Parse(Html.DisplayFor(modelItem => item.DayOfBirth).ToString()).ToShortDateString()*@
 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClassId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Faculty)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Faculty)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
         }
 
     </table>
