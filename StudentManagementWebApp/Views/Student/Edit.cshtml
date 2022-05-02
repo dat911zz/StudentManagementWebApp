@@ -37,10 +37,7 @@
             @Html.LabelFor(model => model.DayOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DayOfBirth, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DayOfBirth, "", new { @class = "text-danger" }).ToString()
-                <!--@Html.ValidationMessageFor(model => model.DayOfBirth, "SOS", new { @class = "text-danger" })-->
-                @*@DateTime.Parse(@Html.ValidationMessageFor(model => model.DayOfBirth, "", new { @class = "text-danger" }).ToString()).ToShortDateString();*@
-                <!--@DateTime.Parse(Html.DisplayFor(modelItem => modelItem.DayOfBirth).ToString()).ToShortDateString()-->
+                @Html.ValidationMessageFor(model => model.DayOfBirth, "", new { @class = "text-danger" })
             </div>
         </div>
 

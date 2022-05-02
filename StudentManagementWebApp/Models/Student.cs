@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -23,6 +24,7 @@ namespace StudentManagementWebApp.Models
         /// <summary>
         /// Ngày sinh
         /// </summary>
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]//Định dạng xuất cho kiểu ngày giờ 
         public virtual DateTime DayOfBirth { get; set; }
         /// <summary>
         /// Lớp

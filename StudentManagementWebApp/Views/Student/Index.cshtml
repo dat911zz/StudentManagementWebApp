@@ -51,8 +51,8 @@
         </td>
         <td>
 
-            @*@Html.DisplayFor(modelItem => item.DayOfBirth, "{00:00:00}")*@
-            @DateTime.Parse(Html.DisplayFor(modelItem => item.DayOfBirth).ToString()).ToShortDateString()
+            @Html.DisplayFor(modelItem => item.DayOfBirth)
+            @*@DateTime.Parse(Html.DisplayFor(modelItem => item.DayOfBirth).ToString()).ToShortDateString()*@
 
         </td>
         <td>
