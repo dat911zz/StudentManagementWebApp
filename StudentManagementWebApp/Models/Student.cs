@@ -12,27 +12,34 @@ namespace StudentManagementWebApp.Models
         /// <summary>
         /// Mã sinh viên
         /// </summary>
+        [Required(ErrorMessage = "Vui lòng nhập mã!")]
         public virtual string Id { get; set; }
         /// <summary>
         /// Họ tên 
         /// </summary>
+        [Required(ErrorMessage = "Vui lòng nhập tên!")]
         public virtual string Name { get; set; }
         /// <summary>
         /// Giới tính
         /// </summary>
+        [Required]
         public virtual string Gender { get; set; }
         /// <summary>
         /// Ngày sinh
         /// </summary>
+        //[DataType(DataType.DateTime)]
+        [Required]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]//Định dạng xuất cho kiểu ngày giờ 
         public virtual DateTime DayOfBirth { get; set; }
         /// <summary>
         /// Lớp
         /// </summary>
+        [Required]
         public virtual string ClassId { get; set; }
         /// <summary>
         /// Khoa
         /// </summary>
+        [Required]
         public virtual string Faculty { get; set; }
         /// <summary>
         /// Chi tiết học phần
