@@ -1,0 +1,64 @@
+﻿@model StudentManagementWebApp.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Họ tên")
+            @*@Html.DisplayNameFor(model => model.Name)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Giới tính")
+            @*@Html.DisplayNameFor(model => model.Gender)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Ngày sinh")
+            @*@Html.DisplayNameFor(model => model.DayOfBirth)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Lớp")
+            @*@Html.DisplayNameFor(model => model.ClassId)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassId)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Khóa")
+            @*@Html.DisplayNameFor(model => model.CourseId)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

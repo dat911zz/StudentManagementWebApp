@@ -10,7 +10,7 @@ namespace StudentManagementWebApp.Interface.IServices
     public interface IStudentService
     {
         List<Student> GetAll();
-        Student Create(string ma, string ten, string gioitinh, DateTime ns, string lop, string khoa);
+        Student Create(string ma, string ten, string gioitinh, DateTime ns, string lop, string Khóa);
         void GetInfo(Student sv);
     }
 }

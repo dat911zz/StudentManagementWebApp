@@ -43,8 +43,8 @@
                 @Html.DisplayName("Lớp")
             </th>
             <th class="text-center">
-                @*@Html.DisplayNameFor(model => model.Faculty)*@
-                @Html.DisplayName("Khoa")
+                @*@Html.DisplayNameFor(model => model.CourseId)*@
+                @Html.DisplayName("Khóa")
             </th>
             <th></th>
         </tr>
@@ -71,7 +71,7 @@
                     @Html.DisplayFor(modelItem => item.ClassId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Faculty)
+                    @Html.DisplayFor(modelItem => item.CourseId)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

@@ -15,7 +15,7 @@ namespace StudentManagementWebApp.Models.Map
             Map(x => x.Gender).Column("GioiTinh");
             Map(x => x.DayOfBirth).Column("NgaySinh");
             Map(x => x.ClassId).Column("Lop");
-            Map(x => x.Faculty).Column("Khoa");
+            Map(x => x.CourseId).Column("Khoa");
 
             Table("SinhVien");
         }

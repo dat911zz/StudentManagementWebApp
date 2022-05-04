@@ -37,10 +37,10 @@ namespace StudentManagementWebApp.Models
         [Required]
         public virtual string ClassId { get; set; }
         /// <summary>
-        /// Khoa
+        /// Khóa
         /// </summary>
         [Required]
-        public virtual string Faculty { get; set; }
+        public virtual string CourseId { get; set; }
         /// <summary>
         /// Chi tiết học phần
         /// </summary>
@@ -52,14 +52,14 @@ namespace StudentManagementWebApp.Models
         {
             this.CourseDetail = new Course();
         }
-        public Student(string id, string name, string gender, DateTime dayOfBirth, string classId, string faculty)
+        public Student(string id, string name, string gender, DateTime dayOfBirth, string classId, string courseId)
         {
             Id = id;
             Name = name;
             Gender = gender;
             DayOfBirth = dayOfBirth;
             ClassId = classId;
-            Faculty = faculty;
+            CourseId = courseId;
             CourseDetail = new Course();
         }
         public Student(Student x)
@@ -69,7 +69,7 @@ namespace StudentManagementWebApp.Models
             this.Gender = x.Gender;
             this.DayOfBirth = x.DayOfBirth;
             this.ClassId = x.ClassId;
-            this.Faculty = x.Faculty;
+            this.CourseId = x.CourseId;
             this.CourseDetail = x.CourseDetail;
         }
         #endregion

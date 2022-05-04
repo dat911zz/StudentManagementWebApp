@@ -16,9 +16,9 @@ namespace StudentManagementWebApp.Services
         {
             _svData = svData;
         }
-        public Student Create(string ma, string ten, string gioitinh, DateTime ns, string lop, string khoa)
+        public Student Create(string ma, string ten, string gioitinh, DateTime ns, string lop, string Khóa)
         {
-            return new Student(ma, ten, gioitinh, ns, lop, khoa);
+            return new Student(ma, ten, gioitinh, ns, lop, Khóa);
         }
         public List<Student> GetAll()
         {
@@ -32,7 +32,7 @@ namespace StudentManagementWebApp.Services
                 $"\tGiới tính: {sv.Gender}" + Environment.NewLine +
                 $"\tNgày sinh: {sv.DayOfBirth.ToShortDateString()}" + Environment.NewLine +
                 $"\tLớp: {sv.ClassId}" + Environment.NewLine +
-                $"\tKhóa: {sv.Faculty}" + Environment.NewLine
+                $"\tKhóa: {sv.CourseId}" + Environment.NewLine
                 );
         }
         //Auto DKHP cho Sinh Viên

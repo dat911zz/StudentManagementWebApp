@@ -7,7 +7,7 @@
 		<property name = "GioiTinh"/>
 		<property name = "NgaySinh"/>
 		<property name = "Lop"/>
-		<property name = "Khoa"/>
+		<property name = "Khóa"/>
 	</class>
 	<class name = "Subject">
 		<id name = "tenMH"></id>

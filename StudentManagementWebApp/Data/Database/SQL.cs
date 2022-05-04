@@ -90,8 +90,8 @@ namespace StudentManagementWebApp.Data.Database
                         string gioitinh = reader.GetString(2);
                         DateTime ngaysinh = reader.GetDateTime(3);
                         string lop = reader.GetString(4);
-                        string khoa = reader.GetString(5);
-                        Student sv = new Student(mssv, tensv, gioitinh, ngaysinh, lop, khoa);
+                        string Khoa = reader.GetString(5);
+                        Student sv = new Student(mssv, tensv, gioitinh, ngaysinh, lop, Khoa);
                         list.Add(sv);
                     }
                 }

@@ -40,18 +40,23 @@ namespace StudentManagementWebApp.Controllers
             mng.AutoWork(ref studentList, subjectList);
             return RedirectToAction("Index");
         }
-
+        #region Index
         // GET: Student
         public ActionResult Index()
         {
             SetupContainer();
             //fetch students from the DB using Entity Framework here
-                      
-            
-            return View(studentList.OrderBy(s=>s.Id));
-        }
 
-        //// GET: Student
+
+            return View(studentList.OrderBy(s => s.Id));
+        }
+        #endregion
+        #region Edit
+        /// <summary>
+        /// GET: Student
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -75,29 +80,42 @@ namespace StudentManagementWebApp.Controllers
 
             return RedirectToAction("Index");
         }
-        [HandleError]
-        public ActionResult Contact()
+        #endregion
+        #region Details
+        [HttpGet]
+        public ActionResult Details(int id)
         {
-            string msg = null;
-            //ViewBag.Message = msg.Length; // this will throw an exception
-     
-
-            return RedirectToRoute("/Views/Shared/Error.cshtml");
+            var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
+            return View(std);
         }
-        protected override void OnException(ExceptionContext filterContext)
+        #endregion
+        #region Create
+        [HttpGet]
+        public ActionResult Create()
         {
-            filterContext.ExceptionHandled = true;
-
-            //Log the error!!
-
-            //Redirect to action
-            //filterContext.Result = RedirectToAction("Error", "InternalError");
-
-            // OR return specific view
-            filterContext.Result = new ViewResult
+            return View("Create");
+        }
+        [HttpPost]
+        public ActionResult Create(Student std)
+        {
+            int lastId = 1;
+            if (studentList.Count != 0)
             {
-                ViewName = "~/Views/Error/InternalError.cshtml"
-            };
+                lastId = int.Parse(studentList.Last().Id);              
+            }
+            std.Id = "" + ++lastId;
+            studentList.Add(std);
+            return RedirectToAction("Index");
         }
+        #endregion
+        #region Delete
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
+            studentList.Remove(std);
+            return RedirectToAction("Index");
+        }
+        #endregion
     }
 }
