@@ -27,7 +27,7 @@ namespace StudentManagementWebApp.Models
         /// <summary>
         /// Ngày sinh
         /// </summary>
-        //[DataType(DataType.DateTime)]
+        [DataType(DataType.DateTime)]
         [Required]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]//Định dạng xuất cho kiểu ngày giờ 
         public virtual DateTime DayOfBirth { get; set; }

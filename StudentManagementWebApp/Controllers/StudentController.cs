@@ -55,11 +55,6 @@ namespace StudentManagementWebApp.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            if (ModelState.IsValid)
-            {
-                ModelState.AddModelError("", "XIN LŨI BẠN TRÔNG NHỨ CỚT ẤY !");
-
-            }
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             return View(std);
         }
@@ -96,7 +91,7 @@ namespace StudentManagementWebApp.Controllers
             //Log the error!!
 
             //Redirect to action
-            filterContext.Result = RedirectToAction("Error", "InternalError");
+            //filterContext.Result = RedirectToAction("Error", "InternalError");
 
             // OR return specific view
             filterContext.Result = new ViewResult

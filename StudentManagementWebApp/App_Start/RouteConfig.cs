@@ -38,6 +38,16 @@ namespace StudentManagementWebApp
                 }
                 
             );
+            //routes.MapRoute(
+            //   name: "Error",
+            //   url: "{id}",
+            //   defaults: new
+            //   {
+            //       controller = "Error",
+            //       action = "PageNotFound"
+
+            //   }
+            //);
         }
     }
 }
