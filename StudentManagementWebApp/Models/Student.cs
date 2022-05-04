@@ -33,7 +33,7 @@ namespace StudentManagementWebApp.Models
         public virtual DateTime DayOfBirth { get; set; }
         /// <summary>
         /// Lớp
-        /// </summary>
+        /// </summary>  
         [Required]
         public virtual string ClassId { get; set; }
         /// <summary>

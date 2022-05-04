@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("https://unicons.iconscout.com/release/v4.0.0/css/line.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @*@Html.Partial("_MenuBar")*@ 
+    @*@{
+        Html.RenderAction("RenderMenu", "Test");
+    }*@
+    @{
+        Html.RenderPartial("_MenuBar");
+    }
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="panel-footer">
+        @RenderSection("Footer", true)
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

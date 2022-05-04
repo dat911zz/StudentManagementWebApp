@@ -45,6 +45,7 @@ namespace StudentManagementWebApp.Controllers
         public ActionResult Index()
         {
             SetupContainer();
+            ViewBag.TotalStudents = studentList.Count;
             //fetch students from the DB using Entity Framework here
 
 
