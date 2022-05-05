@@ -49,7 +49,7 @@ namespace StudentManagementWebApp.Controllers
             //fetch students from the DB using Entity Framework here
 
 
-            return View(studentList.OrderBy(s => s.Id));
+            return View(studentList.OrderBy(s => int.Parse(s.Id)));
         }
         #endregion
         #region Edit
