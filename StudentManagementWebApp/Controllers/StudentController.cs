@@ -49,7 +49,6 @@ namespace StudentManagementWebApp.Controllers
             ViewBag.TotalStudents = studentList.Count;
             //fetch students from the DB using Entity Framework here
 
-
             return View(studentList.OrderBy(s => int.Parse(s.Id)));
         }
         #endregion
