@@ -27,28 +27,22 @@
     <table class="table">
         <tr>
             <th class="text-center">
-                @Html.DisplayName("Mã số sinh viên")
-                @*@Html.DisplayNameFor(model => model.Id)*@
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th class="text-center">
-                @Html.DisplayName("Họ và tên")
-                @*@Html.DisplayNameFor(model => model.Name)*@
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th class="text-center">
-                @Html.DisplayName("Giới tính")
-                @*@Html.DisplayNameFor(model => model.Gender)*@
+                @Html.DisplayNameFor(model => model.Gender)
             </th>
             <th class="text-center">
-                @*@Html.DisplayNameFor(model => model.DayOfBirth)*@
-                @Html.DisplayName("Ngày sinh")
+                @Html.DisplayNameFor(model => model.DayOfBirth)
             </th>
             <th class="text-center">
-                @*@Html.DisplayNameFor(model => model.ClassId)*@
-                @Html.DisplayName("Lớp")
+                @Html.DisplayNameFor(model => model.ClassId)
             </th>
             <th class="text-center">
-                @*@Html.DisplayNameFor(model => model.CourseId)*@
-                @Html.DisplayName("Khóa")
+                @Html.DisplayNameFor(model => model.CourseId)
             </th>
             <th></th>
         </tr>
@@ -67,7 +61,13 @@
                 </td>
                 <td>
 
-                    @Html.DisplayFor(modelItem => item.DayOfBirth)
+                    @*@Html.DisplayFor(modelItem => item.DayOfBirth, "{0:dd/MM/yyyy}")*@
+                    @*@model DateTime*@
+                    @{
+                    var date = item.DayOfBirth.ToString("dd/MM/yyyy");
+                    @Html.DisplayName(date)
+                    }
+
                     @*@DateTime.Parse(Html.DisplayFor(modelItem => item.DayOfBirth).ToString()).ToShortDateString()*@
 
                 </td>

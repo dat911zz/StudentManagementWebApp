@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace StudentManagementWebApp.Controllers
 {
+    [HandleError]
     public class StudentController : Controller
     {
         WindsorContainer container;
@@ -62,6 +63,10 @@ namespace StudentManagementWebApp.Controllers
         public ActionResult Edit(int id)
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
+            if (std == null)
+            {
+                return RedirectToAction("ItemNotFound", "Error");
+            }
             return View(std);
         }
         /// <summary>
@@ -87,6 +92,10 @@ namespace StudentManagementWebApp.Controllers
         public ActionResult Details(int id)
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
+            if(std == null)
+            {
+                return RedirectToAction("ItemNotFound", "Error");
+            }
             return View(std);
         }
         #endregion

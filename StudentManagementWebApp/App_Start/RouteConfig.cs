@@ -34,7 +34,8 @@ namespace StudentManagementWebApp
                 defaults: new 
                 { 
                     controller = "Student", 
-                    action = "Index"
+                    action = "Index",
+                    id = UrlParameter.Optional
                 }
                 
             );
@@ -44,7 +45,8 @@ namespace StudentManagementWebApp
                defaults: new
                {
                    controller = "Test",
-                   action = "Index"
+                   action = "Index",
+                   id = UrlParameter.Optional
 
                }
             );

@@ -12,8 +12,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayName("Họ tên")
-            @*@Html.DisplayNameFor(model => model.Name)*@
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
@@ -21,8 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayName("Giới tính")
-            @*@Html.DisplayNameFor(model => model.Gender)*@
+            @Html.DisplayNameFor(model => model.Gender)
         </dt>
 
         <dd>
@@ -30,17 +28,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayName("Ngày sinh")
-            @*@Html.DisplayNameFor(model => model.DayOfBirth)*@
+            @Html.DisplayNameFor(model => model.DayOfBirth)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DayOfBirth)
+            @*@Html.DisplayFor(model => model.DayOfBirth)*@
+            @{
+                var date = Model.DayOfBirth.ToString("dd/MM/yyyy");
+                @Html.DisplayName(date)
+            }
         </dd>
 
         <dt>
-            @Html.DisplayName("Lớp")
-            @*@Html.DisplayNameFor(model => model.ClassId)*@
+            @Html.DisplayNameFor(model => model.ClassId)
         </dt>
 
         <dd>
@@ -48,8 +48,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayName("Khóa")
-            @*@Html.DisplayNameFor(model => model.CourseId)*@
+            @Html.DisplayNameFor(model => model.CourseId)
         </dt>
 
         <dd>

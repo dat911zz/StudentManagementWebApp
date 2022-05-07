@@ -6,19 +6,21 @@ using System.Web.Mvc;
 
 namespace StudentManagementWebApp.Controllers
 {
-    [HandleError]
-    public class TestController : Controller
+    public class ErrorController : Controller
     {
-        // GET: Test
+        // GET: Error
         public ActionResult Index()
         {
             return View();
         }
 
-        [ChildActionOnly]
-        public ActionResult RenderMenu()
+        public ActionResult PageNotFound()
         {
-            return PartialView("_MenuBar");
+            return View();
+        }
+        public ActionResult ItemNotFound()
+        {
+            return View("ItemNotFound");
         }
     }
 }
