@@ -64,13 +64,16 @@ namespace StudentManagementWebApp.Utilites
         /// <returns></returns>
         public static string ConvertDataTableToHTML(DataTable dt)
         {
-            string html = "<table>";
+            string html = "";
             //add header row
+            html += "<thead>";
             html += "<tr>";
             for (int i = 0; i < dt.Columns.Count; i++)
-                html += "<td>" + dt.Columns[i].ColumnName + "</td>";
+                html += "<th>" + dt.Columns[i].ColumnName + "</th>";
             html += "</tr>";
+            html += "</thead>";
             //add rows
+            html += "<tbody>";
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 html += "<tr>";
@@ -78,7 +81,8 @@ namespace StudentManagementWebApp.Utilites
                     html += "<td>" + dt.Rows[i][j].ToString() + "</td>";
                 html += "</tr>";
             }
-            html += "</table>";
+            html += "</tbody>";
+            html += "";
             return html;
         }
         #region Xuất console thông tin về sv
@@ -147,7 +151,7 @@ namespace StudentManagementWebApp.Utilites
 
             foreach (var item in sv.CourseDetail.SubjectList)
             {
-                dt.Rows.Add(stt++, item.SubjectDetail.Name, item.SubjectDetail.NumOfLessons, item.ScoreDetail.QT, item.ScoreDetail.TP, ds.isPass(item.ScoreDetail) == true ? "Đậu" : "Trượt");           
+                dt.Rows.Add(stt++, item.SubjectDetail.Name.ToString(), item.SubjectDetail.NumOfLessons, item.ScoreDetail.QT, item.ScoreDetail.TP, ds.isPass(item.ScoreDetail) == true ? "Đậu" : "Trượt");           
             }
             return dt;
         }

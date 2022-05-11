@@ -63,52 +63,56 @@
 
         </dl>
     </div>
-    
-    @{
-        string tb = ViewBag.ScoreTB;
-        Html.Display("", "", tb);
-    }
-    @Html.Raw(ViewBag.ScoreTB)
-    <div class="col-md-6">
-        <table class="table table-hover table-striped">
-            <thead style="color: white; background: #222;">
-                <tr>
-                    <th>Cột 1</th>
-                    <th>Cột 2</th>
-                    <th>Cột 3</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Cộs1</td>
-                    <td>Cộs s2</td>
-                    <td>Csộts 3</td>
-                </tr>
-                <tr>
-                    <td>SOS</td>
-                    <td>PASSS?</td>
-                    <td>ssss</td>
-                </tr>
-                <tr>
-                    <td>SOS</td>
-                    <td>PASSS?</td>
-                    <td>ssss</td>
-                </tr>
-                <tr>
-                    <td>SOS</td>
-                    <td>PASSS?</td>
-                    <td>ssss</td>
-                </tr>
-                <tr>
-                    <td>SOS</td>
-                    <td>PASSS?</td>
-                    <td>ssss</td>
-                </tr>
-            </tbody>
 
-        </table>
-    </div>
+    @*@{
+            string tb = ViewBag.ScoreTB;
+            Html.Display("", "ResultTable", tb);
+        }*@
+    <table class="blueTable">
 
+        @Html.Raw(ViewBag.ScoreTB)
+    </table>
+    <!-- #region Table -->
+    @*<div class="col-md-6">
+            <table class="table table-hover table-striped">
+                <thead style="color: white; background: #222;">
+                    <tr>
+                        <th>Cột 1</th>
+                        <th>Cột 2</th>
+                        <th>Cột 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cộs1</td>
+                        <td>Cộs s2</td>
+                        <td>Csộts 3</td>
+                    </tr>
+                    <tr>
+                        <td>SOS</td>
+                        <td>PASSS?</td>
+                        <td>ssss</td>
+                    </tr>
+                    <tr>
+                        <td>SOS</td>
+                        <td>PASSS?</td>
+                        <td>ssss</td>
+                    </tr>
+                    <tr>
+                        <td>SOS</td>
+                        <td>PASSS?</td>
+                        <td>ssss</td>
+                    </tr>
+                    <tr>
+                        <td>SOS</td>
+                        <td>PASSS?</td>
+                        <td>ssss</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>*@
+    <!-- #endregion -->
 </div>
 <div class="container center-block">
     <p>
