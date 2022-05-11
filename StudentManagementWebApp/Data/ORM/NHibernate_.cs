@@ -35,10 +35,6 @@ namespace StudentManagementWebApp.Data.ORM
             using (ISession session = OpenSession())
             {
                 list_sv = session.Query<Student>().ToList();
-                //foreach (var sv in list_sv)
-                //{
-                //    Console.WriteLine("{0} \t{1} \t{2}", ++count, sv.MaSV, sv.TenSV);
-                //}
             }
 
             #region Cách cũ
@@ -86,10 +82,6 @@ namespace StudentManagementWebApp.Data.ORM
             using (ISession session = OpenSession())
             {
                 list_sv = session.Query<Student>().ToList();
-                //foreach (var sv in list_sv)
-                //{
-                //    Console.WriteLine("{0} \t{1} \t{2}", ++count, sv.MaSV, sv.TenSV);
-                //}
             }
             return list_sv;
         }
@@ -100,10 +92,6 @@ namespace StudentManagementWebApp.Data.ORM
             using (ISession session = OpenSession())
             {
                 list_mh = session.Query<Subject>().ToList();
-                //foreach (var mh in list_mh)
-                //{
-                //    Console.WriteLine("{0} \t{1} \t{2}", ++count, mh.tenMH, mh.soTiet);
-                //}
             }
             return list_mh;
         }
@@ -122,7 +110,6 @@ namespace StudentManagementWebApp.Data.ORM
                         if (arr[i] == 1)
                         {
                             x.CourseDetail.SubjectList.Add(new Result(new Subject(list_mh[i]), new Score()));
-                            //Console.WriteLine("HP: {0} \t{1} \t{2}", i, list_hp[i].MaSV, list_hp[i].STT);
                         }
                         
                     }
