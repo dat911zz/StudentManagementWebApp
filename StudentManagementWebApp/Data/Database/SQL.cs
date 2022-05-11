@@ -22,12 +22,29 @@ namespace StudentManagementWebApp.Data.Database
         //Khởi tạo kết nối tới CSDL
         public SqlConnection GetConnection(string datasource, string database, string username, string password)
         {
-            SqlConnection conn = new SqlConnection(DatabaseHelper.GenerateConnectionString(datasource, database, username, password));
-            return conn;
+            SqlConnection conn1 = new SqlConnection(DatabaseHelper.GenerateConnectionString(datasource, database, username, password));
+            SqlConnection conn2 = new SqlConnection("workstation id=DBSinhVien.mssql.somee.com;packet size=4096;user id=ADMIN911;pwd=Vungodat123;data source=DBSinhVien.mssql.somee.com;persist security info=False;initial catalog=DBSinhVien");
+            return conn2;
 
         }
         //Test kết nối với mẫu chuỗi kết nối
+        /// <summary>
+        /// Local DB dat911zz_SQLLogin_1
+        /// </summary>
+        /// <returns></returns>
         public SqlConnection GetConnection()
+        {
+            string datasource = $@"";
+            string database = "SinhVien";
+            string username = "test01";
+            string password = "1234";          
+            return GetConnection(datasource, database, username, password);
+        }
+        /// <summary>
+        /// Cloud Server
+        /// </summary>
+        /// <returns></returns>
+        public SqlConnection GetConnectionSV()
         {
             string datasource = $@"";
             string database = "SinhVien";
@@ -35,6 +52,7 @@ namespace StudentManagementWebApp.Data.Database
             string password = "1234";
             return GetConnection(datasource, database, username, password);
         }
+
 
         public DataTable SetDataStudent()
         {

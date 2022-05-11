@@ -22,3 +22,10 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*Set font for all web*/
+* {
+    font-family: Tahoma;
+    font-style: normal;
+    font-weight: 400;
+}

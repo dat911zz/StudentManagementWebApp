@@ -3,6 +3,7 @@ using StudentManagementWebApp.Installer;
 using StudentManagementWebApp.Interface.IServices;
 using StudentManagementWebApp.Models;
 using StudentManagementWebApp.Utilites;
+using System.Web.UI.HtmlControls;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -90,11 +91,15 @@ namespace StudentManagementWebApp.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
+            SetupContainer();
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             if(std == null)
             {
                 return RedirectToAction("ItemNotFound", "Error");
             }
+
+            ViewBag.ScoreTB = Manager.ConvertDataTableToHTML(mng.UploadScoreSVIntoDGV(std));
+            
             return View(std);
         }
         #endregion

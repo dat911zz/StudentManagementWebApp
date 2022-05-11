@@ -4,60 +4,115 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <h2>View</h2>
 
-<div>
+<div class="container center-block">
     <h4>Student</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gender)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gender)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DayOfBirth)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.DayOfBirth)
+            </dt>
 
-        <dd>
-            @*@Html.DisplayFor(model => model.DayOfBirth)*@
-            @{
-                var date = Model.DayOfBirth.ToString("dd/MM/yyyy");
-                @Html.DisplayName(date)
-            }
-        </dd>
+            <dd>
+                @*@Html.DisplayFor(model => model.DayOfBirth)*@
+                @{
+                    var date = Model.DayOfBirth.ToString("dd/MM/yyyy");
+                    @Html.DisplayName(date)
+                }
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ClassId)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ClassId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ClassId)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ClassId)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CourseId)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CourseId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CourseId)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CourseId)
 
-    </dl>
+            </dd>
+
+        </dl>
+    </div>
+    
+    @{
+        string tb = ViewBag.ScoreTB;
+        Html.Display("", "", tb);
+    }
+    @Html.Raw(ViewBag.ScoreTB)
+    <div class="col-md-6">
+        <table class="table table-hover table-striped">
+            <thead style="color: white; background: #222;">
+                <tr>
+                    <th>Cột 1</th>
+                    <th>Cột 2</th>
+                    <th>Cột 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cộs1</td>
+                    <td>Cộs s2</td>
+                    <td>Csộts 3</td>
+                </tr>
+                <tr>
+                    <td>SOS</td>
+                    <td>PASSS?</td>
+                    <td>ssss</td>
+                </tr>
+                <tr>
+                    <td>SOS</td>
+                    <td>PASSS?</td>
+                    <td>ssss</td>
+                </tr>
+                <tr>
+                    <td>SOS</td>
+                    <td>PASSS?</td>
+                    <td>ssss</td>
+                </tr>
+                <tr>
+                    <td>SOS</td>
+                    <td>PASSS?</td>
+                    <td>ssss</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="container center-block">
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
