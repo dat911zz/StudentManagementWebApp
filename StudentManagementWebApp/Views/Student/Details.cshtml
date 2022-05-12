@@ -4,11 +4,6 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    th, td{
-        text-align: center;
-    }
-</style>
 <h2>View</h2>
 
 <div class="container center-block">
@@ -63,56 +58,10 @@
 
         </dl>
     </div>
-
-    @*@{
-            string tb = ViewBag.ScoreTB;
-            Html.Display("", "ResultTable", tb);
-        }*@
-    <table class="blueTable">
-
-        @Html.Raw(ViewBag.ScoreTB)
-    </table>
-    <!-- #region Table -->
-    @*<div class="col-md-6">
-            <table class="table table-hover table-striped">
-                <thead style="color: white; background: #222;">
-                    <tr>
-                        <th>Cột 1</th>
-                        <th>Cột 2</th>
-                        <th>Cột 3</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cộs1</td>
-                        <td>Cộs s2</td>
-                        <td>Csộts 3</td>
-                    </tr>
-                    <tr>
-                        <td>SOS</td>
-                        <td>PASSS?</td>
-                        <td>ssss</td>
-                    </tr>
-                    <tr>
-                        <td>SOS</td>
-                        <td>PASSS?</td>
-                        <td>ssss</td>
-                    </tr>
-                    <tr>
-                        <td>SOS</td>
-                        <td>PASSS?</td>
-                        <td>ssss</td>
-                    </tr>
-                    <tr>
-                        <td>SOS</td>
-                        <td>PASSS?</td>
-                        <td>ssss</td>
-                    </tr>
-                </tbody>
-
-            </table>
-        </div>*@
-    <!-- #endregion -->
+    <div class="container-fluid">
+        @Html.ActionLink("Danh sách học phần", "CourseDetails", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Kết quả học tập", "ResultDetails", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+    </div>
 </div>
 <div class="container center-block">
     <p>

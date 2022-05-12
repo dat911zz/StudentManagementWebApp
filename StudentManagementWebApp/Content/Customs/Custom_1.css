@@ -1,0 +1,22 @@
+﻿.pad-top-15{
+    padding-top: 15px;
+}
+.margin-top-15{
+    margin-top: 15px;
+}
+.margin-r-10{
+    margin-right: 10px;
+}
+/*Tùy chỉnh cho Nav bar*/
+.switcher{
+    z-index: 20;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+}
+    .navbar-inverse .navbar-nav > li > a:hover, 
+    .navbar-inverse .navbar-nav > li > a:focus {
+        background-color: #ffffff;
+        color: #384289;
+    }

@@ -191,6 +191,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Customs\CustomTable_1.css" />
+    <Content Include="Content\Customs\Custom_1.css" />
     <Content Include="Data\ORM\hibernate.cfg.xml" />
     <Content Include="Data\ORM\NHibernateOld\SinhVien.hbm.xml" />
     <Content Include="favicon.ico" />
@@ -236,6 +237,8 @@
     <Content Include="Views\Shared\_MenuBar.cshtml" />
     <Content Include="Views\Error\ItemNotFound.cshtml" />
     <None Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Student\CourseDetails.cshtml" />
+    <Content Include="Views\Student\ResultDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

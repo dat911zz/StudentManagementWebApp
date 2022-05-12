@@ -1,0 +1,19 @@
+﻿@model StudentManagementWebApp.Models.Student
+
+@{
+    ViewBag.Title = "Course Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center" style="color: #384289;">Danh sách các môn học đã đăng ký</h2>
+<div class="container ">
+    <table class="blueTable">
+        @Html.Raw(ViewBag.CourseList)
+    </table>
+</div>
+<div class="container margin-top-15 center-block">
+    <p>
+        @Html.ActionLink("Trở về trang trước", "Details", new { id = ViewBag.Id }, htmlAttributes: new { @class = "btn btn-primary" }) 
+        @Html.ActionLink("Trở về danh sách sinh viên", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+    </p>
+</div>

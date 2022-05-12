@@ -98,9 +98,37 @@ namespace StudentManagementWebApp.Controllers
                 return RedirectToAction("ItemNotFound", "Error");
             }
 
-            ViewBag.ScoreTB = Manager.ConvertDataTableToHTML(mng.UploadScoreSVIntoDGV(std));
+            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadSubjectSVIntoDGV(std));
             
             return View(std);
+        }
+        [HttpGet]
+        public ActionResult CourseDetails(int id)
+        {
+            SetupContainer();
+            var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
+            if (std == null)
+            {
+                return RedirectToAction("ItemNotFound", "Error");
+            }
+            ViewBag.Id = id;
+            ViewBag.CourseList = Manager.ConvertDataTableToHTML(mng.UploadSubjectSVIntoDGV(std));
+
+            return View("CourseDetails");
+        }
+        [HttpGet]
+        public ActionResult ResultDetails(int id)
+        {
+            SetupContainer();
+            var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
+            if (std == null)
+            {
+                return RedirectToAction("ItemNotFound", "Error");
+            }
+            ViewBag.Id = id;
+            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadScoreSVIntoDGV(std));
+
+            return View("ResultDetails");
         }
         #endregion
         #region Create
