@@ -24,7 +24,7 @@ namespace StudentManagementWebApp.Data.Database
         {
             SqlConnection conn1 = new SqlConnection(DatabaseHelper.GenerateConnectionString(datasource, database, username, password));
             SqlConnection conn2 = new SqlConnection("workstation id=DBSinhVien.mssql.somee.com;packet size=4096;user id=ADMIN911;pwd=Vungodat123;data source=DBSinhVien.mssql.somee.com;persist security info=False;initial catalog=DBSinhVien");
-            return conn1;
+            return conn2;
 
         }
         //Test kết nối với mẫu chuỗi kết nối
