@@ -33,10 +33,12 @@ namespace StudentManagementWebApp.Controllers
             service_mh = container.Resolve<ISubjectService>();
             container.Dispose();
         }
-
-        public ActionResult LoadDB()
+        public StudentController()
         {
             SetupContainer();
+        }
+        public ActionResult LoadDB()
+        {
             studentList = service_sv.GetAll();
             subjectList = service_mh.GetAll();
             mng.AutoWork(ref studentList, subjectList);
@@ -46,7 +48,6 @@ namespace StudentManagementWebApp.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            SetupContainer();
             ViewBag.TotalStudents = studentList.Count;
             //fetch students from the DB using Entity Framework here
 
@@ -91,21 +92,18 @@ namespace StudentManagementWebApp.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            SetupContainer();
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             if(std == null)
             {
                 return RedirectToAction("ItemNotFound", "Error");
             }
 
-            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadSubjectSVIntoDGV(std));
-            
+            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadSubjectSVIntoDGV(std));           
             return View(std);
         }
         [HttpGet]
         public ActionResult CourseDetails(int id)
         {
-            SetupContainer();
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             if (std == null)
             {
@@ -119,7 +117,6 @@ namespace StudentManagementWebApp.Controllers
         [HttpGet]
         public ActionResult ResultDetails(int id)
         {
-            SetupContainer();
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             if (std == null)
             {
@@ -127,7 +124,6 @@ namespace StudentManagementWebApp.Controllers
             }
             ViewBag.Id = id;
             ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadScoreSVIntoDGV(std));
-
             return View("ResultDetails");
         }
         #endregion
