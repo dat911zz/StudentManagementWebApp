@@ -5,12 +5,7 @@
 }
 <div class="text-capitalize text-center">
     <h1 class="text-capitalize text-info">Trang thông tin sinh viên</h1>
-    @*<button class="btn-default" style="text-decoration: none; color: dodgerblue">
-        @Html.ActionLink("Create New", "Create")
-    </button>*@
-    @*<button class="btn-default" style="text-decoration: none; color: dodgerblue">
-            @Html.ActionLink("Load DataBase", "LoadDB")
-        </button>*@
+
     <div style="padding: 0 0 20px 0">
     @Html.ActionLink("Create New", "Create", "Student", null,
     new { @class = "btn btn-default btn-primary" }
@@ -60,16 +55,10 @@
                     @Html.DisplayFor(modelItem => item.Gender)
                 </td>
                 <td>
-
-                    @*@Html.DisplayFor(modelItem => item.DayOfBirth, "{0:dd/MM/yyyy}")*@
-                    @*@model DateTime*@
                     @{
                     var date = item.DayOfBirth.ToString("dd/MM/yyyy");
                     @Html.DisplayName(date)
                     }
-
-                    @*@DateTime.Parse(Html.DisplayFor(modelItem => item.DayOfBirth).ToString()).ToShortDateString()*@
-
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ClassId)
