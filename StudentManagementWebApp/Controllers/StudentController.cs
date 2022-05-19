@@ -19,7 +19,6 @@ namespace StudentManagementWebApp.Controllers
         ISubjectService service_mh;
         static List<Student> studentList = new List<Student>();
         static List<Subject> subjectList = new List<Subject>();
-        public StudentController() { }
         public StudentController(Manager manager, IStudentService studentService, ISubjectService subjectService)
         {
             mng = manager;
