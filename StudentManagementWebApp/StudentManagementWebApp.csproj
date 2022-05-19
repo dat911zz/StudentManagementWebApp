@@ -135,6 +135,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -147,8 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\ContainerBootstrapper.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WindsorActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -162,7 +167,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Installer\ServicesInstaller.cs" />
+    <Compile Include="Container\ControllersInstaller.cs" />
+    <Compile Include="Container\ServicesInstaller.cs" />
+    <Compile Include="Container\WindsorControllerFactory.cs" />
     <Compile Include="Interface\IData\ICourseData.cs" />
     <Compile Include="Interface\IData\ISubjectData.cs" />
     <Compile Include="Interface\IData\IStudentData.cs" />
@@ -184,6 +191,7 @@
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Utilites\DatabaseHelper.cs" />
     <Compile Include="Utilites\Manager.cs" />
+    <Compile Include="Utilites\UnityConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

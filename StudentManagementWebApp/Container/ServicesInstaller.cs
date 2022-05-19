@@ -8,7 +8,7 @@ using StudentManagementWebApp.Interface.IServices;
 using StudentManagementWebApp.Models;
 using StudentManagementWebApp.Services;
 
-namespace StudentManagementWebApp.Installer
+namespace StudentManagementWebApp.Container
 {
     public class ServicesInstaller : IWindsorInstaller
     {

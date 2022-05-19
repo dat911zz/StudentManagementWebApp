@@ -1,6 +1,6 @@
 ﻿using Castle.Windsor;
 using StudentManagementWebApp.Data.Database;
-using StudentManagementWebApp.Installer;
+using StudentManagementWebApp.Container;
 using StudentManagementWebApp.Models;
 using System;
 using System.Collections.Generic;

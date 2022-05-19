@@ -1,41 +1,29 @@
-﻿using Castle.Windsor;
-using StudentManagementWebApp.Installer;
-using StudentManagementWebApp.Interface.IServices;
+﻿using StudentManagementWebApp.Interface.IServices;
 using StudentManagementWebApp.Models;
 using StudentManagementWebApp.Utilites;
-using System.Web.UI.HtmlControls;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using StudentManagementWebApp.Container;
 
 namespace StudentManagementWebApp.Controllers
 {
     [HandleError]
     public class StudentController : Controller
     {
-        WindsorContainer container;
+        
         Manager mng;
+        
         IStudentService service_sv;
         ISubjectService service_mh;
         static List<Student> studentList = new List<Student>();
         static List<Subject> subjectList = new List<Subject>();
-
-        [NonAction]
-        public void SetupContainer()
+        public StudentController(Manager manager, IStudentService studentService, ISubjectService subjectService)
         {
-            container = new WindsorContainer();
-            container.Install(new ServicesInstaller());
-            mng = container.Resolve<Manager>();
-            service_sv = container.Resolve<IStudentService>();
-            service_mh = container.Resolve<ISubjectService>();
-            container.Dispose();
-        }
-        public StudentController()
-        {
-            SetupContainer();
+            mng = manager;
+            service_sv = studentService;
+            service_mh = subjectService;
         }
         public ActionResult LoadDB()
         {
