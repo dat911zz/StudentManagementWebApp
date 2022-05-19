@@ -85,64 +85,25 @@ namespace StudentManagementWebApp.Utilites
             html += "";
             return html;
         }
-        #region Xuất console thông tin về sv
-        //public void GetInfoForm(List<Student> list_sv)
-        //{
-        //    ResultService kqs = container.Resolve<ResultService>();
-        //    foreach (var item in list_sv)
-        //    {
-        //        Console.WriteLine($"- Sinh Viên {item.TenSV}");
-        //        for (int i = 0; i < item.CTHP.DSMH.Count; i++)
-        //        {                   
-        //            Console.WriteLine();
-        //        }
-        //    }
-        //}
-        //public void GetAllListInfo(List<Student> list_sv)
-        //{
-        //    ResultService kqs = container.Resolve<ResultService>();
-        //    list_sv.ForEach(x => {
-        //        Console.WriteLine($"- Sinh Viên {x.TenSV}");
-        //        for (int i = 0; i < x.CTHP.DSMH.Count; i++)
-        //        {
-        //            kqs.GetInfoAll(x.CTHP.DSMH[i++]);
-        //        }
-        //    });
-        //}
-        //public void GetAllSubject_SV(List<Student> list_sv)
-        //{
-        //    ResultService kqs = container.Resolve<ResultService>();          
-        //    list_sv.ForEach(x => {
-        //        Console.WriteLine($"- Sinh Viên {x.TenSV}");
-        //        for (int i = 0; i < x.CTHP.DSMH.Count; i++)
-        //        {
-        //            kqs.GetInfoSubject(x.CTHP.DSMH[i++]);
-        //        }
-        //    });
-        //}
-        #endregion
+
         #region Tải thông tin lên bảng ảo
-        public DataTable UploadSubjectSVIntoDGV(Student sv)
+        public DataTable UploadSubjectSVIntoDataTable(Student sv)
         {
-            int stt = 1;
             DataTable dt = new DataTable();
-            dt.Columns.Add("STT", typeof(int));
             dt.Columns.Add("Tên MH", typeof(string));
             dt.Columns.Add("Số tiết", typeof(int));
 
             foreach (var item in sv.CourseDetail.SubjectList)
             {
-                dt.Rows.Add(stt++, item.SubjectDetail.Name , item.SubjectDetail.NumOfLessons);
+                dt.Rows.Add(item.SubjectDetail.Name , item.SubjectDetail.NumOfLessons);
 
             }
             return dt;
         }
-        public DataTable UploadScoreSVIntoDGV(Student sv)
+        public DataTable UploadScoreSVIntoDataTable(Student sv)
         {
-            int stt = 1;
             ScoreService ds = container.Resolve<ScoreService>();
             DataTable dt = new DataTable();
-            dt.Columns.Add("STT", typeof(int));
             dt.Columns.Add("Tên MH", typeof(string));
             dt.Columns.Add("Số tiết", typeof(int));
             dt.Columns.Add("Điểm quá trình", typeof(int));
@@ -151,7 +112,7 @@ namespace StudentManagementWebApp.Utilites
 
             foreach (var item in sv.CourseDetail.SubjectList)
             {
-                dt.Rows.Add(stt++, item.SubjectDetail.Name.ToString(), item.SubjectDetail.NumOfLessons, item.ScoreDetail.QT, item.ScoreDetail.TP, ds.isPass(item.ScoreDetail) == true ? "Đậu" : "Trượt");           
+                dt.Rows.Add(item.SubjectDetail.Name.ToString(), item.SubjectDetail.NumOfLessons, item.ScoreDetail.QT, item.ScoreDetail.TP, ds.isPass(item.ScoreDetail) == true ? "Đậu" : "Trượt");           
             }
             return dt;
         }

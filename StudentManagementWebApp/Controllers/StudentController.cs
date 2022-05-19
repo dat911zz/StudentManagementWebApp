@@ -86,7 +86,7 @@ namespace StudentManagementWebApp.Controllers
                 return RedirectToAction("ItemNotFound", "Error");
             }
 
-            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadSubjectSVIntoDGV(std));           
+            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadSubjectSVIntoDataTable(std));           
             return View(std);
         }
         [HttpGet]
@@ -98,7 +98,7 @@ namespace StudentManagementWebApp.Controllers
                 return RedirectToAction("ItemNotFound", "Error");
             }
             ViewBag.Id = id;
-            ViewBag.CourseList = Manager.ConvertDataTableToHTML(mng.UploadSubjectSVIntoDGV(std));
+            ViewBag.CourseList = Manager.ConvertDataTableToHTML(mng.UploadSubjectSVIntoDataTable(std));
 
             return View("CourseDetails");
         }
@@ -111,7 +111,7 @@ namespace StudentManagementWebApp.Controllers
                 return RedirectToAction("ItemNotFound", "Error");
             }
             ViewBag.Id = id;
-            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadScoreSVIntoDGV(std));
+            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadScoreSVIntoDataTable(std));
             return View("ResultDetails");
         }
         #endregion

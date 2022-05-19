@@ -2,6 +2,12 @@
     /*background-color: #e7ecf0;*/
 }
 
+.pagination li:hover {
+    cursor: pointer;
+}
+table.th, table.td {
+    text-align: center;
+}
 /*PaleBlueRows*/
 table.paleBlueRows {
     font-family: Tahoma, Geneva, sans-serif;
