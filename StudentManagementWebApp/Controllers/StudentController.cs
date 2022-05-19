@@ -19,6 +19,7 @@ namespace StudentManagementWebApp.Controllers
         ISubjectService service_mh;
         static List<Student> studentList = new List<Student>();
         static List<Subject> subjectList = new List<Subject>();
+        public StudentController() { }
         public StudentController(Manager manager, IStudentService studentService, ISubjectService subjectService)
         {
             mng = manager;
@@ -27,10 +28,18 @@ namespace StudentManagementWebApp.Controllers
         }
         public ActionResult LoadDB()
         {
-            studentList = service_sv.GetAll();
-            subjectList = service_mh.GetAll();
-            mng.AutoWork(ref studentList, subjectList);
-            return RedirectToAction("Index");
+            try
+            {
+                studentList = service_sv.GetAll();
+                subjectList = service_mh.GetAll();
+                mng.AutoWork(ref studentList, subjectList);
+                return RedirectToAction("Index");
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("ItemNotFound", "Error");
+            }
+            
         }
         #region Index
         // GET: Student

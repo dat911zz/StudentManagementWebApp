@@ -50,6 +50,16 @@ namespace StudentManagementWebApp
 
                }
             );
+            routes.MapRoute(
+                name: "Login",
+                url: "Areas/{controller}/{action}/{id}",
+                defaults: new
+                {
+                    controller = "Login",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
+            );
         }
     }
 }

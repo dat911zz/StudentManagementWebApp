@@ -4,14 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace StudentManagementWebApp.Areas.Admin.Controllers
+namespace StudentManagementWebApp.Areas.User.Controllers
 {
+    [RouteArea("User")]
     public class AdminController : Controller
     {
-        // GET: Admin/Admin
+        // GET: User/Admin
         public ActionResult Index()
         {
-            return View();
+            return View("");
         }
     }
 }
