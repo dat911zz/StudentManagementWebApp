@@ -12,7 +12,7 @@ namespace StudentManagementWebApp.Areas.User.Controllers
         // GET: User/Admin
         public ActionResult Index()
         {
-            return View("");
+            return View();
         }
     }
 }

@@ -28,6 +28,7 @@ namespace StudentManagementWebApp
             //bundles.Add(new ScriptBundle("~/WebScript").Include(
             //          "~/Content/Index.js"
             //    ));
+
         }
     }
 }

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    @Styles.Render("~/Content/Customs/Login.css")
+</head>
+
+<body id="particles-js" width="100%" height="100%">
+    <div class="animated bounceInDown">
+        <div class="container">
+            <span class="error animated tada" id="msg"></span>
+            <form name="form1" class="box" onsubmit="return checkStuff()" method="post">
+                <h4><span style="font-size: 24px">Cổng Thông Tin Sinh Viên</span></h4>
+                <h5>Đăng Nhập Hệ Thống</h5>
+                <input type="text" name="email" placeholder="Email" autocomplete="off">
+                <i class="typcn typcn-eye" id="eye"></i>
+                <input type="password" name="password" placeholder="Passsword" id="pwd" autocomplete="off">
+                <a href="#" class="forgetpass">Quên mật khẩu?</a>
+                <input name="action:Login" type="submit" value="Đăng Nhập" class="btn1">
+
+
+            </form>
+            <a href="#" class="dnthave">Chưa có tài khoản? Đăng ký ngay!</a>
+        </div>
+        <div class="footer">
+            <span>Made with <i class="fa fa-heart pulse"></i></span>
+        </div>
+    </div>
+    <canvas class="particles-js-canvas-el" style="width: 100%; height: 100%;" width="1320" height="320"></canvas>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+</body>
+@Scripts.Render("https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js")
+@Scripts.Render("~/Scripts/Customs/Login.js")
+</html>

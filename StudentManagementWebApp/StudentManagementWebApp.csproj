@@ -153,6 +153,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\User\Controllers\AdminController.cs" />
+    <Compile Include="Areas\User\Controllers\LoginController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Utilites\DatabaseHelper.cs" />
     <Compile Include="Utilites\Manager.cs" />
+    <Compile Include="Utilites\MultipleButtonAttribute.cs" />
     <Compile Include="Utilites\UnityConfig.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,9 +200,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Customs\CustomTable_1.css" />
     <Content Include="Content\Customs\Custom_1.css" />
+    <Content Include="Content\Customs\Login.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Data\ORM\hibernate.cfg.xml" />
     <Content Include="Data\ORM\NHibernateOld\SinhVien.hbm.xml" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -208,7 +214,14 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\User\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\User\Views\Login\Login.cshtml" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Customs\Login.js" />
     <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -251,6 +264,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Areas\User\Views\Shared\" />
+    <Folder Include="Areas\User\Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
