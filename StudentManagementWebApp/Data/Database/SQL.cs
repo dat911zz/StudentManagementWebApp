@@ -12,7 +12,7 @@ namespace StudentManagementWebApp.Data.Database
     /// <summary>
     /// Interacting with SQL Databse 
     /// </summary>
-    public class SQL : IStudentData, ISubjectData, ICourseData
+    public class SQL : IStudentData, ISubjectData, ICourseData, IUsersData
     {
         //---log test server name : DESKTOP-GUE0JS7
         SqlCommand cmd;
@@ -40,20 +40,6 @@ namespace StudentManagementWebApp.Data.Database
             string password = "1234";          
             return GetConnection(datasource, database, username, password);
         }
-        /// <summary>
-        /// Cloud Server
-        /// </summary>
-        /// <returns></returns>
-        public SqlConnection GetConnectionSV()
-        {
-            string datasource = $@"";
-            string database = "SinhVien";
-            string username = "test01";
-            string password = "1234";
-            return GetConnection(datasource, database, username, password);
-        }
-
-
         public DataTable SetDataStudent()
         {
             return SetDataTable("dataGridView1", "SELECT * FROM SinhVien");
@@ -62,7 +48,6 @@ namespace StudentManagementWebApp.Data.Database
         {
             return SetDataTable("dataGridView1", "SELECT * FROM MonHoc");
         }
-
         public DataTable SetDataTable(string datagridview, string query)
         {
             tb = new DataTable(datagridview);
@@ -117,7 +102,6 @@ namespace StudentManagementWebApp.Data.Database
             conn.Close();
             return list;
         }
-
         public List<Subject> GetAllMH()
         {
             List<Subject> list = new List<Subject>();
@@ -139,8 +123,7 @@ namespace StudentManagementWebApp.Data.Database
             }
             conn.Close();
             return list;
-        }
-        
+        }     
         public void GetAllCTHP(ref List<Student> list_sv, List<Subject> list_mh)
         {
             List<Subject> list = new List<Subject>();
@@ -177,19 +160,73 @@ namespace StudentManagementWebApp.Data.Database
             }
             conn.Close();
         }
+        public List<User> GetAllUsers()
+        {
+            List<User> list = new List<User>();
+            SqlConnection conn = GetConnection();
+            conn.Open();
+            cmd = new SqlCommand("SELECT * FROM Users", conn);
+            using (DbDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        User user = new User(
+                            reader.GetString(1),
+                            reader.GetString(2),
+                            reader.GetString(3),
+                            reader.GetString(4),
+                            reader.GetString(5),
+                            reader.GetBoolean(6)
+                            );
+                        list.Add(user);
+                    }
+                }
+            }
+            conn.Close();
+            return list;
+        }
         public void Add(Student sv)
         {
             throw new NotImplementedException();
         }
-
         public void Add(Subject sv)
         {
             throw new NotImplementedException();
         }
-
         public void Add(Course cthp)
         {
             throw new NotImplementedException();
+        }
+        public void Add(User user)
+        {
+            SqlConnection conn = GetConnection();
+            conn.Open();
+            cmd = new SqlCommand(@"INSERT INTO Users VALUES (@fname, @lname, @email, @username, @hash, 0);", conn);
+            #region Using Parameter to prevent SQL Injection
+
+            //cmd.Parameters.Add("@fname", SqlDbType.NVarChar);
+            //cmd.Parameters["@fname"].Value = user.FirstName;
+            //cmd.Parameters.Add("@lname", SqlDbType.NVarChar);
+            //cmd.Parameters["@lname"].Value = user.LastName;
+            //cmd.Parameters.Add("@email", SqlDbType.NVarChar);
+            //cmd.Parameters["@email"].Value = user.Email;
+            //cmd.Parameters.Add("@username", SqlDbType.NVarChar);
+            //cmd.Parameters["@username"].Value = user.UserName;
+            //cmd.Parameters.Add("@hash", SqlDbType.NVarChar);
+            //cmd.Parameters["@fname"].Value = user.Hash;
+
+            cmd.Parameters.AddWithValue("@fname", user.FirstName);
+            cmd.Parameters.AddWithValue("@lname", user.LastName);
+            cmd.Parameters.AddWithValue("@email", user.Email);
+            cmd.Parameters.AddWithValue("@username", user.UserName);
+            cmd.Parameters.AddWithValue("@hash", user.Hash);
+
+            #endregion
+            int rowsAffected = cmd.ExecuteNonQuery();
+            conn.Close();
+
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace StudentManagementWebApp.Areas.User.Controllers
+namespace StudentManagementWebApp.Areas.Account.Controllers
 {
-    [RouteArea("User")]
+    [RouteArea("Account")]
     public class AdminController : Controller
     {
-        // GET: User/Admin
+        // GET: Account/Admin
         public ActionResult Index()
         {
             return View();

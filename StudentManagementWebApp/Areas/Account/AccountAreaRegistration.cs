@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace StudentManagementWebApp.Areas.User
+namespace StudentManagementWebApp.Areas.Account
 {
-    public class UserAreaRegistration : AreaRegistration 
+    public class AccountAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "User";
+                return "Account";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "User_default",
-                "User/{controller}/{action}/{id}",
+                "Account_default",
+                "Account/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

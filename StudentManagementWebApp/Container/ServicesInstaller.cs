@@ -25,7 +25,7 @@ namespace StudentManagementWebApp.Container
             //Services only
             container.Register(
                 Component
-                    .For<ISubjectData, IStudentData, ICourseData>()
+                    .For<ISubjectData, IStudentData, ICourseData, IUsersData>()
                     .ImplementedBy<SQL>()
                     .LifestyleTransient());
             container.Register(
@@ -51,6 +51,11 @@ namespace StudentManagementWebApp.Container
                 Component
                     .For<ISubjectService>()
                     .ImplementedBy<SubjectService>()
+                    .LifestyleTransient());
+            container.Register(
+                Component
+                    .For<IUsersService>()
+                    .ImplementedBy<UsersService>()
                     .LifestyleTransient());
             container.Register(
                 Component

@@ -152,9 +152,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\User\Controllers\AdminController.cs" />
-    <Compile Include="Areas\User\Controllers\LoginController.cs" />
-    <Compile Include="Areas\User\UserAreaRegistration.cs" />
+    <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
+    <Compile Include="Areas\Account\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Account\Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -172,8 +172,10 @@
     <Compile Include="Interface\IData\ICourseData.cs" />
     <Compile Include="Interface\IData\ISubjectData.cs" />
     <Compile Include="Interface\IData\IStudentData.cs" />
+    <Compile Include="Interface\IData\IUsersData.cs" />
     <Compile Include="Interface\IServices\ISubjectService.cs" />
     <Compile Include="Interface\IServices\IStudentService.cs" />
+    <Compile Include="Interface\IServices\IUsersService.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\DKHP.cs" />
     <Compile Include="Models\Map\DKHPMap.cs" />
@@ -183,11 +185,13 @@
     <Compile Include="Models\Score.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ScoreService.cs" />
     <Compile Include="Services\ResultService.cs" />
     <Compile Include="Services\SubjectService.cs" />
     <Compile Include="Services\StudentService.cs" />
+    <Compile Include="Services\UsersService.cs" />
     <Compile Include="Utilites\DatabaseHelper.cs" />
     <Compile Include="Utilites\Manager.cs" />
     <Compile Include="Utilites\MultipleButtonAttribute.cs" />
@@ -212,14 +216,15 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\User\Views\web.config" />
-    <Content Include="Areas\User\Views\Admin\Index.cshtml" />
-    <Content Include="Areas\User\Views\Login\Login.cshtml" />
+    <Content Include="Areas\Account\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Account\Views\Authentication\Login.cshtml" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Account\Views\web.config" />
+    <Content Include="Areas\Account\Views\Authentication\Register.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Customs\Login.js" />
     <Content Include="Scripts\Index.js" />
@@ -262,9 +267,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\User\Data\" />
-    <Folder Include="Areas\User\Views\Shared\" />
-    <Folder Include="Areas\User\Views\User\" />
+    <Folder Include="Areas\Account\Data\" />
+    <Folder Include="Areas\Account\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
