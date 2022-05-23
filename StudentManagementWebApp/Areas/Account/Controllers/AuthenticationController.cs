@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace StudentManagementWebApp.Areas.Account.Controllers
 {
@@ -57,13 +58,11 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
 
         }
 
-        [HttpPost]
-        [MultipleButton(Name = "action", Argument = "Login")]
-        public ActionResult Login(string a)
+        public ActionResult Login()
         {
-            ViewBag.Message = string.Format("Hello {0}.\\nCurrent Date and Time: {1}", a, DateTime.Now.ToString());
             return View("Login");
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string username, string password)
@@ -80,18 +79,23 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
                     )
                     .FirstOrDefault();
                 //Authencation
-                if (data.idUser != 0)
+                if (data != null)
                 {
+                    string fullname = data.FirstName + " " + data.LastName;
                     //add session
-                    Session["FullName"] = data.FirstName + " " + data.LastName;
-                    Session["Email"] = data.Email;
+                    Session["FullName"] = fullname;
+                    Session["UserName"] = data.Email;
                     Session["idUser"] = data.idUser;
-                    return RedirectToAction("Index");
+                    HttpCookie Bánh_Quy = new HttpCookie("UserSession", Session.SessionID);
+                    Bánh_Quy.Domain = "/";
+                    FormsAuthentication.SetAuthCookie(fullname, true);
+                    //string sessionKey = HttpContext.Session[]
+                    return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else
                 {
                     ViewBag.error = "Login failed";
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Index");
                 }
             }
             return View();

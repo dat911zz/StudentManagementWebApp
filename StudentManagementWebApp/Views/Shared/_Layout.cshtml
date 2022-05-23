@@ -43,12 +43,13 @@
                             {
 
                                 @Html.ActionLink("Login", "Index", "Account/Authentication")
+
                             }
                         </li>
                         <li>
                             @if (!Request.IsAuthenticated)
                             {
-                                @Html.ActionLink("Register", "Register", "Account/Authentication")
+                                @Html.ActionLink("Register", "Register", "Account")
                             }
 
                         </li>

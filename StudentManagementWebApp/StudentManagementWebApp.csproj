@@ -194,7 +194,6 @@
     <Compile Include="Services\UsersService.cs" />
     <Compile Include="Utilites\DatabaseHelper.cs" />
     <Compile Include="Utilites\Manager.cs" />
-    <Compile Include="Utilites\MultipleButtonAttribute.cs" />
     <Compile Include="Utilites\UnityConfig.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -82,14 +82,13 @@ namespace StudentManagementWebApp.Models
         /// <param name="userName"></param>
         /// <param name="hash">Encrypting Password</param>
         /// <param name="manager"></param>
-        public User(string firstName, string lastName, string email, string userName, string hash, bool manager)
+        public User(string firstName, string lastName, string email, string userName, string hash)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-            Hash = userName;
-            Password = hash;
-            Manager = manager;
+            UserName = userName;
+            Hash = hash;
         }
         public User(User x)
         {
