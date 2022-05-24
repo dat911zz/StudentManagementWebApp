@@ -7,6 +7,9 @@
 .margin-r-10{
     margin-right: 10px;
 }
+.float-right{
+    float: right;
+}
 /*Tùy chỉnh cho Nav bar*/
 .switcher{
     z-index: 20;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentManagementWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,5 +32,7 @@ namespace StudentManagementWebApp.Controllers
             ViewBag.Message = "Intro page";
             return View();
         }
+
+        
     }
 }

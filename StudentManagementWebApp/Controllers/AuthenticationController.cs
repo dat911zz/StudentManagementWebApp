@@ -16,7 +16,7 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
         {
             this.usersService = usersService;
         }
-        // GET: Account/Authentication
+        // GET: Authentication
         public ActionResult Index()
         {
             return View("Login");
@@ -83,13 +83,10 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
                 {
                     string fullname = data.FirstName + " " + data.LastName;
                     //add session
-                    Session["FullName"] = fullname;
-                    Session["UserName"] = data.Email;
-                    Session["idUser"] = data.idUser;
+                    Session["Username"] = data.UserName;
                     HttpCookie Bánh_Quy = new HttpCookie("UserSession", Session.SessionID);
                     Bánh_Quy.Domain = "/";
                     FormsAuthentication.SetAuthCookie(fullname, true);
-                    //string sessionKey = HttpContext.Session[]
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else
@@ -121,7 +118,8 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
         public ActionResult Logout()
         {
             Session.Clear();//remove session
-            return RedirectToAction("Login");
+            return RedirectToAction("Index","Home");
         }
+
     }
 }

@@ -154,7 +154,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
     <Compile Include="Areas\Account\Controllers\AdminController.cs" />
-    <Compile Include="Areas\Account\Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -216,14 +216,14 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Account\Views\Admin\Index.cshtml" />
-    <Content Include="Areas\Account\Views\Authentication\Login.cshtml" />
+    <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Areas\Account\Views\web.config" />
-    <Content Include="Areas\Account\Views\Authentication\Register.cshtml" />
+    <Content Include="Views\Authentication\Register.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Customs\Login.js" />
     <Content Include="Scripts\Index.js" />

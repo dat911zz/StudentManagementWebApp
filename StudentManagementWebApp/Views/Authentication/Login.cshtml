@@ -1,4 +1,7 @@
 ﻿@model StudentManagementWebApp.Models.User
+@{
+    Layout = "";
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,17 +16,17 @@
     <div class="animated bounceInDown">
         <div class="container">
             <span class="error animated tada" id="msg"></span>
-                <form name="form1" class="box" onsubmit="return checkStuff()" method="post" action="@Url.Action("Login","Authentication/Login")">
-                    @Html.AntiForgeryToken()
-                    <h4><span style="font-size: 24px">Cổng Thông Tin Sinh Viên</span></h4>
-                    <h5>Đăng Nhập Hệ Thống</h5>
-                    <input type="text" name="username" placeholder="Username" autocomplete="off">
-                    <i class="typcn typcn-eye" id="eye"></i>
-                    <input type="password" name="password" placeholder="Passsword" id="pwd" autocomplete="off">
-                    <a href="#" class="forgetpass">Quên mật khẩu?</a>
-                    <input name="action:Login" type="submit" value="Đăng Nhập" class="btn1">
-                </form>
-            <a href="#" class="dnthave">Chưa có tài khoản? Đăng ký ngay!</a>
+            <form name="form1" class="box" onsubmit="return checkStuff()" method="post" action="@Url.Action("Login","Authentication")">
+                @Html.AntiForgeryToken()
+                <h4><span style="font-size: 24px">Cổng Thông Tin Sinh Viên</span></h4>
+                <h5>Đăng Nhập Hệ Thống</h5>
+                <input type="text" name="username" placeholder="Username" autocomplete="off">
+                <i class="typcn typcn-eye" id="eye"></i>
+                <input type="password" name="password" placeholder="Passsword" id="pwd" autocomplete="off">
+                <a href="#" class="forgetpass">Quên mật khẩu?</a>
+                <input name="" type="submit" value="Đăng Nhập" class="btn1">
+            </form>
+            <a href="@Url.Action("Register", "Authentication")" class="dnthave">Chưa có tài khoản? Đăng ký ngay!</a>
         </div>
         <div class="footer">
             <span>Made with <i class="fa fa-heart pulse"></i></span>
