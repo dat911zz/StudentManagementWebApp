@@ -3,6 +3,7 @@ using StudentManagementWebApp.Utilites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -29,7 +30,7 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
         //POST: Register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Models.User _user)
+        public async Task<ActionResult> Register(Models.User _user)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +66,7 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string username, string password)
+        public async Task<ActionResult> Login(string username, string password)
         {
             if (ModelState.IsValid)
             {
@@ -84,15 +85,13 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
                     string fullname = data.FirstName + " " + data.LastName;
                     //add session
                     Session["Username"] = data.UserName;
-                    HttpCookie Bánh_Quy = new HttpCookie("UserSession", Session.SessionID);
-                    Bánh_Quy.Domain = "/";
-                    FormsAuthentication.SetAuthCookie(fullname, true);
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else
                 {
-                    ViewBag.error = "Login failed";
-                    return RedirectToAction("Index");
+                    ViewBag.error = "Đăng nhập thất cmn bại, vui lòng thử lại =))";
+                    //return RedirectToAction("Index");
+                    return View("Login");
                 }
             }
             return View();

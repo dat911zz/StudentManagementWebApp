@@ -7,7 +7,7 @@
     <title>@ViewBag.Title - Trường ĐH Lùa Gà</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/Customs/css")
-    @Styles.Render("//cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css");
+    @Styles.Render("//cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css")
 
     @Styles.Render("https://unicons.iconscout.com/release/v4.0.0/css/line.css")
     @Scripts.Render("~/bundles/modernizr")
@@ -35,8 +35,8 @@
                     <li>
                         @if (Session["Username"] != null)
                         {
-                            @Html.ActionLink("Log Out", "Logout", "Authentication", htmlAttributes: new { @class = "float-right" })
-                            <a style="float: right">@Session["Username"].ToString()</a>
+                            @Html.ActionLink("Log Out", "Logout", "Authentication", null, htmlAttributes: new { @class = "float-right" })
+                            <a class="float-right none-menu"> @Session["Username"].ToString()</a>
                         }
                         else
                         {

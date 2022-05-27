@@ -85,9 +85,27 @@
                         @Html.DisplayFor(modelItem => item.CourseId)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @if (Session["Username"] == null)
+                        {
+                            @Html.ActionLink("Details", "Details", new { id = item.Id });
+                        }
+                        else
+                        {
+                            if (Session["Username"].ToString().Equals("Admin"))
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id });
+                                @Html.ActionLink(" | ", "");
+                                @Html.ActionLink("Details", "Details", new { id = item.Id });
+                                @Html.ActionLink(" | ", "");
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id });
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Details", "Details", new { id = item.Id });
+                            }
+                        }
+
+
                     </td>
                 </tr>
             }

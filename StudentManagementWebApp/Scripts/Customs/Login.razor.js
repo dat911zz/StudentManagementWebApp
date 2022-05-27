@@ -1,5 +1,11 @@
 ﻿var pwd = document.getElementById('pwd');
 var eye = document.getElementById('eye');
+var bd = document.querySelector("body");
+var errModal = document.querySelector(".alertModal");
+var closeBtn = document.getElementById("btnClose-js");
+var tryAgainBtn = document.getElementById("btnTryAgain-js");
+var modalBackground = document.getElementById("modalBackground");
+
 
 eye.addEventListener('click', togglePass);
 
@@ -158,4 +164,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
         },
         "retina_detect": true
     });
+});
+/* Modals */
+closeBtn.addEventListener("click", () => {
+    errModal.classList.remove("show");
+    modalBackground.style.display = "none";
+});
+tryAgainBtn.addEventListener("click", () => {
+    errModal.classList.remove("show");
+    modalBackground.style.display = "none";
 });

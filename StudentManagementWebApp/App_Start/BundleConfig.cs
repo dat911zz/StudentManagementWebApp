@@ -27,7 +27,7 @@ namespace StudentManagementWebApp
                       "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/Customs/css").Include(
                       "~/Content/Customs/CustomTable_1.css",
-                      "~/Content/Customs/Custom_1.css"));
+                      "~/Content/Customs/Custom_1.razor.css"));
             //bundles.Add(new ScriptBundle("~/WebScript").Include(
             //          "~/Content/Index.js"
             //    ));

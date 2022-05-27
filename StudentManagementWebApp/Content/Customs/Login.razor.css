@@ -202,3 +202,121 @@ label span {
     .footer .fa {
         color: #7f5feb;
     }
+
+
+/* For error modal */
+.alertModal {
+    display: none;
+}
+
+.alert-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    width: 550px;
+    height: 300px;
+}
+
+    .alert-box .top {
+        height: 30%;
+        width: 100%;
+        background-color: #e85e6c;
+        padding: 15px;
+        border-bottom: none;
+        position: relative;
+        text-align: center;
+        margin: -20px -20px 0;
+        border-radius: 5px 5px 0 0;
+    }
+
+        .alert-box .top .top-icon {
+            text-align: center;
+            width: 65px;
+            height: 60px;
+            font-family: initial;
+            font-weight: bolder;
+            font-size: 55px;
+            margin: 0 auto;
+            margin-top: 14px;
+            color: #fff;
+            border: 4px solid #fff;
+            border-radius: 50%;
+        }
+
+            .alert-box .top .top-icon > img {
+                width: 100%;
+                height: 100%;
+            }
+
+    .alert-box .close {
+        position: absolute;
+        width: 24px;
+        top: 15px;
+        right: 15px;
+        color: #fff;
+        text-shadow: none;
+        opacity: 0.5;
+    }
+
+    .alert-box .top .close > img {
+        width: 100%;
+    }
+
+    .alert-box .bot {
+        height: 70%;
+        width: 100%;
+        padding: 15px;
+        margin: -20px -20px 0;
+        border-radius: 0 0 5px 5px;
+        background-color: #fff;
+    }
+
+    .alert-box .top .close:hover {
+        opacity: 0.9;
+    }
+
+    .alert-box .bot .alert--btn:hover {
+        background: #eda645 !important;
+        outline: none;
+    }
+
+    .alert-box .bot .alert--header {
+        text-align: center;
+        font-size: 34px;
+        padding: 24px;
+        opacity: 0.8;
+    }
+
+    .alert-box .bot .alert--content {
+        text-align: center;
+        margin: 10px;
+        opacity: 0.8;
+    }
+
+    .alert-box .bot .alert--btn {
+        margin: 0 auto;
+        width: 100px;
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 18px;
+        color: #fff;
+        background-color: #eeb711;
+        border-radius: 20px;
+        text-align: center;
+    }
+
+#modalBackground {
+    display: none;
+    position: fixed;
+    z-Index: 999;
+    width: 100vw;
+    height: 100vh;
+    transform: scale3d(1.5, 1.5, 1.5);
+    background-color: #9999;
+}
+
+.show {
+    display: block;
+}
