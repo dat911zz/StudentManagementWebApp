@@ -91,7 +91,7 @@
                         }
                         else
                         {
-                            if (Session["Username"].ToString().Equals("Admin"))
+                            if (Session["Role"].ToString().Equals("Manager"))
                             {
                                 @Html.ActionLink("Edit", "Edit", new { id = item.Id });
                                 @Html.ActionLink(" | ", "");

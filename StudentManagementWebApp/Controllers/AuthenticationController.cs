@@ -85,6 +85,12 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
                     string fullname = data.FirstName + " " + data.LastName;
                     //add session
                     Session["Username"] = data.UserName;
+                    Session["Role"] = "User";
+                    if (data.Manager == true)
+                    {
+                        Session["Role"] = "Manager";
+                    }
+                    
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else

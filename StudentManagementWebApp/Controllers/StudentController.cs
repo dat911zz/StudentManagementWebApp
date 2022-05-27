@@ -59,12 +59,16 @@ namespace StudentManagementWebApp.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
-            if (std == null)
+            if (Session["Role"].ToString().Equals("Manager"))
             {
-                return RedirectToAction("ItemNotFound", "Error");
+                var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
+                if (std == null)
+                {
+                    return RedirectToAction("ItemNotFound", "Error");
+                }
+                return View(std);
             }
-            return View(std);
+            return RedirectToAction("ItemNotFound", "Error");
         }
         /// <summary>
         /// POST: Student
@@ -127,7 +131,11 @@ namespace StudentManagementWebApp.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View("Create");
+            if (Session["Role"].ToString().Equals("Manager"))
+            {
+                return View("Create");
+            }
+            return RedirectToAction("ItemNotFound", "Error");
         }
         [HttpPost]
         public ActionResult Create(Student std)
