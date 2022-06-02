@@ -206,17 +206,6 @@ namespace StudentManagementWebApp.Data.Database
             cmd = new SqlCommand(@"INSERT INTO Users VALUES (@fname, @lname, @email, @username, @hash, 0);", conn);
             #region Using Parameter to prevent SQL Injection
 
-            //cmd.Parameters.Add("@fname", SqlDbType.NVarChar);
-            //cmd.Parameters["@fname"].Value = user.FirstName;
-            //cmd.Parameters.Add("@lname", SqlDbType.NVarChar);
-            //cmd.Parameters["@lname"].Value = user.LastName;
-            //cmd.Parameters.Add("@email", SqlDbType.NVarChar);
-            //cmd.Parameters["@email"].Value = user.Email;
-            //cmd.Parameters.Add("@username", SqlDbType.NVarChar);
-            //cmd.Parameters["@username"].Value = user.UserName;
-            //cmd.Parameters.Add("@hash", SqlDbType.NVarChar);
-            //cmd.Parameters["@fname"].Value = user.Hash;
-
             cmd.Parameters.AddWithValue("@fname", user.FirstName);
             cmd.Parameters.AddWithValue("@lname", user.LastName);
             cmd.Parameters.AddWithValue("@email", user.Email);

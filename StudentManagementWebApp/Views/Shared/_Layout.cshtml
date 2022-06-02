@@ -8,7 +8,6 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/Customs/css")
     @Styles.Render("//cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css")
-
     @Styles.Render("https://unicons.iconscout.com/release/v4.0.0/css/line.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -32,25 +31,30 @@
                     <li>@Html.ActionLink("Khác", "Intro", "Home")</li>
                 </ul>
                 <ul class="nav navbar-nav" style="float: right">
-                    <li>
+                    <li class="dropdown">
                         @if (Session["Username"] != null)
                         {
-                            @Html.ActionLink("Log Out", "Logout", "Authentication", null, htmlAttributes: new { @class = "float-right" })
-                            <a class="float-right none-menu"> @Session["Username"].ToString()</a>
+
+                            <a data-toggle="dropdown" href=""><span class="">Người dùng: </span> @Session["Username"].ToString()</a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Đăng Xuất cực mạnh", "Logout", "Authentication", null, htmlAttributes: new { @class = "" })</li>
+                            </ul>
+
                         }
                         else
                         {
-                            @Html.ActionLink("Login", "Login", "Authentication")
+                            @Html.ActionLink("Đăng Nhập", "Login", "Authentication")
                         }
                     </li>
-                    <li>
-                        @if (Session["Username"] == null)
-                        {
+            
+                    @*<li>
+            @if (Session["Username"] == null)
+            {
 
-                            @Html.ActionLink("Register", "Register", "Authentication")
-                        }
+                @Html.ActionLink("Register", "Register", "Authentication")
+            }
 
-                    </li>
+        </li>*@
                 </ul>
 
             </div>
