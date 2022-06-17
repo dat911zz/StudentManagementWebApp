@@ -1,0 +1,11 @@
+.navbar-logo{
+    margin-right: 18px;
+    margin-top: 4px;
+}
+.navbar-logo > img{
+    height: 50px;
+}
+.navbar-logo > a{
+    font-size: 50px;
+    color: blue;
+}

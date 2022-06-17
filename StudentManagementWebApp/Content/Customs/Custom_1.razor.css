@@ -25,3 +25,9 @@
         background-color: #ffffff;
         color: #384289;
     }
+
+/*Add vào sau*/
+#content-wrapper {
+    font-family: Tahoma;
+    color: #000;
+}
