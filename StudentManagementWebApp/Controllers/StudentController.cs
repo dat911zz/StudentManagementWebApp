@@ -10,6 +10,7 @@ using StudentManagementWebApp.Container;
 namespace StudentManagementWebApp.Controllers
 {
     [HandleError]
+    [Authorize]
     public class StudentController : Controller
     {
         
@@ -42,6 +43,7 @@ namespace StudentManagementWebApp.Controllers
         }
         #region Index
         // GET: Student
+        [AuthorizeRole(Role.USER, Role.ADMIN)]
         public ActionResult Index()
         {
             ViewBag.TotalStudents = studentList.Count;
@@ -57,6 +59,7 @@ namespace StudentManagementWebApp.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [AuthorizeRole(Role.ADMIN)]
         public ActionResult Edit(int id)
         {
             if (Session["Role"].ToString().Equals("Manager"))

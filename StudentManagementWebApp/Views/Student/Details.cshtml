@@ -31,7 +31,6 @@
             </dt>
 
             <dd>
-                @*@Html.DisplayFor(model => model.DayOfBirth)*@
                 @{
                     var date = Model.DayOfBirth.ToString("dd/MM/yyyy");
                     @Html.DisplayName(date)

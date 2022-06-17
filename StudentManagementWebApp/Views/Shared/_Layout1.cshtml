@@ -108,8 +108,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">December 12, 2019</div>
-                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    <div class="small text-gray-500">17/06/2022</div>
+                                    <span class="font-weight-bold">Giao diện web trường đã được nâng cấp</span>
                                 </div>
                             </a>
                         </li>
@@ -121,8 +121,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">December 7, 2019</div>
-                                    $290.29 has been deposited into your account!
+                                    <div class="small text-gray-500">10/06/2022</div>
+                                    $999999.99 has been deposited into your account!
                                 </div>
                             </a>
                         </li>
@@ -134,8 +134,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">December 2, 2019</div>
-                                    Spending Alert: We've noticed unusually high spending for your account.
+                                    <div class="small text-gray-500">23/05/2022</div>
+                                    Cập nhật hệ thống lần 01
                                 </div>
                             </a>
                         </li>
@@ -148,31 +148,44 @@
 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                        <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-                    </a>
-                    <!-- Dropdown - User Information -->
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Profile
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Settings
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Activity Log
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
-                        </a>
-                    </div>
+                    @{
+                        var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+                        if (authCookie != null)
+                        {
+                            FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@authTicket.Name.ToString()</span>
+                                <img class="img-profile rounded-circle" src="~/Assets/anony.png">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Hồ sơ
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cài đặt
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Hoạt động tài khoản
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Đăng xuất
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Đăng Nhập", "Login", "Authentication", null, htmlAttributes: new { @class = "nav-link", @role = "button" })
+                        }
+                    }
+
+
                 </li>
 
             </ul>
@@ -180,90 +193,95 @@
         </nav>
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        @{
+            if (authCookie != null)
+            {
+                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <div style="margin-top: 70px;">
-            </div>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="~/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Trang Chủ</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Thông tin chung
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="~/Student" aria-expanded="true">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Thông tin sinh viên</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                   aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Thay đổi thông tin</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="#">Coming Soon</a>
-                        <a class="collapse-item" href="#">Coming Soon</a>
+                    <!-- Sidebar - Brand -->
+                    <div style="margin-top: 70px;">
                     </div>
-                </div>
-            </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                    <!-- Divider -->
+                    <hr class="sidebar-divider my-0">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Học tập
-            </div>
+                    <!-- Nav Item - Dashboard -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="~/">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Trang Chủ</span>
+                        </a>
+                    </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-graduation-cap"></i>
-                    <span>Kết quả học tập</span>
-                </a>
-            </li>
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Biểu đồ</span>
-                </a>
-            </li>
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Thông tin chung
+                    </div>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Student" aria-expanded="true">
+                            <i class="fas fa-fw fa-user"></i>
+                            <span>Thông tin sinh viên</span>
+                        </a>
+                    </li>
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+                    <!-- Nav Item - Utilities Collapse Menu -->
+                    <!-- Nav Item - Utilities Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                           aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            <span>Thay đổi thông tin</span>
+                        </a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                             data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Custom Utilities:</h6>
+                                <a class="collapse-item" href="#">Coming Soon</a>
+                                <a class="collapse-item" href="#">Coming Soon</a>
+                            </div>
+                        </div>
+                    </li>
 
-        </ul>
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Học tập
+                    </div>
+
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-fw fa-graduation-cap"></i>
+                            <span>Kết quả học tập</span>
+                        </a>
+                    </li>
+
+                    <!-- Nav Item - Charts -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Biểu đồ</span>
+                        </a>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
+
+                    <!-- Sidebar Toggler (Sidebar) -->
+                    <div class="text-center d-none d-md-inline">
+                        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                    </div>
+
+                </ul>
+            }
+        }
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -283,7 +301,7 @@
             <!-- End of Main Content -->
             <!-- Footer -->
             <hr />
-            <footer class="sticky-footer bg-gradient-light">
+            <footer class="footer sticky-footer bg-transparent">
                 <div class="container my-auto text-muted text-center">
                     <p>&copy; 23/04/2022 - Author: Vu Dat</p>
                     <p class="text-danger">Not for commercial use - This website is used for Educational purpose only!</p>
@@ -315,11 +333,12 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/Authentication/Logout">Logout</a>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
@@ -331,12 +350,11 @@
     <!-- Custom scripts for all pages-->
     <script src="~/Scripts/Customs/sb-admin-2.js"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
     <script>
         $(document).ready(function () {
             $('#table_id').DataTable();
         });
     </script>
 </body>
-
+    
 </html>

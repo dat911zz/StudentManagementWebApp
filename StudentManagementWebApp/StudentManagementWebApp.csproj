@@ -155,6 +155,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\AuthorizationFilter.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -176,12 +177,14 @@
     <Compile Include="Interface\IServices\ISubjectService.cs" />
     <Compile Include="Interface\IServices\IStudentService.cs" />
     <Compile Include="Interface\IServices\IUsersService.cs" />
+    <Compile Include="Models\AuthorizeRoleAttribute.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\DKHP.cs" />
     <Compile Include="Models\Map\DKHPMap.cs" />
     <Compile Include="Models\Map\StudentMap.cs" />
     <Compile Include="Models\Map\SubjectMap.cs" />
     <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Score.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Subject.cs" />
@@ -197,7 +200,9 @@
     <Compile Include="Utilites\UnityConfig.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\anony.png" />
     <Content Include="Assets\close.svg" />
+    <Content Include="Assets\error_401.png" />
     <Content Include="Assets\user.svg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -2084,6 +2089,7 @@
     <Content Include="Views\Student\CourseDetails.cshtml" />
     <Content Include="Views\Student\ResultDetails.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
+    <Content Include="Views\Error\Page401.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

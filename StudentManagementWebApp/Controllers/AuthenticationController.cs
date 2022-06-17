@@ -79,6 +79,7 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
                     x.UserName.Equals(username.ToString()) && x.Hash.Equals(f_password)
                     )
                     .FirstOrDefault();
+                
                 //Authencation
                 if (data != null)
                 {
@@ -90,13 +91,24 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
                     {
                         Session["Role"] = "Manager";
                     }
-                    
+
+                    string role = "USER";
+                    if (data.Manager == true)
+                    {
+                        role = "ADMIN";
+                    }
+
+                    FormsAuthentication.SetAuthCookie(data.UserName, false);
+                    var authTicket = new FormsAuthenticationTicket(1, data.UserName, DateTime.Now, DateTime.Now.AddMinutes(20), false, role);
+                    string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+                    var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    HttpContext.Response.Cookies.Add(authCookie);
+    
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else
                 {
                     ViewBag.error = "Đăng nhập thất cmn bại, vui lòng thử lại =))";
-                    //return RedirectToAction("Index");
                     return View("Login");
                 }
             }
@@ -122,6 +134,7 @@ namespace StudentManagementWebApp.Areas.Account.Controllers
         //Logout
         public ActionResult Logout()
         {
+            FormsAuthentication.SignOut();
             Session.Clear();//remove session
             return RedirectToAction("Index","Home");
         }

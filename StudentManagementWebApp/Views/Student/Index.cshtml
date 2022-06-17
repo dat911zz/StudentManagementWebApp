@@ -1,6 +1,13 @@
 ﻿@model IEnumerable<StudentManagementWebApp.Models.Student>
 @{
     ViewBag.Title = "Dashboard for Student";
+    string[] roles = new string[1];
+    var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+    if (authCookie != null)
+    {
+        FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+        roles = authTicket.UserData.Split(',');
+    }
 }
 <div class="text-capitalize text-center">
     <h1 class="text-capitalize text-info">Trang thông tin sinh viên</h1>
@@ -20,23 +27,9 @@
     </div>
 
     <div class="container">
-        <h4 style="text-align: left;">Chọn số lượng dòng</h4>
-        <div class="form-group">
-            <!--		Show Numbers Of Rows 		-->
-            <select class="form-control" name="state" id="maxRows">
-                <option value="5000">Show ALL Rows</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="70">70</option>
-                <option value="100">100</option>
-            </select>
-
-        </div>
-
-        <table id="table-id" class="table">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="table_id" width="100%" cellspacing="0">
+            <thead>
             <tr>
                 <th class="text-center">
                     @Html.DisplayNameFor(model => model.Id)
@@ -56,9 +49,12 @@
                 <th class="text-center">
                     @Html.DisplayNameFor(model => model.CourseId)
                 </th>
-                <th></th>
+                <th class="text-center">
+                    Tùy chọn
+                </th>
             </tr>
-
+            </thead>
+            <tbody>
             @foreach (var item in Model)
             {
                 <tr>
@@ -84,13 +80,13 @@
                         @Html.DisplayFor(modelItem => item.CourseId)
                     </td>
                     <td>
-                        @if (Session["Username"] == null)
+                        @if (authCookie == null)
                         {
                             @Html.ActionLink("Details", "Details", new { id = item.Id });
                         }
                         else
                         {
-                            if (Session["Role"].ToString().Equals("Manager"))
+                            if (roles[0].Equals("ADMIN"))
                             {
                                 @Html.ActionLink("Edit", "Edit", new { id = item.Id });
                                 @Html.ActionLink(" | ", "");
@@ -103,28 +99,12 @@
                                 @Html.ActionLink("Details", "Details", new { id = item.Id });
                             }
                         }
-
-
                     </td>
                 </tr>
             }
+            </tbody>
 
         </table>
-        <!--		Start Pagination -->
-        <div class='pagination-container'>
-            <nav>
-                <ul class="pagination">
-
-                    <li data-page="prev">
-                        <span> < <span class="sr-only">(current)</span></span>
-                    </li>
-                    <!--	Here the JS Function Will Add the Rows -->
-                    <li data-page="next" id="prev">
-                        <span> > <span class="sr-only">(current)</span></span>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
+    </div>
     </div><!-- 		End of Container -->
 </div>
