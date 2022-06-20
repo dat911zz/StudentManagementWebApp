@@ -22,5 +22,10 @@ namespace StudentManagementWebApp.Controllers
         {
             return View("ItemNotFound");
         }
+
+        public ActionResult Unauthorized()
+        {
+            return View("Page401");
+        }
     }
 }

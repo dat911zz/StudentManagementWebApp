@@ -37,8 +37,8 @@ namespace StudentManagementWebApp
             var context = new HttpContextWrapper(Context);
             if (context.Response.StatusCode == 401)
             {
-                
-                context.Response.Redirect("~/Error/Page401");
+
+                context.Response.Redirect("~/Error/Unauthorized");
             }
         }
     }
