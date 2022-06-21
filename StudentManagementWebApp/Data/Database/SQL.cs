@@ -215,7 +215,6 @@ namespace StudentManagementWebApp.Data.Database
             #endregion
             int rowsAffected = cmd.ExecuteNonQuery();
             conn.Close();
-
         }
     }
 }
