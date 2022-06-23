@@ -25,7 +25,8 @@ namespace StudentManagementWebApp.Data.Database
             SqlConnection conn1 = new SqlConnection(DatabaseHelper.GenerateConnectionString(datasource, database, username, password));
             SqlConnection conn2 = new SqlConnection("workstation id=DBSinhVien.mssql.somee.com;packet size=4096;user id=ADMIN911;pwd=Vungodat123;data source=DBSinhVien.mssql.somee.com;persist security info=False;initial catalog=DBSinhVien");
             //Cần kiểm soát quyền truy cập vào CSDL
-            //Nếu để như vầy sẽ bị lộ tài khoản 
+            //Nếu để như vầy sẽ bị lộ tài khoản
+            //Tham khảo tại đây: https://viblo.asia/p/bai-toan-phan-quyen-van-de-muon-thuo-1VgZvw9mlAw
             return conn2;
 
         }
