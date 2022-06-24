@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace StudentManagementWebApp.Areas.Account.Controllers
+namespace StudentManagementWebApp.Controllers
 {
     public class AuthenticationController : Controller
     {

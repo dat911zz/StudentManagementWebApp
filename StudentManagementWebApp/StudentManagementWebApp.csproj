@@ -164,6 +164,7 @@
     <Compile Include="Data\Database\XML.cs" />
     <Compile Include="Data\ORM\Dapper.cs" />
     <Compile Include="Data\ORM\NHibernate_.cs" />
+    <Compile Include="Filter\AppExceptionHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

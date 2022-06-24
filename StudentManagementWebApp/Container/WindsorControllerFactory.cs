@@ -17,13 +17,15 @@ namespace StudentManagementWebApp.Container
         {
             this.container = container;
         }
-
+        [HandleError]
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
+
             if (controllerType != null && container.Kernel.HasComponent(controllerType))
                 return (IController)container.Resolve(controllerType);
+            return null;
+            //return base.GetControllerInstance(requestContext, controllerType);
 
-            return base.GetControllerInstance(requestContext, controllerType);
         }
 
         public override void ReleaseController(IController controller)
