@@ -23,7 +23,7 @@ namespace StudentManagementWebApp.Container
 
             if (controllerType != null && container.Kernel.HasComponent(controllerType))
                 return (IController)container.Resolve(controllerType);
-            return null;
+            return null;//Sửa đổi vì nếu để câu lệnh dưới sẽ dính exception
             //return base.GetControllerInstance(requestContext, controllerType);
 
         }
