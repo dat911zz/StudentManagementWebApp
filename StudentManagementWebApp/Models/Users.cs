@@ -13,25 +13,24 @@ namespace StudentManagementWebApp.Models
         [Key, Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idUser { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Vui lòng điền vào trường này")]
         [StringLength(50, MinimumLength = 2)]
         public string FirstName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Vui lòng điền vào trường này")]
         [StringLength(50, MinimumLength = 2)]
         public string LastName { get; set; }
-        [Required]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        [Required(ErrorMessage = "Vui lòng điền vào trường này")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Hãy nhập địa chỉ email hợp lệ.\nExample@gmail.com")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Vui lòng điền vào trường này")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng điền vào trường này")]
         //[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string Password { get; set; }
 
-
         [NotMapped]
-        [Required]
+        [Required(ErrorMessage = "Vui lòng điền vào trường này")]
         [System.ComponentModel.DataAnnotations.Compare("Password")]
         public string ConfirmPassword { get; set; }
 

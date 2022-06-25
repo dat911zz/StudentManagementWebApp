@@ -30,7 +30,7 @@ namespace StudentManagementWebApp.Controllers
         //POST: Register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(Models.User _user)
+        public ActionResult Register(Models.User _user)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace StudentManagementWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(string username, string password)
+        public ActionResult Login(string username, string password)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace StudentManagementWebApp.Controllers
                     x.UserName.Equals(username.ToString()) && x.Hash.Equals(f_password)
                     )
                     .FirstOrDefault();
-                
+
                 //Authencation
                 if (data != null)
                 {
@@ -103,7 +103,7 @@ namespace StudentManagementWebApp.Controllers
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
-    
+
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else
