@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using StudentManagementWebApp.Container;
+using System.Web.Security;
 
 namespace StudentManagementWebApp.Controllers
 {
@@ -62,16 +63,12 @@ namespace StudentManagementWebApp.Controllers
         [AuthorizeRole(Role.ADMIN)]
         public ActionResult Edit(int id)
         {
-            if (Session["Role"].ToString().Equals("Manager"))
+            var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
+            if (std == null)
             {
-                var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
-                if (std == null)
-                {
-                    return RedirectToAction("ItemNotFound", "Error");
-                }
-                return View(std);
+                return RedirectToAction("ItemNotFound", "Error");
             }
-            return RedirectToAction("ItemNotFound", "Error");
+            return View(std);
         }
         /// <summary>
         /// POST: Student
@@ -132,6 +129,7 @@ namespace StudentManagementWebApp.Controllers
         #endregion
         #region Create
         [HttpGet]
+        [AuthorizeRole(Role.ADMIN)]
         public ActionResult Create()
         {
             if (Session["Role"].ToString().Equals("Manager"))
@@ -155,6 +153,7 @@ namespace StudentManagementWebApp.Controllers
         #endregion
         #region Delete
         [HttpGet]
+        [AuthorizeRole(Role.ADMIN)]
         public ActionResult Delete(int id)
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
