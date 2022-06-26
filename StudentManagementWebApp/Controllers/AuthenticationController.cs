@@ -68,6 +68,7 @@ namespace StudentManagementWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string username, string password)
         {
+            
             if (ModelState.IsValid)
             {
                 Models.User data = new Models.User();
@@ -85,12 +86,12 @@ namespace StudentManagementWebApp.Controllers
                 {
                     string fullname = data.FirstName + " " + data.LastName;
                     //add session
-                    Session["Username"] = data.UserName;
-                    Session["Role"] = "User";
-                    if (data.Manager == true)
-                    {
-                        Session["Role"] = "Manager";
-                    }
+                    //Session["Username"] = data.UserName;
+                    //Session["Role"] = "User";
+                    //if (data.Manager == true)
+                    //{
+                    //    Session["Role"] = "Manager";
+                    //}
 
                     string role = "USER";
                     if (data.Manager == true)
