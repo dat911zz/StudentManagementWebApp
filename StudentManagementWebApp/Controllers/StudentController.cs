@@ -132,11 +132,7 @@ namespace StudentManagementWebApp.Controllers
         [AuthorizeRole(Role.ADMIN)]
         public ActionResult Create()
         {
-            if (Session["Role"].ToString().Equals("Manager"))
-            {
-                return View("Create");
-            }
-            return RedirectToAction("ItemNotFound", "Error");
+            return View("Create");
         }
         [HttpPost]
         public ActionResult Create(Student std)
