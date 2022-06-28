@@ -33,6 +33,10 @@ namespace StudentManagementWebApp.Controllers
             return View();
         }
 
+        public ActionResult Chat()
+        {
+            return RedirectToAction("Index", "Chat");
+        }
         
     }
 }

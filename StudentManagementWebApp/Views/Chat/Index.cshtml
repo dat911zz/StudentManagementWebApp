@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Phòng Chat";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<link rel="stylesheet" href="~/Content/Customs/ChatHub.css">
+
+
+<div class="container" style="height: 500px">
+    <h1 class="mt-5 text-center">Kênh Chat nội bộ</h1>
+    <ul id="discussion" style="height: 80%; overflow: scroll">
+    </ul>
+    <input type="text" id="message" placeholder="Nhập tin nhắn ..." />
+    <input type="button" id="sendmessage" value="Send" />
+    <input type="hidden" id="displayname" />
+</div>
+
+
+<!--Script references. -->
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            // Reference the auto-generated proxy for the hub.
+            var chat = $.connection.chatHub;
+            //console.log(chat);
+
+            // Get the user name and store it to prepend to messages.
+            $('#displayname').val(prompt('Enter your name:', ''));
+            // Set initial focus to message input box.
+            $('#message').focus();
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                $('#sendmessage').click(function () {
+                    sendMsg();
+                });
+                $('#message').on('keyup', function (e) {
+                    if (e.key === 'Enter' || e.keyCode === 13) {
+                        sendMsg();
+                    }
+                });
+            });
+            // Message-sender function
+            function sendMsg() {
+                // Call the Send method on the hub.
+                var name = $('#displayname').val();
+                var msg = $('#message').val();
+                console.log("[user: " + name + "]: " + msg);
+                chat.server.send(name, msg);
+                //chat.server.send($('#displayname').val(), $('#message').val());
+                // Clear text box and reset focus for next comment.
+                $('#message').val('').focus();
+            }
+            // Create a function that the hub can call back to display messages.
+            chat.client.addNewMessageToPage = function (name, message) {
+                // Add the message to the page.
+                $('#discussion').append('<li><strong>' + htmlEncode(name)
+                    + '</strong>: ' + htmlEncode(message) + '</li>');
+            };
+        });
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+    </script>
+}

@@ -355,6 +355,10 @@
             $('#table_id').DataTable();
         });
     </script>
+    <!-- Scripts for chat hub-->
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    @RenderSection("scripts", required: false);
 </body>
     
 </html>

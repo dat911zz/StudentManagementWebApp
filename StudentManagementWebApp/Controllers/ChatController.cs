@@ -6,19 +6,12 @@ using System.Web.Mvc;
 
 namespace StudentManagementWebApp.Controllers
 {
-    [HandleError]
-    public class TestController : Controller
+    public class ChatController : Controller
     {
-        // GET: Test
+        // GET: Chat
         public ActionResult Index()
         {
             return View();
-        }
-
-        [ChildActionOnly]
-        public ActionResult RenderMenu()
-        {
-            return PartialView("_MenuBar");
         }
     }
 }

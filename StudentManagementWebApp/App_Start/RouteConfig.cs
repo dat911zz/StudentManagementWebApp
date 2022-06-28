@@ -7,6 +7,7 @@ using System.Web.Routing;
 
 namespace StudentManagementWebApp
 {
+    [Obsolete]
     public class RouteConfig
     {
         /// <summary>
@@ -36,29 +37,7 @@ namespace StudentManagementWebApp
                     controller = "Student", 
                     action = "Index",
                     id = UrlParameter.Optional
-                }
-                
-            );
-            routes.MapRoute(
-               name: "Test",
-               url: "tests/{id}",
-               defaults: new
-               {
-                   controller = "Test",
-                   action = "Index",
-                   id = UrlParameter.Optional
-
-               }
-            );
-            routes.MapRoute(
-                name: "Login",
-                url: "Areas/{controller}/{action}/{id}",
-                defaults: new
-                {
-                    controller = "Login",
-                    action = "Index",
-                    id = UrlParameter.Optional
-                }
+                }               
             );
         }
     }
