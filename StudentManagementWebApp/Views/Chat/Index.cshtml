@@ -4,7 +4,6 @@
 }
 <link rel="stylesheet" href="~/Content/Customs/ChatHub.css">
 
-
 <div class="container mb-5">
     <div class="cs-bg-1 p-2 text-white">
         <h2 class="mt-4 text-center">Kênh Chat nội bộ</h2>
@@ -22,6 +21,11 @@
 
 <!--Script references. -->
 @section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js"
+            integrity="sha512-PEsccDx9jqX6Dh4wZDCnWMaIO3gAaU0j46W//sSqQhUQxky6/eHZyeB3NrXD2xsyugAKd4KPiDANkcuoEa2JuA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
     <script type="text/javascript">
         $(function () {
             // Reference the auto-generated proxy for the hub.
@@ -52,7 +56,7 @@
                     var authCookies = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
                     FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookies.Value);
                 }
-                var name = "@authTicket.Name.ToString()";
+                var name = he.decode('@authTicket.Name');
                 var msg = $('#message').val();
                 console.log("[user: " + name + "]: " + msg);
                 if ($('#message').val() != '') {
@@ -61,9 +65,9 @@
                 // Clear text box and reset focus for next comment.
                 $('#message').val('').focus();
                 /*autoScrollBottom();*/
-                
+
             }
-            // Create a function that the hub can call back to display messages.          
+            // Create a function that the hub can call back to display messages.
             chat.client.addNewMessageToPage = function (name, message) {
                 // Add the message to the page.
                 var time = new Date().toLocaleString().replace(',', '').split(' ');
@@ -88,6 +92,13 @@
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
+        }
+        function htmlEnc(s) {
+            return s.replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/'/g, '&#39;')
+                .replace(/"/g, '&#34;');
         }
         //Auto scroll to bottom
         const autoScrollBottom = () => {
@@ -115,6 +126,6 @@
             }
         };
 
-        
+
     </script>
 }
