@@ -22,8 +22,6 @@ namespace StudentManagementWebApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //// The order of this is important
-            //RouteTable.Routes.MapHubs();
             // Calling Global action filter
             //GlobalFilters.Filters.Add(new AppExceptionHandler());
             //RouteTable.Routes.MapHubs();
@@ -40,35 +38,39 @@ namespace StudentManagementWebApp
                     var roles = authTicket.UserData.Split(',');
                     HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(new FormsIdentity(authTicket), roles);
                 }
+                else
+                {
+                    FormsAuthentication.SignOut();
+                }
             }
         }
-        //protected void Application_EndRequest()
-        //{
-        //    var context = new HttpContextWrapper(Context);
-        //    switch (context.Response.StatusCode)
-        //    {
-        //        case 401:
-        //            context.Response.Redirect("~/Error/Unauthorized");
-        //            break;
-        //        case 404:
-        //            context.Response.Redirect("~/Error/PageNotFound");
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
-        //protected void Application_Error()
-        //{
-        //    var ex = Server.GetLastError();
-        //    var httpException = ex as HttpException;
+        protected void Application_EndRequest()
+        {
+            var context = new HttpContextWrapper(Context);
+            switch (context.Response.StatusCode)
+            {
+                case 401:
+                    context.Response.Redirect("~/Error/Unauthorized");
+                    break;
+                case 404:
+                    context.Response.Redirect("~/Error/PageNotFound");
+                    break;
+                default:
+                    break;
+            }
+        }
+        protected void Application_Error()
+        {
+            var ex = Server.GetLastError();
+            var httpException = ex as HttpException;
 
-        //    if (httpException == null || httpException.GetHttpCode() != 404)
-        //    {
-        //        // Not an HttpException, or HTTP error other than 404.
-        //        // Here: log error, send alert, etc.
-        //        new HttpContextWrapper(Context).Response.Redirect("~/Error/PageNotFound");
-        //    }
+            if (httpException == null || httpException.GetHttpCode() != 404)
+            {
+                // Not an HttpException, or HTTP error other than 404.
+                // Here: log error, send alert, etc.
+                new HttpContextWrapper(Context).Response.Redirect("~/Error/PageNotFound");
+            }
 
-        //}
+        }
     }
 }

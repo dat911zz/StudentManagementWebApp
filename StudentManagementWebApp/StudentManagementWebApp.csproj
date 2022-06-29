@@ -174,7 +174,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Controllers\AuthorizationFilter.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2044,7 +2043,6 @@
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\Details.cshtml" />
     <Content Include="Views\Shared\_MyLayoutPage.cshtml" />
-    <Content Include="Views\Shared\_MenuBar.cshtml" />
     <Content Include="Views\Error\ItemNotFound.cshtml" />
     <Content Include="vendor\fontawesome-free\less\brands.less" />
     <Content Include="vendor\fontawesome-free\less\fontawesome.less" />
@@ -2115,6 +2113,8 @@
     <Content Include="Views\Student\ResultDetails.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
     <Content Include="Views\Error\Page401.cshtml" />
+    <Content Include="Views\Shared\_TopBar.cshtml" />
+    <Content Include="Views\Shared\_SideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -136,7 +136,6 @@ namespace StudentManagementWebApp.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            Session.Clear();//remove session
             return RedirectToAction("Index","Home");
         }
 

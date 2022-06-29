@@ -13,7 +13,6 @@ namespace StudentManagementWebApp.Controllers
         {
             return View();
         }
-
         public ActionResult PageNotFound()
         {
             return View();

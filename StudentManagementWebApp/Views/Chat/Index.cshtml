@@ -5,13 +5,18 @@
 <link rel="stylesheet" href="~/Content/Customs/ChatHub.css">
 
 
-<div class="container" style="height: 500px">
-    <h1 class="mt-5 text-center">Kênh Chat nội bộ</h1>
-    <ul id="discussion" style="height: 80%; overflow: scroll">
-    </ul>
-    <input type="text" id="message" placeholder="Nhập tin nhắn ..." />
-    <input type="button" id="sendmessage" value="Send" />
-    <input type="hidden" id="displayname" />
+<div class="container mb-5">
+    <div class="cs-bg-1 p-2 text-white">
+        <h2 class="mt-4 text-center">Kênh Chat nội bộ</h2>
+        <h4 class="mt-2 text-center">(Tin nhắn sẽ không lưu lại nhằm đảm bảo tính bí mật)</h4>
+    </div>
+    <div id="discussion">
+    </div>
+    <div class="chatControl mb-4">
+        <input type="text" id="message" placeholder="Nhập tin nhắn ..." />
+        <input type="button" id="sendmessage" value="Gửi" />
+        <input type="hidden" id="displayname" />
+    </div>
 </div>
 
 
@@ -24,7 +29,8 @@
             //console.log(chat);
 
             // Get the user name and store it to prepend to messages.
-            $('#displayname').val(prompt('Enter your name:', ''));
+            //$('#displayname').val(prompt('Enter your name:', ''));
+
             // Set initial focus to message input box.
             $('#message').focus();
             // Start the connection.
@@ -41,19 +47,41 @@
             // Message-sender function
             function sendMsg() {
                 // Call the Send method on the hub.
-                var name = $('#displayname').val();
+                //var name = $('#displayname').val();
+                @{
+                    var authCookies = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+                    FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookies.Value);
+                }
+                var name = "@authTicket.Name.ToString()";
                 var msg = $('#message').val();
                 console.log("[user: " + name + "]: " + msg);
-                chat.server.send(name, msg);
-                //chat.server.send($('#displayname').val(), $('#message').val());
+                if ($('#message').val() != '') {
+                    chat.server.send(name, msg);
+                }
                 // Clear text box and reset focus for next comment.
                 $('#message').val('').focus();
+                /*autoScrollBottom();*/
+                
             }
-            // Create a function that the hub can call back to display messages.
+            // Create a function that the hub can call back to display messages.          
             chat.client.addNewMessageToPage = function (name, message) {
                 // Add the message to the page.
-                $('#discussion').append('<li><strong>' + htmlEncode(name)
-                    + '</strong>: ' + htmlEncode(message) + '</li>');
+                var time = new Date().toLocaleString().replace(',', '').split(' ');
+
+                $('#discussion').append('<div class="ds-container"><span class="u-name">' + htmlEncode(name)
+                    + '</span><span class="u-time text-muted ml-4">' + time[0] + '</span></br><span class="u-msg">' + htmlEncode(message) + '</span></div>'
+
+
+                );
+                //Auto scroll when newMessage arrived
+
+                autoScrollBottom();
+                //const newMessage = document.getElementById("discussion").lastElementChild;
+                //newMessage.scrollIntoView({
+                //    behavior: 'smooth',
+                //    block: 'end',
+                //    inline: 'nearest',
+                //});
             };
         });
         // This optional function html-encodes messages for display in the page.
@@ -61,5 +89,32 @@
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
+        //Auto scroll to bottom
+        const autoScrollBottom = () => {
+            const msg = document.getElementById("discussion");
+
+            const lastMsg = msg.lastElementChild;
+
+            const lastMsgStyles = getComputedStyle(lastMsg);
+            const lastMsgMargin = parseInt(lastMsgStyles.marginBottom);
+            const lastMsgHeight = lastMsg.offsetHeight + lastMsgMargin;
+
+
+
+            // Visible height
+            const visibleHeight = msg.offsetHeight;
+
+            // Height of messages container
+            const containerHeight = msg.scrollHeight;
+
+            // How far have I scrolled?
+            const scrollOffset = msg.scrollTop + visibleHeight;
+
+            if (containerHeight - lastMsgHeight <= scrollOffset) {
+                msg.scrollTop = msg.scrollHeight;
+            }
+        };
+
+        
     </script>
 }

@@ -1,10 +1,41 @@
-﻿#message {
+﻿.cs-bg-1 {
+    background-color: #e9bdb9;
+    background-image: linear-gradient(180deg,#1cc88a 10%,#55afc3 100%);
+    background-size: cover;
+}
+.chatControl {
     height: 55px;
-    width: 80%;
+    width: 100%;
+}
+
+#message {
+    height: 100%;
+    width: 84.4%;
     padding: 0 20px;
-    margin-left: 20px
 }
 #sendmessage{
-    height: 55px;
+    height: 100%;
     width: 15%;
 }
+.u-time {
+    margin-top: 5px;
+    font-size: 12px;
+}
+.u-name{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.u-msg {
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+#discussion {
+    height: 400px;
+    overflow-y: scroll;   
+    border: 1px solid #999;
+    padding: 25px 25px 0;
+}
+    #discussion .ds-container {
+        margin-bottom: 15px;
+    }
