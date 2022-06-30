@@ -7,7 +7,6 @@ using System.Web.Routing;
 
 namespace StudentManagementWebApp
 {
-    [Obsolete]
     public class RouteConfig
     {
         /// <summary>

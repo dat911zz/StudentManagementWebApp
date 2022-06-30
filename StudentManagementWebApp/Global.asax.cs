@@ -24,7 +24,6 @@ namespace StudentManagementWebApp
 
             // Calling Global action filter
             //GlobalFilters.Filters.Add(new AppExceptionHandler());
-            //RouteTable.Routes.MapHubs();
             new WindsorContainer().Install(FromAssembly.InDirectory(new AssemblyFilter(HttpRuntime.BinDirectory)));
         }
         protected void Application_PostAuthenticateRequest()
