@@ -30,15 +30,18 @@
                         @Html.Label("Tên người dùng")
                         @Html.TextBoxFor(m => m.UserName, "", new { @class = "form-control", @placeholder = "Nhập tên người dùng" })
                         @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "badge badge-danger" })
-
+                        @if (ViewBag.errorUsername != null)
+                        {
+                            <span class="badge badge-danger">@ViewBag.errorUsername</span>
+                        }
                     </div>
                     <div class="form-group">
                         @Html.Label("Email")
                         @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Nhập mail" })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "badge badge-danger" })
-                        @if (ViewBag.error != null)
+                        @if (ViewBag.errorEmail != null)
                         {
-                            <span class="badge badge-danger">@ViewBag.error</span>
+                            <span class="badge badge-danger">@ViewBag.errorEmail</span>
                         }
                     </div>
                     <div class="form-group">

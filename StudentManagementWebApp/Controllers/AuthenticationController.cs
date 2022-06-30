@@ -34,13 +34,18 @@ namespace StudentManagementWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var check = usersService.GetAll()
+                var checkMail = usersService.GetAll()
                     .Where(x =>
                     x.Email.Equals(_user.Email.ToString())
                     )
                     .FirstOrDefault();
+                var checkUsername = usersService.GetAll()
+                    .Where(x =>
+                    x.UserName.Equals(_user.UserName.ToString())
+                    )
+                    .FirstOrDefault();
 
-                if (check == null)
+                if (checkMail == null && checkUsername == null)
                 {
                     _user.Hash = GetMD5(_user.Password);
                     usersService.Add(_user);
@@ -48,11 +53,16 @@ namespace StudentManagementWebApp.Controllers
                 }
                 else
                 {
-                    ViewBag.error = "Email already exists";
+                    if (checkMail != null)
+                    {
+                        ViewBag.errorEmail = "Mail đã tồn tại!";                  
+                    }
+                    if (checkUsername != null)
+                    {
+                        ViewBag.errorUsername = "Tên đăng nhập đã tồn tại!";
+                    }                 
                     return View();
                 }
-
-
             }
             return View();
 
@@ -100,7 +110,7 @@ namespace StudentManagementWebApp.Controllers
                     }
 
                     FormsAuthentication.SetAuthCookie(data.UserName, false);
-                    var authTicket = new FormsAuthenticationTicket(1, data.UserName, DateTime.Now, DateTime.Now.AddMinutes(20), false, role);
+                    var authTicket = new FormsAuthenticationTicket(1, data.UserName, DateTime.Now, DateTime.Now.AddHours(2), false, role);
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);

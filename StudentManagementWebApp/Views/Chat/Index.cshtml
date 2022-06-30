@@ -118,18 +118,44 @@
                 msg.scrollTop = msg.scrollHeight;
             }
         };
-        //Timer for Ticket-Experied
-        window.setInterval(function () {
-            // Send an AJAX request every 20min to poll for changes and update the UI
-            // example with jquery:
+
+        /*============ Count time + Auto logout when user inactive ==============*/
+        @{
+            TimeSpan time = @authTicket.Expiration - DateTime.Now;
+            var at_time = @authTicket.Expiration;
+        }
+        console.log('@time');
+        function msToTime(duration) {
+            var milliseconds = parseInt((duration % 1000) / 100),
+                seconds = Math.floor((duration / 1000) % 60),
+                minutes = Math.floor((duration / (1000 * 60)) % 60),
+                hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+        }
+        var tick = new Date(@at_time.Year, @at_time.Month, @at_time.Day, @at_time.Hour, @at_time.Minute, @at_time.Second);
+        //window.setInterval(function () {
+        //    console.log(msToTime(tick.getTime() - new Date().getTime()));
+        //}, 1000);
+        onInactive(20 * 60 * 1000, function () {
             $.get('/Chat/Index', function (result) {
                 // TODO: use the results returned from your controller action
                 // to update the UI
                 alert("Hệ thống đăng xuất tự động vì không hoạt động quá 20p");
                 location.assign("/Authentication/Logout");
-
             });
-        }, 1200000);
-
+        });
+        function onInactive(ms, cb) {
+            console.log('Countdown Activated!');
+            var wait = setTimeout(cb, ms);
+            document.onmousemove = document.mousedown = document.mouseup = document.onkeydown = document.onkeyup = document.focus = function () {
+                clearTimeout(wait);
+                wait = setTimeout(cb, ms);
+            };
+        }
     </script>
 }
