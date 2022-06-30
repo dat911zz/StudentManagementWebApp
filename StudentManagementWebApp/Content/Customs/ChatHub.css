@@ -4,13 +4,13 @@
     background-size: cover;
 }
 .chatControl {
-    height: 55px;
+    height: 70px;
     width: 100%;
 }
 
 #message {
     height: 100%;
-    width: 84.4%;
+    width: 100%;
     padding: 0 20px;
 }
 #sendmessage{
@@ -28,7 +28,7 @@
 
 .u-msg {
     margin-bottom: 10px;
-    word-break: break-all;
+    word-break: break-word;
 }
 #discussion {
     height: 400px;

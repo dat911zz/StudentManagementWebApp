@@ -13,7 +13,7 @@
     </div>
     <div class="chatControl mb-4">
         <input type="text" id="message" placeholder="Nhập tin nhắn ..." />
-        <input type="button" id="sendmessage" value="Gửi" />
+        @*<input type="button" id="sendmessage" value="Gửi" />*@
         <input type="hidden" id="displayname" />
     </div>
 </div>
@@ -39,9 +39,9 @@
             $('#message').focus();
             // Start the connection.
             $.connection.hub.start().done(function () {
-                $('#sendmessage').click(function () {
-                    sendMsg();
-                });
+                //$('#sendmessage').click(function () {
+                //    sendMsg();
+                //});
                 $('#message').on('keyup', function (e) {
                     if (e.key === 'Enter' || e.keyCode === 13) {
                         sendMsg();
@@ -93,13 +93,6 @@
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
-        function htmlEnc(s) {
-            return s.replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/'/g, '&#39;')
-                .replace(/"/g, '&#34;');
-        }
         //Auto scroll to bottom
         const autoScrollBottom = () => {
             const msg = document.getElementById("discussion");
@@ -125,7 +118,18 @@
                 msg.scrollTop = msg.scrollHeight;
             }
         };
+        //Timer for Ticket-Experied
+        window.setInterval(function () {
+            // Send an AJAX request every 20min to poll for changes and update the UI
+            // example with jquery:
+            $.get('/Chat/Index', function (result) {
+                // TODO: use the results returned from your controller action
+                // to update the UI
+                alert("Hệ thống đăng xuất tự động vì không hoạt động quá 20p");
+                location.assign("/Authentication/Logout");
 
+            });
+        }, 1200000);
 
     </script>
 }
