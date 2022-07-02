@@ -31,7 +31,7 @@ namespace StudentManagementWebApp.Models
 
         [NotMapped]
         [Required(ErrorMessage = "Vui lòng điền vào trường này")]
-        [System.ComponentModel.DataAnnotations.Compare("Password")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Mật khẩu nhập lại không trùng khớp!")]
         public string ConfirmPassword { get; set; }
 
         public string Hash { get; set; }

@@ -20,6 +20,10 @@ namespace StudentManagementWebApp.Services
         {
             return new Student(ma, ten, gioitinh, ns, lop, Khóa);
         }
+        public void Add(Student std)
+        {
+            _svData.Add(std);
+        }
         public List<Student> GetAll()
         {
             return _svData.GetAllSV();

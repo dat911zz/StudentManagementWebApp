@@ -10,6 +10,6 @@ namespace StudentManagementWebApp.Interface.IData
     public interface ISubjectData
     {
         List<Subject> GetAllMH();
-        void Add(Subject sv);
+        void Add(Subject s);
     }
 }

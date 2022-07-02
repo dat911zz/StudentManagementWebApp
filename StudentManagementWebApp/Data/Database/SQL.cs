@@ -192,11 +192,36 @@ namespace StudentManagementWebApp.Data.Database
         }
         public void Add(Student sv)
         {
-            throw new NotImplementedException();
+            SqlConnection conn = GetConnection();
+            conn.Open();
+            cmd = new SqlCommand(@"INSERT INTO SinhVien VALUES (@msv, @ht, @gt, @ns, @lop, @khoa);", conn);
+            #region Using Parameter to prevent SQL Injection
+
+            cmd.Parameters.AddWithValue("@msv", sv.Id);
+            cmd.Parameters.AddWithValue("@ht", sv.Name);
+            cmd.Parameters.AddWithValue("@gt", sv.Gender);
+            cmd.Parameters.AddWithValue("@ns", sv.DayOfBirth);
+            cmd.Parameters.AddWithValue("@lop", sv.ClassId);
+            cmd.Parameters.AddWithValue("@khoa", sv.CourseId);
+
+            #endregion
+            int rowsAffected = cmd.ExecuteNonQuery();
+            conn.Close();
+
         }
-        public void Add(Subject sv)
+        public void Add(Subject s)
         {
-            throw new NotImplementedException();
+            SqlConnection conn = GetConnection();
+            conn.Open();
+            cmd = new SqlCommand(@"INSERT INTO MonHoc VALUES (@ten, @st);", conn);
+            #region Using Parameter to prevent SQL Injection
+
+            cmd.Parameters.AddWithValue("@ten", s.Name);
+            cmd.Parameters.AddWithValue("@st", s.NumOfLessons);
+
+            #endregion
+            int rowsAffected = cmd.ExecuteNonQuery();
+            conn.Close();
         }
         public void Add(Course cthp)
         {

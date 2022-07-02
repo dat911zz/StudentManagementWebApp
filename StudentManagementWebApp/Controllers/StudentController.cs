@@ -79,11 +79,14 @@ namespace StudentManagementWebApp.Controllers
         public ActionResult Edit(Student std)
         {
             //update student in DB using EntityFramework in real-life application
+            service_sv.Add(std);
 
             //update list by removing old student and adding updated student for demo purpose
             var student = studentList.Where(s => s.Id == std.Id).FirstOrDefault();
             studentList.Remove(student);
             studentList.Add(std);
+
+
 
             return RedirectToAction("Index");
         }
