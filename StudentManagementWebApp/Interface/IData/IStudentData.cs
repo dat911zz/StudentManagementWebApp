@@ -10,6 +10,7 @@ namespace StudentManagementWebApp.Interface.IData
     public interface IStudentData
     {
         List<Student> GetAllSV();
-        void Add(Student sv);      
+        void Add(Student sv);
+        void Remove(string id);
     }
 }

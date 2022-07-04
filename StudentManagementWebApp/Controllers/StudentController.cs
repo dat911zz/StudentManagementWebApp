@@ -78,17 +78,21 @@ namespace StudentManagementWebApp.Controllers
         [HttpPost]
         public ActionResult Edit(Student std)
         {
-            //update student in DB using EntityFramework in real-life application
-            service_sv.Add(std);
+            if (ModelState.IsValid)
+            {
+                //update student in DB using EntityFramework in real-life application
+            
 
-            //update list by removing old student and adding updated student for demo purpose
-            var student = studentList.Where(s => s.Id == std.Id).FirstOrDefault();
-            studentList.Remove(student);
-            studentList.Add(std);
+                //update list by removing old student and adding updated student for demo purpose
+                var student = studentList.Where(s => s.Id == std.Id).FirstOrDefault();
+                studentList.Remove(student);
+                studentList.Add(std);
 
 
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            return View();
         }
         #endregion
         #region Details
@@ -140,14 +144,19 @@ namespace StudentManagementWebApp.Controllers
         [HttpPost]
         public ActionResult Create(Student std)
         {
-            int lastId = 1;
-            if (studentList.Count != 0)
+            if (ModelState.IsValid)//Check đk form đã nhập chưa
             {
-                lastId = int.Parse(studentList.Last().Id);              
+                int lastId = 1;
+                if (studentList.Count != 0)
+                {
+                    lastId = int.Parse(studentList.Last().Id);              
+                }
+                std.Id = "" + ++lastId;
+                service_sv.Add(std);
+                studentList.Add(std);
+                return RedirectToAction("Index");
             }
-            std.Id = "" + ++lastId;
-            studentList.Add(std);
-            return RedirectToAction("Index");
+            return View();
         }
         #endregion
         #region Delete

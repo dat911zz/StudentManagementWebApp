@@ -8,7 +8,6 @@
     <div class="col-md-5">
         @using (Html.BeginForm("Register", "Authentication", FormMethod.Post))
         {
-            //@Html.ValidationSummary()
             @Html.AntiForgeryToken()
 
             <div class="card" style="margin: 0 auto;">

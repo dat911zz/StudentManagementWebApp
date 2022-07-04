@@ -71,6 +71,11 @@ namespace StudentManagementWebApp.Data.ORM
         {
             throw new System.NotImplementedException();
         }
+
+        public void Remove(string id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
     
 }

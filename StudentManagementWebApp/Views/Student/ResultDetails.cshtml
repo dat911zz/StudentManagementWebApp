@@ -3,6 +3,17 @@
 @{
     ViewBag.Title = "Result Details";
 }
+<div class="breadcrumb">
+    <div class="breadcrumb-item">
+        @Html.ActionLink("Danh sách sinh viên", "Index")
+    </div>
+    <div class="breadcrumb-item">
+        @Html.ActionLink("Thông tin sinh viên", "Details", new { id = ViewBag.Id })
+    </div>
+    <div class="breadcrumb-item">
+        <a href="#">Kết quả học tập</a>
+    </div>
+</div>
 
 <h2 class="text-center" style="color: #384289;">Kết quả học tập</h2>
 <div class="container">

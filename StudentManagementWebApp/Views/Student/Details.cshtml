@@ -3,11 +3,18 @@
 @{
     ViewBag.Title = "Details";
 }
-<h2>Thông tin sinh viên</h2>
+<div class="breadcrumb">
+    <div class="breadcrumb-item">
+        @Html.ActionLink("Danh sách sinh viên", "Index")
+    </div>
+    <div class="breadcrumb-item">
+        <a href="#">Thông tin sinh viên</a>
+    </div>
+</div>
+<h2 class="text-center col-md-10">Thông tin sinh viên</h2>
 
 <div class="container center-block">
-    <h4>Sinh Viên</h4>
-    <hr />
+    <hr class="col-md-10 float-left">
     <div class="col-md-6">
         <dl class="dl-horizontal">
             <dt>
@@ -56,14 +63,15 @@
 
         </dl>
     </div>
+    <hr class="col-md-10 float-left">
     <div class="container-fluid">
         @Html.ActionLink("Danh sách học phần", "CourseDetails", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
         @Html.ActionLink("Kết quả học tập", "ResultDetails", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
     </div>
 </div>
-<div class="container center-block">
+@*<div class="container center-block">
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
-</div>
+</div>*@

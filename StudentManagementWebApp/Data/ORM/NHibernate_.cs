@@ -57,7 +57,6 @@ namespace StudentManagementWebApp.Data.ORM
         /// <returns>ISession</returns>
         public ISession OpenSession()
         {
-            //string cntString = tconnectionString;
             ISessionFactory sessionFactory = Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2012
                   .ConnectionString(connectionString).ShowSql()
@@ -78,7 +77,6 @@ namespace StudentManagementWebApp.Data.ORM
         public List<Student> GetAllSV()
         {
             List<Student> list_sv = new List<Student>();
-            //int count = 0;
             using (ISession session = OpenSession())
             {
                 list_sv = session.Query<Student>().ToList();
@@ -88,7 +86,6 @@ namespace StudentManagementWebApp.Data.ORM
         public List<Subject> GetAllMH()
         {
             List<Subject> list_mh = new List<Subject>();
-            //int count = 0;
             using (ISession session = OpenSession())
             {
                 list_mh = session.Query<Subject>().ToList();
@@ -126,6 +123,11 @@ namespace StudentManagementWebApp.Data.ORM
             throw new NotImplementedException();
         }
         public void Add(Course cthp)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(string id)
         {
             throw new NotImplementedException();
         }

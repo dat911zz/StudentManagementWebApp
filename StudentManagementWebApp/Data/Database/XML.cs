@@ -42,5 +42,10 @@ namespace StudentManagementWebApp.Data.Database
         {
             throw new NotImplementedException();
         }
+
+        public void Remove(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

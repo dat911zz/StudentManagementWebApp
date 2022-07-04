@@ -2042,7 +2042,6 @@
     <Content Include="Views\Student\Edit.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\Details.cshtml" />
-    <Content Include="Views\Shared\_MyLayoutPage.cshtml" />
     <Content Include="Views\Error\ItemNotFound.cshtml" />
     <Content Include="vendor\fontawesome-free\less\brands.less" />
     <Content Include="vendor\fontawesome-free\less\fontawesome.less" />

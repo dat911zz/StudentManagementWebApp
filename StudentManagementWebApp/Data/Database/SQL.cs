@@ -244,5 +244,14 @@ namespace StudentManagementWebApp.Data.Database
             int rowsAffected = cmd.ExecuteNonQuery();
             conn.Close();
         }
+
+        public void Remove(string id)
+        {           
+            SqlConnection conn = GetConnection();
+            conn.Open();
+            cmd = new SqlCommand($@"DELETE SinhVien WHERE MaSV = '{id}'");
+
+            conn.Close();
+        }
     }
 }

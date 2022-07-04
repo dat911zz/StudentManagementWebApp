@@ -20,9 +20,9 @@ namespace StudentManagementWebApp.Services
         {
             return new Student(ma, ten, gioitinh, ns, lop, Khóa);
         }
-        public void Add(Student std)
+        public void Add(Student sv)
         {
-            _svData.Add(std);
+            _svData.Add(sv);
         }
         public List<Student> GetAll()
         {
@@ -48,6 +48,11 @@ namespace StudentManagementWebApp.Services
             {
                 kqs.GetInfoAll(item);
             }
+        }
+
+        public void Remove(string id)
+        {
+            _svData.Remove(id);
         }
     }
 }
