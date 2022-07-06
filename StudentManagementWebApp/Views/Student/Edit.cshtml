@@ -15,7 +15,6 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
     <div class="form-group">
         <h4 class="text-center col-md-10">Sửa đổi thông tin</h4>
         <hr class="col-md-10 float-left">
@@ -63,7 +62,7 @@
         <hr class="col-md-10 float-left">
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Lưu" class="btn btn-outline-primary btn-block" />
+                <input type="button" value="Lưu" data-toggle="modal" data-target="#confirmModal" aria-labelledby="Save" class="btn btn-outline-primary btn-block" />
             </div>
         </div>
     </div>

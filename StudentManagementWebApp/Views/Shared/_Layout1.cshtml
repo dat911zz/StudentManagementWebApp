@@ -18,7 +18,7 @@
           rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    
+
     <link rel="stylesheet" href="~/Content/Customs/sb-admin-2.min.css" />
     <link rel="stylesheet" href="@Url.Content("~/Content/Customs/navbar.css")" media="all" />
     <link rel="stylesheet" href="@Url.Content("~/Content/Customs/Custom_1.razor.css")" media="all" />
@@ -32,7 +32,7 @@
     <div id="wrapper">
         <!-- Topbar -->
         @Html.Partial("_TopBar");
-        
+
         <!-- Sidebar -->
         @Html.Partial("_SideBar");
 
@@ -93,6 +93,8 @@
         </div>
     </div>
 
+    <!-- Confirm Modal-->
+    @Html.Partial("_ConfirmForm");
 
     <!-- Bootstrap core JavaScript-->
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
@@ -108,12 +110,20 @@
         $(document).ready(function () {
             $('#table_id').DataTable();
         });
+        $(function () {
+            var modalBox = function (e) {
+                e.preventDefault();
+                $("#modalBox").modal({ show: true });
+            };
+            $("#create").click(modalBox);
+        });
     </script>
+
     <!-- Scripts for chat hub-->
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <!--Bắt buộc phải có để load script cho SignalR Hub-->
     @RenderSection("scripts", required: false)
 </body>
-    
+
 </html>
