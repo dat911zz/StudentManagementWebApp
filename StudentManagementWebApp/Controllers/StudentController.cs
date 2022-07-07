@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Mvc;
 using StudentManagementWebApp.Container;
 using System.Web.Security;
+using System;
 
 namespace StudentManagementWebApp.Controllers
 {
@@ -34,6 +35,10 @@ namespace StudentManagementWebApp.Controllers
                 studentList = service_sv.GetAll();
                 subjectList = service_mh.GetAll();
                 mng.AutoWork(ref studentList, subjectList);
+
+                studentList.Sort(new Comparison<Student>((x, y) => {
+                    return int.Parse(x.Id) - int.Parse(y.Id);             
+                }));
                 return RedirectToAction("Index");
             }
             catch (System.Exception)
@@ -50,7 +55,8 @@ namespace StudentManagementWebApp.Controllers
             ViewBag.TotalStudents = studentList.Count;
             //fetch students from the DB using Entity Framework here
 
-            return View(studentList.OrderBy(s => int.Parse(s.Id)));
+            //return View(studentList.OrderBy(s => int.Parse(s.Id)));
+            return View(studentList);
         }
         #endregion
         #region Edit
@@ -144,7 +150,7 @@ namespace StudentManagementWebApp.Controllers
         [HttpPost]
         public ActionResult Create(Student std)
         {
-            if (ModelState.IsValid)//Check đk form đã nhập chưa
+            if (ModelState.IsValidField("ClassId") && ModelState.IsValidField("CourseId") && ModelState.IsValidField("Name") && ModelState.IsValidField("Gender"))//Check đk form đã nhập chưa
             {
                 int lastId = 1;
                 if (studentList.Count != 0)

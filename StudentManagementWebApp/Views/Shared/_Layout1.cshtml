@@ -110,12 +110,17 @@
         $(document).ready(function () {
             $('#table_id').DataTable();
         });
-        $(function () {
-            var modalBox = function (e) {
-                e.preventDefault();
-                $("#modalBox").modal({ show: true });
-            };
-            $("#create").click(modalBox);
+        //$(function () {
+        //    var modalBox = function (e) {
+        //        e.preventDefault();
+        //        $("#modalBox").modal({ show: true });
+        //    };
+        //    $("#create").click(modalBox);
+        //});
+        $(() => {
+            $('#submitBtn').on('click', (e) => {
+                $('#Form').submit();
+            });
         });
     </script>
 

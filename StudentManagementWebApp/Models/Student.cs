@@ -12,7 +12,7 @@ namespace StudentManagementWebApp.Models
         /// <summary>
         /// Mã sinh viên
         /// </summary>
-        [Required(ErrorMessage = "Vui lòng nhập mã!")]
+        //[Required(ErrorMessage = "Vui lòng nhập mã!")]
         [Display(Name = "Mã Sinh Viên")]
         public virtual string Id { get; set; }
         /// <summary>

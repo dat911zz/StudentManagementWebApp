@@ -12,7 +12,7 @@
     </div>
 </div>
 <div class="container-fluid justify-content-center align-content-center">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit","Student",FormMethod.Post, htmlAttributes: new { @id = "Form"}))
     {
         @Html.AntiForgeryToken()
     <div class="form-group">
