@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="~/Content/Customs/sb-admin-2.min.css" />
     <link rel="stylesheet" href="@Url.Content("~/Content/Customs/navbar.css")" media="all" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/Customs/Custom_1.razor.css")" media="all" />
+    <link rel="stylesheet" href="~/Content/Customs/Custom_1.razor.css" media="all" />
     <link rel="stylesheet" href="@Url.Content("//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css")" media="all" />
 
 </head>
@@ -110,13 +110,6 @@
         $(document).ready(function () {
             $('#table_id').DataTable();
         });
-        //$(function () {
-        //    var modalBox = function (e) {
-        //        e.preventDefault();
-        //        $("#modalBox").modal({ show: true });
-        //    };
-        //    $("#create").click(modalBox);
-        //});
         $(() => {
             $('#submitBtn').on('click', (e) => {
                 $('#Form').submit();
@@ -127,6 +120,17 @@
     <!-- Scripts for chat hub-->
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
     <script src="~/signalr/hubs"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-474K6FYWXE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-474K6FYWXE');
+    </script>
+
     <!--Bắt buộc phải có để load script cho SignalR Hub-->
     @RenderSection("scripts", required: false)
 </body>

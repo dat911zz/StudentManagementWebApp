@@ -2,34 +2,59 @@
     ViewBag.Title = "Trang Chủ";
 }
 
-<div class="jumbotron text-center">
+<div class="jumbotron text-center bg-gradient-primary" style="color: #fff">
     <h1>Trường đại học Lùa Gà</h1>
-    <p class="lead">Tra cứu thông tin?</p>
-    @Html.ActionLink("Bấm vào đây!", "Index", "Student", null,
-    new { @class = "btn btn-block btn-primary btn-lg"}
-    )
+    @{
+        var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+        if (authCookie == null)
+        {
+            <p class="lead">Đăng nhập vào hệ thống quản trị</p>
+            @Html.ActionLink("Đăng nhập hệ thống", "Login", "Authentication", null, htmlAttributes: new { @class = "btn btn-block btn-success" })
+        }
+        else
+        {
+            <p class="lead">Hệ Thống Quản Trị</p>
+            @Html.ActionLink("Danh sách sinh viên", "Index", "Student", null,
+            new { @class = "btn btn-block btn-success btn-lg" }
+            )
+
+        }
+    }
+
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Sinh viên là gì?</h2>
-        <p>
-            Sinh viên là sinh viên học trong 1 trường đại học được gọi là sinh viên =))
-        </p>
-        <p><a class="btn btn-default" href="~/Home/Intro">Learn more &raquo;</a></p>
-      </div>
-    <div class="col-md-4">
-        <h2>Thế nào là lùa gà?</h2>
-        <p class="text-justify">
-            Xét về nghĩa đen, lùa gà đơn giản là một hành động mà con người dùng tay không, chổi, que,...hoặc bất cứ thứ gì có thể xua đuổi, gây chú ý và dồn đàn vật nuôi, khiến chúng quy về một mối. Tuy nhiên, từ lóng này hiện nay còn được dùng để ám chỉ việc kêu gọi đầu tư trên các sàn giao dịch tiền ảo.
-            Trong đó, "đàn gà" ở đây chính là phép ẩn dụ chỉ những nhà đầu tư muốn rót vốn kiếm lời. Còn người lùa được hiểu là nhà phát hành tiền ảo với hứa hẹn, quảng cáo sẽ đem lại nhuận khủng cho họ trong thời gian ngắn. Chiêu trò này đánh vào lòng tham trở thành "tỷ phú chỉ sau một đêm" nên rất dễ lôi kéo, dụ dỗ được đông đảo thành viên bỏ tiền tham gia đầu tư để nhằm mục đích trục lợi cho cá nhân.
-            Sau khi đã "lùa" thành công một số lượng "gà" đủ lớn, chủ sàn sẽ ôm tài sản bỏ chạy hoặc khiến cho đồng tiền tụt giá không phanh và chối bỏ trách nhiệm. Lúc này, người chơi mới ngỡ ngàng nhận ra mình thua lỗ và bị mất trắng khoản đầu tư bỏ ra ban đầu nhưng đã quá muộn.
-        </p>
-        <p><a class="btn btn-default" href="~/Home/Intro">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Thêm thông tin về trường</h2>
-        <p class="text-justify">Trường đại học Lùa Gà là trường đại học hàng đầu uy tin nhất Đông Lào, chuyên đào tạo các khóa lùa gà chất lượng cao. Cam kết 100% đậu, ra trường kiếm hàng chục tỷ USD mỗi tháng là chuyện đơn giản. Hãy liên hệ ngay với chúng tôi qua hotline: 113</p>
-        <p><a class="btn btn-default" href="~/Home/Intro">Learn more &raquo;</a></p>
-    </div>
-</div>
+@{
+    if (authCookie == null)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Sinh viên là gì?</h2>
+                <p>
+                    Sinh viên là sinh viên học trong 1 trường đại học được gọi là sinh viên =))
+                </p>
+                <p><a class="btn btn-default" href="~/Home/Intro">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Thế nào là lùa gà?</h2>
+                <p class="text-justify">
+                    Xét về nghĩa đen, lùa gà đơn giản là một hành động mà con người dùng tay không, chổi, que,...hoặc bất cứ thứ gì có thể xua đuổi, gây chú ý và dồn đàn vật nuôi, khiến chúng quy về một mối. Tuy nhiên, từ lóng này hiện nay còn được dùng để ám chỉ việc kêu gọi đầu tư trên các sàn giao dịch tiền ảo.
+                    Trong đó, "đàn gà" ở đây chính là phép ẩn dụ chỉ những nhà đầu tư muốn rót vốn kiếm lời. Còn người lùa được hiểu là nhà phát hành tiền ảo với hứa hẹn, quảng cáo sẽ đem lại nhuận khủng cho họ trong thời gian ngắn. Chiêu trò này đánh vào lòng tham trở thành "tỷ phú chỉ sau một đêm" nên rất dễ lôi kéo, dụ dỗ được đông đảo thành viên bỏ tiền tham gia đầu tư để nhằm mục đích trục lợi cho cá nhân.
+                    Sau khi đã "lùa" thành công một số lượng "gà" đủ lớn, chủ sàn sẽ ôm tài sản bỏ chạy hoặc khiến cho đồng tiền tụt giá không phanh và chối bỏ trách nhiệm. Lúc này, người chơi mới ngỡ ngàng nhận ra mình thua lỗ và bị mất trắng khoản đầu tư bỏ ra ban đầu nhưng đã quá muộn.
+                </p>
+                <p><a class="btn btn-default" href="~/Home/Intro">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Thêm thông tin về trường</h2>
+                <p class="text-justify">Trường đại học Lùa Gà là trường đại học hàng đầu uy tin nhất Đông Lào, chuyên đào tạo các khóa lùa gà chất lượng cao. Cam kết 100% đậu, ra trường kiếm hàng chục tỷ USD mỗi tháng là chuyện đơn giản. Hãy liên hệ ngay với chúng tôi qua hotline: 113</p>
+                <p><a class="btn btn-default" href="~/Home/Intro">Learn more &raquo;</a></p>
+            </div>
+        </div>
+    }
+    else
+    {
+@*<div class="text-center">
+    <img src="~/Assets/anony.png" />
+</div>*@
+        
+    }
+}
