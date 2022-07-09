@@ -27,86 +27,108 @@
     </div>
 
     <div class="container">
-    <div class="table-responsive">
-        <table class="table table-bordered" id="table_id" width="100%" cellspacing="0">
-            <thead>
-            <tr>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.Gender)
-                </th>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.DayOfBirth)
-                </th>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.ClassId)
-                </th>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.CourseId)
-                </th>
-                <th class="text-center">
-                    Tùy chọn
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender)
-                    </td>
-                    <td>
-                        @{
-                            var date = item.DayOfBirth.ToString("dd/MM/yyyy");
-                            @Html.DisplayName(date)
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ClassId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CourseId)
-                    </td>
-                    <td>
-                        @if (authCookie == null)
-                        {
-                            @Html.ActionLink("Details", "Details", new { id = item.Id });
-                        }
-                        else
-                        {
-                            if (roles[0].Equals("ADMIN"))
-                            {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id });
-                                @Html.ActionLink(" | ", "");
-                                @Html.ActionLink("Details", "Details", new { id = item.Id });
-                                @Html.ActionLink(" | ", "");
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, htmlAttributes: new { @aria-labelledby = "Save" });
-                                <input type="button" value="Xóa" data-toggle="modal" data-target="#confirmModal" class="btn btn-outline-primary" />
+        <div class="table-responsive">
+            <table class="table table-bordered" id="table_id" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Gender)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.DayOfBirth)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.ClassId)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.CourseId)
+                        </th>
+                        <th class="text-center">
+                            Tùy chọn
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+                            <td>
+                                @{
+                                    var date = item.DayOfBirth.ToString("dd/MM/yyyy");
+                                    @Html.DisplayName(date)
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClassId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CourseId)
+                            </td>
+                            <td>
+                                @if (authCookie == null)
+                                {
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id });
+                                }
+                                else
+                                {
+                                    if (roles[0].Equals("ADMIN"))
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-primary" });
+                                        @Html.Label(" | ")
+                                        @Html.ActionLink("Details", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-primary" });
+                                        @Html.Label(" |")
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.Id }, htmlAttributes: new { onclick = "return confirm('Are sure wants to delete?');"});*@
+                                        <input type="button" value="Xóa" id="@item.Id" class="btn btn-outline-primary" onclick="deleteConfirm(@item.Id)" />
 
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Details", "Details", new { id = item.Id });
-                            }
-                        }
-                    </td>
-                </tr>
-            }
-            </tbody>
-
-        </table>
-    </div>
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Details", "Details", new { id = item.Id });
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div><!-- 		End of Container -->
 </div>
+
+
+<!-- Delete modal -->
+<div id="del_confirmModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="del_confirmModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="color: #000; background-color: #ed6161ab">
+                <h5 class="modal-title" id="confirmModalTitle">Hệ Thống</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color: #000">
+                <p>Bạn có chắc chắn muốn xóa sinh viên có mã <strong id="delValName"></strong> ?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="delete" type="button" class="btn btn-primary" aria-label="Save" onclick="deleteData()">Xóa</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Delete modal-->

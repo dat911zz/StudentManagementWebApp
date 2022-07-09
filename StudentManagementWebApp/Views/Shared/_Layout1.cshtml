@@ -38,8 +38,8 @@
 
         <!-- End of Sidebar -->
         <!-- Background -->
-        
-        @{ 
+
+        @{
             var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
             if (authCookie != null)
             {
@@ -127,7 +127,35 @@
             });
         });
     </script>
-
+    <script>
+        var deleteConfirm = function (val) {
+            console.log("+");
+            $('#delValName').text(val);
+            $('#del_confirmModal').modal('show');
+        }
+        var deleteData = function () {
+            /*$('#divLoading').show();*/
+            console.log("+");
+            var id = parseInt($('#delValName').text());
+            var _url = '@Url.Action("Delete","Student")/' + id;
+            console.log(_url);
+            $.ajax({
+                type: "POST",
+                url: _url,
+                data: { id: id },
+                success: function (result) {
+                    $("#del_confirmModal").modal('hide');
+                    console.log("Done");
+                    location.href = '@Url.Action("Index","Student")';
+                },
+                error: function () {
+                    $("#del_confirmModal").modal('hide');
+                    console.log("Fail");
+                    location.href = '@Url.Action("Index","Student")';
+                }
+            });
+        }
+    </script>
     <!-- Scripts for chat hub-->
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
     <script src="~/signalr/hubs"></script>

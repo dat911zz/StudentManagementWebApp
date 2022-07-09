@@ -164,7 +164,7 @@ namespace StudentManagementWebApp.Controllers
         }
         #endregion
         #region Delete
-        [HttpGet]
+        [HttpPost]
         [AuthorizeRole(Role.ADMIN)]
         public ActionResult Delete(int id)
         {
