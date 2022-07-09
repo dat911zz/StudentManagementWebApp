@@ -32,11 +32,11 @@
     color: #000;
     background-color: transparent !important;
 }
-    #wrapper #content-wrapper::after {
+    #wrapper #bg {
         background: url(/Assets/anony.png) !important;
         background-repeat: no-repeat !important;
         background-position: center !important;
-        background-size: 80vh !important;       
+        background-size: 70vh !important; 
         content: "";
         top: 0px;
         right: 0px;
@@ -46,3 +46,9 @@
         z-index: -100;
         position: absolute;
     }
+
+
+
+table.dataTable tbody td{
+    vertical-align: middle;
+}

@@ -37,6 +37,17 @@
         @Html.Partial("_SideBar");
 
         <!-- End of Sidebar -->
+        <!-- Background -->
+        
+        @{ 
+            var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (authCookie != null)
+            {
+                <div id="bg"></div>
+            }
+        }
+
+        <!-- End of bg-->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -94,7 +105,7 @@
     </div>
 
     <!-- Confirm Modal-->
-    @Html.Partial("_ConfirmForm");
+    @Html.Partial("_ConfirmForm")
 
     <!-- Bootstrap core JavaScript-->
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>

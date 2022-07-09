@@ -15,10 +15,14 @@ namespace StudentManagementWebApp.Data.Database
     public class SQL : IStudentData, ISubjectData, ICourseData, IUsersData
     {
         //---log test server name : DESKTOP-GUE0JS7
-        SqlCommand cmd;
+        private SqlCommand cmd;
         SqlDataAdapter da;
         SqlCommandBuilder builder;
         DataTable tb;
+        public SQL()
+        {
+            
+        }
         //Khởi tạo kết nối tới CSDL
         public SqlConnection GetConnection(string datasource, string database, string username, string password)
         {
@@ -249,8 +253,33 @@ namespace StudentManagementWebApp.Data.Database
         {           
             SqlConnection conn = GetConnection();
             conn.Open();
-            cmd = new SqlCommand($@"DELETE SinhVien WHERE MaSV = '{id}'");
+            cmd = new SqlCommand($@"exec fk_delete_mssv '{id}'", conn);
+            int rowsAffected = cmd.ExecuteNonQuery();
+            conn.Close();
+        }
 
+        public void Update(Student sv)
+        {
+            SqlConnection conn = GetConnection();
+            conn.Open();
+            cmd = new SqlCommand($@" 
+            SET DATEFORMAT DMY
+            update SinhVien
+            set TenSV = @name, GioiTinh = @gender, NgaySinh = @date, Lop = @classId, Khoa = @courseId
+            where MaSV = @id
+            ", conn);
+
+            #region Using Parameter to prevent SQL Injection
+
+            cmd.Parameters.AddWithValue("@name", sv.Name);
+            cmd.Parameters.AddWithValue("@gender", sv.Gender);
+            cmd.Parameters.AddWithValue("@date", sv.DayOfBirth);
+            cmd.Parameters.AddWithValue("@classId", sv.ClassId);
+            cmd.Parameters.AddWithValue("@courseId", sv.CourseId);
+            cmd.Parameters.AddWithValue("@id", sv.Id);
+            #endregion
+
+            int rowsAffect = cmd.ExecuteNonQuery();
             conn.Close();
         }
     }

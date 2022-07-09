@@ -73,7 +73,7 @@ namespace StudentManagementWebApp.Controllers
             if (std == null)
             {
                 return RedirectToAction("ItemNotFound", "Error");
-            }
+            }           
             return View(std);
         }
         /// <summary>
@@ -87,15 +87,13 @@ namespace StudentManagementWebApp.Controllers
             if (ModelState.IsValid)
             {
                 //update student in DB using EntityFramework in real-life application
-            
+                service_sv.Update(std);
 
                 //update list by removing old student and adding updated student for demo purpose
                 var student = studentList.Where(s => s.Id == std.Id).FirstOrDefault();
                 studentList.Remove(student);
                 studentList.Add(std);
-
-
-
+                
                 return RedirectToAction("Index");
             }
             return View();
@@ -172,6 +170,7 @@ namespace StudentManagementWebApp.Controllers
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             studentList.Remove(std);
+            service_sv.Remove(std.Id);
             return RedirectToAction("Index");
         }
         #endregion

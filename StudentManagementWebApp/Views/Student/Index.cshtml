@@ -92,7 +92,9 @@
                                 @Html.ActionLink(" | ", "");
                                 @Html.ActionLink("Details", "Details", new { id = item.Id });
                                 @Html.ActionLink(" | ", "");
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id });
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, htmlAttributes: new { @aria-labelledby = "Save" });
+                                <input type="button" value="Xóa" data-toggle="modal" data-target="#confirmModal" class="btn btn-outline-primary" />
+
                             }
                             else
                             {

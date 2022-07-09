@@ -12,5 +12,6 @@ namespace StudentManagementWebApp.Interface.IData
         List<Student> GetAllSV();
         void Add(Student sv);
         void Remove(string id);
+        void Update(Student sv);
     }
 }

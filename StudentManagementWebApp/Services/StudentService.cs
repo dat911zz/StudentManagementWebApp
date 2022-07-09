@@ -54,5 +54,9 @@ namespace StudentManagementWebApp.Services
         {
             _svData.Remove(id);
         }
+        public void Update(Student sv)
+        {
+            _svData.Update(sv);
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace StudentManagementWebApp.Interface.IServices
         void GetInfo(Student sv);
         void Add(Student sv);
         void Remove(string id);
+        void Update(Student sv);
     }
 }

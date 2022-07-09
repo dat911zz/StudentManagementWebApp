@@ -76,6 +76,11 @@ namespace StudentManagementWebApp.Data.ORM
         {
             throw new System.NotImplementedException();
         }
+
+        public void Update(Student sv)
+        {
+            throw new System.NotImplementedException();
+        }
     }
     
 }

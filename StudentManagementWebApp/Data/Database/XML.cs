@@ -47,5 +47,10 @@ namespace StudentManagementWebApp.Data.Database
         {
             throw new NotImplementedException();
         }
+
+        public void Update(Student sv)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
