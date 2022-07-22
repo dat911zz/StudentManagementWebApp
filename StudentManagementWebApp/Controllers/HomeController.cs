@@ -39,16 +39,5 @@ namespace StudentManagementWebApp.Controllers
         {
             return RedirectToAction("Index", "Chat");
         }
-
-        [ChildActionOnly]
-        public ActionResult RenderTopbar()
-        {
-            return PartialView("_TopBar");
-        }
-        [ChildActionOnly]
-        public ActionResult RenderSidebar()
-        {
-            return PartialView("_SideBar");
-        }
     }
 }

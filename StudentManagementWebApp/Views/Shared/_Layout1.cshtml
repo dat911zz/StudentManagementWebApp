@@ -37,20 +37,20 @@
         @Html.Partial("_SideBar");
 
         <!-- End of Sidebar -->
-        <!-- Background -->
-
-        @{
-            var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
-            if (authCookie != null)
-            {
-                <div id="bg"></div>
-            }
-        }
-
-        <!-- End of bg-->
+        
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column" style="overflow: scroll">
+            <!-- Background -->
 
+            @{
+                var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+                if (authCookie != null)
+                {
+                    <div id="bg"></div>
+                }
+            }
+
+            <!-- End of bg-->
             <!-- Main Content -->
             <div id="content" style="margin-top: 72px;">
 
