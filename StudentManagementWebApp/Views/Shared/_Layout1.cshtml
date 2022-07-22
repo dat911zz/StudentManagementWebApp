@@ -37,20 +37,9 @@
         @Html.Partial("_SideBar");
 
         <!-- End of Sidebar -->
-        
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column" style="overflow: scroll">
-            <!-- Background -->
 
-            @{
-                var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
-                if (authCookie != null)
-                {
-                    <div id="bg"></div>
-                }
-            }
-
-            <!-- End of bg-->
             <!-- Main Content -->
             <div id="content" style="margin-top: 72px;">
 
@@ -170,6 +159,8 @@
         gtag('config', 'G-474K6FYWXE');
     </script>
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2232183921249407"
+            crossorigin="anonymous"></script>
     <!--Bắt buộc phải có để load script cho SignalR Hub-->
     @RenderSection("scripts", required: false)
 </body>

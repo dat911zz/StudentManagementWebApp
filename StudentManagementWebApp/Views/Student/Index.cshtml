@@ -9,6 +9,17 @@
         roles = authTicket.UserData.Split(',');
     }
 }
+
+<!-- Background -->
+
+@*@{
+    if (authCookie != null)
+    {
+        <div id="bg"></div>
+    }
+}*@
+
+<!-- End of bg-->
 <div class="text-capitalize text-center">
     <h1 class="text-capitalize text-info">Trang Quản Lý Sinh Viên</h1>
 
@@ -88,13 +99,13 @@
                                 {
                                     if (roles[0].Equals("ADMIN"))
                                     {
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-primary" });
-                                        @Html.Label(" | ")
-                                        @Html.ActionLink("Details", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-primary" });
-                                        @Html.Label(" |")
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.Id }, htmlAttributes: new { onclick = "return confirm('Are sure wants to delete?');"});*@
-                                        <input type="button" value="Xóa" id="@item.Id" class="btn btn-outline-primary" onclick="deleteConfirm(@item.Id)" />
+                                        <span class="btn-group">
 
+                                            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-primary" })
+                                            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-primary" })
+                                            <a id="@item.Id" class="btn btn-outline-primary" onclick="deleteConfirm(@item.Id)" >Xóa</a>
+
+                                        </span>
                                     }
                                     else
                                     {

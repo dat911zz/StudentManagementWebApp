@@ -1,7 +1,7 @@
 ﻿@model StudentManagementWebApp.Models.Student
 
 @{
-    ViewBag.Title = "Course Details";
+    ViewBag.Title = "Thông tin ";
 }
 <div class="breadcrumb">
     <div class="breadcrumb-item">
@@ -22,6 +22,7 @@
             @Html.Raw(ViewBag.CourseList)
         </table>
     </div>
+</div>
 <div class="container margin-top-15 center-block">
     <p>
         @Html.ActionLink("Trở về trang trước", "Details", new { id = ViewBag.Id }, htmlAttributes: new { @class = "btn btn-primary" })

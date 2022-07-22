@@ -174,5 +174,15 @@ namespace StudentManagementWebApp.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+
+        #region Course Register
+        public ActionResult DKHP()
+        {
+            ViewBag.Subjects = subjectList; 
+            return View("CourseRegister");
+        }
+
+        #endregion
     }
 }

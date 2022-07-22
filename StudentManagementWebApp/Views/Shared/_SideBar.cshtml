@@ -47,8 +47,10 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Sinh Viên</h6>
                     <a class="collapse-item" href="#">Đăng ký học phần</a>
-                    <a class="collapse-item" href="#">Cập nhật môn</a>
+                    @Html.ActionLink("Đăng ký học phần", "DKHP", null, htmlAttributes: new { @class="collapse-item"})
                     <a class="collapse-item" href="#">Cập nhật điểm</a>
+                    <h6 class="collapse-header">Hệ Thống</h6>
+                    <a class="collapse-item" href="#">Cập nhật môn</a>
                 </div>
             </div>
         </li>

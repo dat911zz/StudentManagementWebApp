@@ -1,0 +1,38 @@
+﻿@model StudentManagementWebApp.Models.Student
+@{
+    ViewBag.Title = "Cổng Thông Tin Đăng Ký Học Phần";
+}
+
+<div class="jumbotron bg-gradient-success">
+    <h1 class="text-center text-white">Cổng Thông Tin Đăng Ký Học Phần</h1>
+
+</div>
+
+<div class="container">
+    <div class="table-responsive">
+        <table id="table-id" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Môn</th>
+                    <th>Số Tín chỉ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int stt = 1;
+                    foreach (StudentManagementWebApp.Models.Subject s in ViewBag.Subjects)
+                    {
+                        <tr>
+                            <td>@stt</td>
+                            <td>@s.Name</td>
+                            <td>@s.NumOfLessons</td>
+                        </tr>
+                        stt++;
+                    }
+                }
+            </tbody>
+            
+        </table>
+    </div>
+</div>
