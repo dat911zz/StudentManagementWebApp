@@ -1,5 +1,7 @@
 ﻿@model StudentManagementWebApp.Models.Student
+@using StudentManagementWebApp.Models
 @{
+    
     ViewBag.Title = "Cổng Thông Tin Đăng Ký Học Phần";
 }
 
@@ -9,13 +11,15 @@
 </div>
 
 <div class="container">
-    <div class="table-responsive">
-        <table id="table-id" class="table table-bordered">
+    <h2>Danh sách môn học hiện có</h2>
+    <div class="table-responsive text-center">
+        <table class="table table-bordered" id="table_id" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th>STT</th>
-                    <th>Tên Môn</th>
-                    <th>Số Tín chỉ</th>
+                    <th class="text-center">STT</th>
+                    <th class="text-center">Tên Môn</th>
+                    <th class="text-center">Số Tiết</th>
+                    <th class="text-center">Thêm vào danh sách đăng ký</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,12 +31,49 @@
                             <td>@stt</td>
                             <td>@s.Name</td>
                             <td>@s.NumOfLessons</td>
+                            <td>
+                                @Html.ActionLink("+","AddToTmpList", "Student", new { Name = s.Name}, htmlAttributes: new { @class="btn"})
+                            </td>
                         </tr>
                         stt++;
                     }
                 }
             </tbody>
             
+        </table>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Danh sách môn đang chờ đăng ký</h2>
+    <div class="table-responsive text-center">
+        <table class="table table-bordered" id="table_id1" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="text-center">STT</th>
+                    <th class="text-center">Tên Môn</th>
+                    <th class="text-center">Số Tiết</th>
+                    <th class="text-center">Loại khỏi danh sách</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    stt = 1;
+                    foreach (StudentManagementWebApp.Models.Subject s in ViewBag.TmpList)
+                    {
+                        <tr>
+                            <td>@stt</td>
+                            <td>@s.Name</td>
+                            <td>@s.NumOfLessons</td>
+                            <td>
+                                -
+                            </td>
+                        </tr>
+                        stt++;
+                    }
+                }
+            </tbody>
+
         </table>
     </div>
 </div>

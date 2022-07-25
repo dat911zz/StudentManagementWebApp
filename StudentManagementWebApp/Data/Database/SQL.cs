@@ -31,7 +31,7 @@ namespace StudentManagementWebApp.Data.Database
             //Cần kiểm soát quyền truy cập vào CSDL
             //Nếu để như vầy sẽ bị lộ tài khoản
             //Tham khảo tại đây: https://viblo.asia/p/bai-toan-phan-quyen-van-de-muon-thuo-1VgZvw9mlAw
-            return conn2;
+            return conn1;
 
         }
         //Test kết nối với mẫu chuỗi kết nối
@@ -172,7 +172,7 @@ namespace StudentManagementWebApp.Data.Database
             List<User> list = new List<User>();
             SqlConnection conn = GetConnection();
             conn.Open();
-            cmd = new SqlCommand("SELECT * FROM Users", conn);
+            cmd = new SqlCommand("SELECT * FROM User_SV", conn);
             using (DbDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.HasRows)
@@ -185,7 +185,7 @@ namespace StudentManagementWebApp.Data.Database
                             reader.GetString(3),
                             reader.GetString(4),
                             reader.GetString(5),
-                            reader.GetBoolean(6)
+                            reader.GetString(6)
                             );
                         list.Add(user);
                     }
@@ -235,7 +235,7 @@ namespace StudentManagementWebApp.Data.Database
         {
             SqlConnection conn = GetConnection();
             conn.Open();
-            cmd = new SqlCommand(@"INSERT INTO Users VALUES (@fname, @lname, @email, @username, @hash, 0);", conn);
+            cmd = new SqlCommand(@"INSERT INTO Users VALUES (@fname, @lname, @email, @username, @hash, 'USER');", conn);
             #region Using Parameter to prevent SQL Injection
 
             cmd.Parameters.AddWithValue("@fname", user.FirstName);

@@ -27,11 +27,11 @@ namespace StudentManagementWebApp.Models
 
         [NotMapped]
         [Required(ErrorMessage = "Vui lòng điền vào trường này")]
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Mật khẩu nhập lại không trùng khớp!")]
+        [Compare("Password", ErrorMessage = "Mật khẩu nhập lại không trùng khớp!")]
         public string ConfirmPassword { get; set; }
 
         public string Hash { get; set; }
-        public bool Manager { get; set; }
+        public string RoleId { get; set; }
         public string FullName()
         {
             return this.FirstName + " " + this.LastName;
@@ -55,8 +55,8 @@ namespace StudentManagementWebApp.Models
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <param name="confirmPassword"></param>
-        /// <param name="manager"></param>
-        public User(int idUser, string firstName, string lastName, string email, string userName, string password, string confirmPassword, bool manager)
+        /// <param name="RoleId"></param>
+        public User(int idUser, string firstName, string lastName, string email, string userName, string password, string confirmPassword, string RoleId)
         {
             this.idUser = idUser;
             FirstName = firstName;
@@ -65,7 +65,7 @@ namespace StudentManagementWebApp.Models
             UserName = userName;
             Password = password;
             ConfirmPassword = confirmPassword;
-            Manager = manager;
+            this.RoleId = RoleId;
         }
         /// <summary>
         /// For Get data form DB with Encrypting Password
@@ -76,15 +76,15 @@ namespace StudentManagementWebApp.Models
         /// <param name="email"></param>
         /// <param name="userName"></param>
         /// <param name="hash">Encrypting Password</param>
-        /// <param name="manager"></param>
-        public User(string firstName, string lastName, string email, string userName, string hash, bool manager)
+        /// <param name="RoleId"></param>
+        public User(string firstName, string lastName, string email, string userName, string hash, string RoleId)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             UserName = userName;
             Hash = hash;
-            Manager = manager;
+            this.RoleId = RoleId;
         }
         public User(User x)
         {
@@ -95,7 +95,7 @@ namespace StudentManagementWebApp.Models
             this.UserName = x.UserName;
             this.Password = x.Password;
             this.ConfirmPassword = x.ConfirmPassword;
-            this.Manager = x.Manager;
+            this.RoleId = x.RoleId;
         }
         #endregion
     }

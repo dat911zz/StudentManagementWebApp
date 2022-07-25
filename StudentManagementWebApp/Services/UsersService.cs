@@ -21,9 +21,9 @@ namespace StudentManagementWebApp.Services
             _usersData.Add(user);
         }
 
-        public User Create(string firstname, string lastname, string email, string username, string hash, bool manager)
+        public User Create(string firstname, string lastname, string email, string username, string hash, string roleid)
         {
-            return new User(firstname, lastname, email, username, hash, manager);
+            return new User(firstname, lastname, email, username, hash, roleid);
         }
         public List<User> GetAll()
         {

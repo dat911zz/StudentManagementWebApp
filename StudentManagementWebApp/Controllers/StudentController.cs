@@ -22,6 +22,7 @@ namespace StudentManagementWebApp.Controllers
         ISubjectService service_mh;
         static List<Student> studentList = new List<Student>();
         static List<Subject> subjectList = new List<Subject>();
+        List<Subject> tmpSubjectList = new List<Subject>(); 
         public StudentController(Manager manager, IStudentService studentService, ISubjectService subjectService)
         {
             mng = manager;
@@ -49,7 +50,7 @@ namespace StudentManagementWebApp.Controllers
         }
         #region Index
         // GET: Student
-        [AuthorizeRole(Role.USER, Role.ADMIN)]
+        [AuthorizeRole(Roles = "ADMIN, MODERATOR, USER")]
         public ActionResult Index()
         {
             ViewBag.TotalStudents = studentList.Count;
@@ -66,7 +67,7 @@ namespace StudentManagementWebApp.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [AuthorizeRole(Role.ADMIN)]
+        [AuthorizeRole(Roles = "ADMIN")]
         public ActionResult Edit(int id)
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
@@ -140,7 +141,7 @@ namespace StudentManagementWebApp.Controllers
         #endregion
         #region Create
         [HttpGet]
-        [AuthorizeRole(Role.ADMIN)]
+        [AuthorizeRole(Roles = "ADMIN")]
         public ActionResult Create()
         {
             return View("Create");
@@ -165,7 +166,7 @@ namespace StudentManagementWebApp.Controllers
         #endregion
         #region Delete
         [HttpPost]
-        [AuthorizeRole(Role.ADMIN)]
+        [AuthorizeRole(Roles = "ADMIN")]
         public ActionResult Delete(int id)
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
@@ -177,12 +178,20 @@ namespace StudentManagementWebApp.Controllers
 
 
         #region Course Register
+        [HttpGet]
         public ActionResult DKHP()
         {
-            ViewBag.Subjects = subjectList; 
+            ViewBag.Subjects = subjectList;
+            ViewBag.TmpList = tmpSubjectList;
             return View("CourseRegister");
         }
-
+        [HttpPost]
+        public ActionResult AddToTmpList(Subject x)
+        {
+            tmpSubjectList.Add(x);
+            ViewBag.TmpList = tmpSubjectList;
+            return View("CourseRegister");
+        }
         #endregion
     }
 }

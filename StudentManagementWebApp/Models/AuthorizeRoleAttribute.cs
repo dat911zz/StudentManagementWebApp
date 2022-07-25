@@ -11,9 +11,15 @@ namespace StudentManagementWebApp.Models
     {
         public AuthorizeRoleAttribute(params object[] roles)
         {
-            if (roles.Any(r => r.GetType().BaseType != typeof(Enum)))
+            //if (roles.Any(r => r.GetType().BaseType != typeof(Enum)))
+            //    throw new ArgumentException("roles");
+            //this.Roles = string.Join(",", roles.Select(r => Enum.GetName(r.GetType(), r)));
+
+            if (roles.Any(r => r.ToString().CompareTo("") == 0))
+            {
                 throw new ArgumentException("roles");
-            this.Roles = string.Join(",", roles.Select(r => Enum.GetName(r.GetType(), r)));
+            }
+            this.Roles = string.Join(",", roles);
         }
     }
 }

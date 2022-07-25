@@ -1,9 +1,34 @@
-﻿namespace StudentManagementWebApp.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace StudentManagementWebApp.Models
 {
-    public enum Role
+    public class Role
     {
-        SUPERADMIN = 1,
-        ADMIN = 2,
-        USER = 3,
+        #region Props and Attrs
+        private string roleId;
+        private string permId;
+        public string RoleId { get => roleId; set => roleId = value; }
+        public string PermId { get => permId; set => permId = value; }
+        #endregion
+        #region Constructors
+        public Role()
+        {
+            RoleId = "USER";
+            PermId = "READ";
+        }
+        public Role(string role, string perm)
+        {
+            RoleId = role;
+            PermId = perm;
+        }
+        public Role(Role x)
+        {
+            this.roleId = x.roleId;
+            this.permId = x.permId;
+        }
+        #endregion
     }
 }
