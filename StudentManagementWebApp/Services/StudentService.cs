@@ -40,14 +40,14 @@ namespace StudentManagementWebApp.Services
                 );
         }
         //Auto DKHP cho Sinh Viên
-        public void AutoImportCTHP(Student sv, string tenMH, int soTiet, double ScoreQT, double ScoreTP)
+        public void AutoImportCTHP(Student sv, string maMH, string tenMH, int soTiet, double ScoreQT, double ScoreTP)
         {
             ResultService kqs = new ResultService();
-            sv.CourseDetail.SubjectList.Add(new Result(new Subject(tenMH, soTiet), new Score(ScoreQT, ScoreTP)));
-            foreach (var item in sv.CourseDetail.SubjectList)
-            {
-                kqs.GetInfoAll(item);
-            }
+            sv.CourseDetail.SubjectList.Add(new Result(new Subject(maMH, tenMH, soTiet), new Score(ScoreQT, ScoreTP)));
+            //foreach (var item in sv.CourseDetail.SubjectList)
+            //{
+            //    kqs.GetInfoAll(item);
+            //}
         }
 
         public void Remove(string id)

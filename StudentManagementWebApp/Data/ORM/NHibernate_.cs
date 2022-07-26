@@ -137,6 +137,11 @@ namespace StudentManagementWebApp.Data.ORM
             throw new NotImplementedException();
         }
 
+        public void GetAllCTHP(ref List<Student> list_sv)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
 

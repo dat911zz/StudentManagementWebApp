@@ -29,25 +29,6 @@ namespace StudentManagementWebApp.Controllers
             service_sv = studentService;
             service_mh = subjectService;
         }
-        public ActionResult LoadDB()
-        {
-            try
-            {
-                studentList = service_sv.GetAll();
-                subjectList = service_mh.GetAll();
-                mng.AutoWork(ref studentList, subjectList);
-
-                studentList.Sort(new Comparison<Student>((x, y) => {
-                    return int.Parse(x.Id) - int.Parse(y.Id);             
-                }));
-                return RedirectToAction("Index");
-            }
-            catch (System.Exception)
-            {
-                return RedirectToAction("ItemNotFound", "Error");
-            }
-            
-        }
         #region Index
         // GET: Student
         [AuthorizeRole(Roles = "ADMIN, MODERATOR, USER")]
@@ -55,7 +36,20 @@ namespace StudentManagementWebApp.Controllers
         {
             ViewBag.TotalStudents = studentList.Count;
             //fetch students from the DB using Entity Framework here
+            try
+            {
+                studentList = service_sv.GetAll();
+                subjectList = service_mh.GetAll();
+                mng.AutoWork(ref studentList, subjectList);
 
+                studentList.Sort(new Comparison<Student>((x, y) => {
+                    return int.Parse(x.Id.Substring(2)) - int.Parse(y.Id.Substring(2));
+                }));
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("ItemNotFound", "Error");
+            }
             //return View(studentList.OrderBy(s => int.Parse(s.Id)));
             return View(studentList);
         }
@@ -68,7 +62,7 @@ namespace StudentManagementWebApp.Controllers
         /// <returns></returns>
         [HttpGet]
         [AuthorizeRole(Roles = "ADMIN")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             if (std == null)
@@ -102,7 +96,7 @@ namespace StudentManagementWebApp.Controllers
         #endregion
         #region Details
         [HttpGet]
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             if(std == null)
@@ -114,7 +108,7 @@ namespace StudentManagementWebApp.Controllers
             return View(std);
         }
         [HttpGet]
-        public ActionResult CourseDetails(int id)
+        public ActionResult CourseDetails(string id)
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             if (std == null)
@@ -127,7 +121,7 @@ namespace StudentManagementWebApp.Controllers
             return View("CourseDetails");
         }
         [HttpGet]
-        public ActionResult ResultDetails(int id)
+        public ActionResult ResultDetails(string id)
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             if (std == null)
@@ -154,9 +148,32 @@ namespace StudentManagementWebApp.Controllers
                 int lastId = 1;
                 if (studentList.Count != 0)
                 {
-                    lastId = int.Parse(studentList.Last().Id);              
+                    lastId = int.Parse(studentList.Last().Id.Substring(2));              
                 }
-                std.Id = "" + ++lastId;
+                if (studentList.Count < 10)
+                {
+                    std.Id = "SV00" + ++lastId;
+                }
+                else
+                {
+                    if (studentList.Count < 100)
+                    {
+                        std.Id = "SV0" + ++lastId;
+                    }
+                    else
+                    {
+                        if (studentList.Count < 1000)
+                        {
+                            std.Id = "SV" + ++lastId;
+                        }
+                        else
+                        {
+                            std.Id = "SV" + ++lastId;
+                        }
+                    }
+
+                }
+                
                 service_sv.Add(std);
                 studentList.Add(std);
                 return RedirectToAction("Index");
@@ -167,7 +184,7 @@ namespace StudentManagementWebApp.Controllers
         #region Delete
         [HttpPost]
         [AuthorizeRole(Roles = "ADMIN")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             studentList.Remove(std);
@@ -185,6 +202,12 @@ namespace StudentManagementWebApp.Controllers
             ViewBag.TmpList = tmpSubjectList;
             return View("CourseRegister");
         }
+        [HttpGet]
+        public ActionResult SearchForm()
+        {
+            return View("SearchStudentToCR");
+        }
+
         [HttpPost]
         public ActionResult AddToTmpList(Subject x)
         {

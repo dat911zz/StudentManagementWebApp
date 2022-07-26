@@ -34,10 +34,5 @@ namespace StudentManagementWebApp.Controllers
             ViewBag.Message = "Intro page";
             return View();
         }
-        //[AuthorizeRole(Roles = "ADMIN, MORDERATOR")]
-        //public ActionResult Chat()
-        //{
-        //    return RedirectToAction("Index", "Chat");
-        //}
     }
 }

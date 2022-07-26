@@ -56,3 +56,24 @@ table.dataTable tbody td{
 .btn-group > .btn-group:not(:first-child), .btn-group > .btn:not(:first-child) {
      margin-left: 0px; 
 }
+
+.table{
+    color: #000;
+}
+
+.info-group {
+    width: 100%;
+    margin: 0px 30px;
+}
+
+.search-form {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+.w154{
+    width: 154px;
+}

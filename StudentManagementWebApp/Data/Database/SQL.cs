@@ -121,9 +121,10 @@ namespace StudentManagementWebApp.Data.Database
                 {
                     while (reader.Read())
                     {
-                        string ten = reader.GetString(0);
-                        int sotiet = reader.GetInt32(1);
-                        Subject sv = new Subject(ten, sotiet);
+                        string sid = reader.GetString(0);
+                        string name = reader.GetString(1);
+                        int sotiet = reader.GetInt32(2);
+                        Subject sv = new Subject(sid, name, sotiet);
                         list.Add(sv);
                     }
                 }
@@ -131,9 +132,34 @@ namespace StudentManagementWebApp.Data.Database
             conn.Close();
             return list;
         }     
+        public void GetCTHP(ref Student sv)
+        {
+            SqlConnection conn = GetConnection();
+            conn.Open();
+            cmd = new SqlCommand(@"SELECT * FROM DS_CTHP_SV WHERE MaSV = @MSSV", conn);
+            cmd.Parameters.AddWithValue("@MSSV", sv.Id);
+            using (DbDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        sv.CourseDetail.SubjectList.Add( 
+                            new Result(
+                                new Subject(reader.GetString(1), reader.GetString(2), reader.GetInt32(3)),
+                                new Score(reader.GetDouble(4), reader.GetDouble(5))
+                                )
+                            );
+                    }
+                }
+            }
+        }
+        public void GetAllCTHP(ref List<Student> list_sv)
+        {
+            list_sv.ForEach(x => GetCTHP(ref x));
+        }
         public void GetAllCTHP(ref List<Student> list_sv, List<Subject> list_mh)
         {
-            List<Subject> list = new List<Subject>();
             SqlConnection conn = GetConnection();
             conn.Open();
             cmd = new SqlCommand("SELECT * FROM DKHP", conn);
@@ -163,8 +189,9 @@ namespace StudentManagementWebApp.Data.Database
                         i++;
                     }
                 }
-                Console.WriteLine();
+                //Console.WriteLine();
             }
+
             conn.Close();
         }
         public List<User> GetAllUsers()

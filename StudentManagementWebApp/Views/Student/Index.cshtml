@@ -27,9 +27,9 @@
         @Html.ActionLink("Create New", "Create", "Student", null,
         new { @class = "btn btn-default btn-primary" }
         )
-        @Html.ActionLink("Load Data Base", "LoadDB", "Student", null,
+        @*@Html.ActionLink("Load Data Base", "LoadDB", "Student", null,
         new { @class = "btn btn-default btn-primary" }
-        )
+        )*@
 
     </div>
     <div style="padding: 5px; background: black; margin: 20px 0 5px 0; margin: 0 auto; margin-bottom: 20px; color: white; width: 200px; border-radius: 5px; font-weight: bold; ">
@@ -103,7 +103,7 @@
 
                                             @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-primary" })
                                             @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-primary" })
-                                            <a id="@item.Id" class="btn btn-outline-primary" onclick="deleteConfirm(@item.Id)" >Xóa</a>
+                                            <a id="@item.Id" class="btn btn-outline-primary" onclick="deleteConfirm('@item.Id')" >Xóa</a>
 
                                         </span>
                                     }

@@ -26,9 +26,9 @@ namespace StudentManagementWebApp.Services
             mh.Name = TenMH;
             mh.NumOfLessons = SoTiet;
         }
-        public Subject Create(string tenMH, int soTiet)
+        public Subject Create(string maMH, string tenMH, int soTiet)
         {
-            return new Subject(tenMH, soTiet);
+            return new Subject(maMH, tenMH, soTiet);
         }
         public List<Subject> GetAll()
         {

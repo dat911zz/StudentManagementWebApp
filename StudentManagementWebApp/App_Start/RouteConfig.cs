@@ -36,7 +36,7 @@ namespace StudentManagementWebApp
                     controller = "Student", 
                     action = "Index",
                     id = UrlParameter.Optional
-                }               
+                }
             );
         }
     }

@@ -10,6 +10,7 @@ namespace StudentManagementWebApp.Interface.IData
     public interface ICourseData
     {
         void GetAllCTHP(ref List<Student> list_sv, List<Subject> list_mh);
+        void GetAllCTHP(ref List<Student> list_sv);
         void Add(Course cthp);
     }
 }

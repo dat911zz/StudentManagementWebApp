@@ -15,55 +15,43 @@
 
 <div class="container center-block">
     <hr class="col-md-10 float-left">
-    <div class="col-md-6">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Gender)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Gender)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.DayOfBirth)
-            </dt>
-
-            <dd>
-                @{
-                    var date = Model.DayOfBirth.ToString("dd/MM/yyyy");
-                    @Html.DisplayName(date)
-                }
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ClassId)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ClassId)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.CourseId)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CourseId)
-
-            </dd>
-
-        </dl>
+    <div>
+        <div class="info-group row">
+            <label class="col-6">
+                <span>@Html.DisplayNameFor(model => model.Name)</span>
+                :
+                <span class="font-weight-bold">@Html.DisplayFor(model => model.Name)</span>
+            </label>
+            <label class="col-6">
+                <span>@Html.DisplayNameFor(model => model.Gender)</span>
+                :
+                <span class="font-weight-bold">@Html.DisplayFor(model => model.Gender)</span>
+            </label>
+        </div>
+        <div class="info-group row">
+            <label class="col-6">
+                <span>@Html.DisplayNameFor(model => model.DayOfBirth)</span>
+                :
+                <span class="font-weight-bold">@Html.DisplayFor(model => model.DayOfBirth)</span>
+            </label>
+            <label class="col-6">
+                <span>@Html.DisplayNameFor(model => model.ClassId)</span>
+                :
+                <span class="font-weight-bold">@Html.DisplayFor(model => model.ClassId)</span>
+            </label>
+        </div>
+        <div class="info-group row">            
+            <label class="col-6">
+                <span>@Html.DisplayNameFor(model => model.CourseId)</span>
+                :
+                <span class="font-weight-bold">@Html.DisplayFor(model => model.CourseId)</span>
+            </label>
+        </div>
     </div>
     <hr class="col-md-10 float-left">
+    
+
+
     <div class="container-fluid">
         @Html.ActionLink("Danh sách học phần", "CourseDetails", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
         @Html.ActionLink("Kết quả học tập", "ResultDetails", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })

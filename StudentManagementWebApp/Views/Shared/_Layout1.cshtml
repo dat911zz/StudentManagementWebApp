@@ -123,12 +123,15 @@
         var deleteConfirm = function (val) {
             console.log("+");
             $('#delValName').text(val);
+            console.log($('#delValName').text(val));
             $('#del_confirmModal').modal('show');
         }
         var deleteData = function () {
             /*$('#divLoading').show();*/
-            console.log("+");
-            var id = parseInt($('#delValName').text());
+            console.log("+"+id);
+            /*Khi nào route dùng số nguyên mới phải convert*/
+            /*var id = parseInt($('#delValName').text());*/
+            var id = $('#delValName').text();
             var _url = '@Url.Action("Delete","Student")/' + id;
             console.log(_url);
             $.ajax({

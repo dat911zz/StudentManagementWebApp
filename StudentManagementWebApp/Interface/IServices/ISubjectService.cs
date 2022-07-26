@@ -10,6 +10,6 @@ namespace StudentManagementWebApp.Interface.IServices
     public interface ISubjectService
     {
         List<Subject> GetAll();
-        Subject Create(string tenMH, int soTiet);
+        Subject Create(string maMH, string tenMH, int soTiet);
     }
 }

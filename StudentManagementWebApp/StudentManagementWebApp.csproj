@@ -2159,6 +2159,7 @@
     <Content Include="Views\Shared\_SideBar.cshtml" />
     <Content Include="Views\Shared\_ConfirmForm.cshtml" />
     <Content Include="Views\Student\CourseRegister.cshtml" />
+    <Content Include="Views\Student\SearchStudentToCR.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

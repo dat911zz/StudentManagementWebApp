@@ -27,7 +27,7 @@ namespace StudentManagementWebApp.Utilites
         public void AutoWork(ref List<Student> list_sv, List<Subject> list_mh)
         {
             AutoDKHP(ref list_sv, list_mh);
-            AutoImportScore(list_sv);
+            //AutoImportScore(list_sv);
         }
         /// <summary>
         /// Đăng ký học phần tự động
@@ -37,7 +37,8 @@ namespace StudentManagementWebApp.Utilites
         public void AutoDKHP(ref List<Student> list_sv, List<Subject> list_mh)
         {
             ICourseData CTHP_data = container.Resolve<ICourseData>();
-            CTHP_data.GetAllCTHP(ref list_sv, list_mh);          
+            //CTHP_data.GetAllCTHP(ref list_sv, list_mh);
+            CTHP_data.GetAllCTHP(ref list_sv);
         }
         /// <summary>
         /// Nhập điểm tự động
@@ -69,7 +70,7 @@ namespace StudentManagementWebApp.Utilites
             html += "<thead>";
             html += "<tr>";
             for (int i = 0; i < dt.Columns.Count; i++)
-                html += "<th>" + dt.Columns[i].ColumnName + "</th>";
+                html += "<th style='color: #000'>" + dt.Columns[i].ColumnName + "</th>";
             html += "</tr>";
             html += "</thead>";
             //add rows
@@ -78,10 +79,32 @@ namespace StudentManagementWebApp.Utilites
             {
                 html += "<tr>";
                 for (int j = 0; j < dt.Columns.Count; j++)
-                    html += "<td>" + dt.Rows[i][j].ToString() + "</td>";
+                {
+                    var value = dt.Rows[i][j].ToString();
+                    if (value == "Trượt")
+                    {
+                        html += "<td style='color: red'>" + value + "</td>";
+                    }
+                    else
+                    {
+                        double tmp = 0;
+                        if (double.TryParse(value, out tmp) && tmp < 5)
+                        {
+                            html += "<td style='color: red'>" + value + "</td>";                    
+                        }
+                        else
+                        {
+                            html += "<td style='color: #000'>" + value + "</td>";
+                        }
+                    }
+                }
                 html += "</tr>";
             }
             html += "</tbody>";
+            if (dt.Rows.Count == 0)
+            {
+                html += "<p style='font-size: 30px'>Không có thông tin!</p>";
+            }
             html += "";
             return html;
         }

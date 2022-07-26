@@ -33,6 +33,11 @@ namespace StudentManagementWebApp.Data.Database
             throw new NotImplementedException();
         }
 
+        public void GetAllCTHP(ref List<Student> list_sv)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Subject> GetAllMH()
         {
             throw new NotImplementedException();
