@@ -24,9 +24,9 @@ namespace StudentManagementWebApp.Utilites
             container.Dispose();
             #endregion
         }
-        public void AutoWork(ref List<Student> list_sv, List<Subject> list_mh)
+        public void AutoWork(ref List<Student> list_sv)
         {
-            AutoDKHP(ref list_sv, list_mh);
+            AutoDKHP(ref list_sv);
             //AutoImportScore(list_sv);
         }
         /// <summary>
@@ -34,7 +34,7 @@ namespace StudentManagementWebApp.Utilites
         /// </summary>
         /// <param name="list_sv"></param>
         /// <param name="list_mh"></param>
-        public void AutoDKHP(ref List<Student> list_sv, List<Subject> list_mh)
+        public void AutoDKHP(ref List<Student> list_sv)
         {
             ICourseData CTHP_data = container.Resolve<ICourseData>();
             //CTHP_data.GetAllCTHP(ref list_sv, list_mh);

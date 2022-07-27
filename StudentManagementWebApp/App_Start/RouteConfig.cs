@@ -30,11 +30,11 @@ namespace StudentManagementWebApp
 
             routes.MapRoute(
                 name: "Student",
-                url: "students/{id}",
+                url: "{controller}/{id}/{action}",
                 defaults: new 
                 { 
                     controller = "Student", 
-                    action = "Index",
+                    action = "DKHP",
                     id = UrlParameter.Optional
                 }
             );

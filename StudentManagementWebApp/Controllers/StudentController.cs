@@ -38,9 +38,8 @@ namespace StudentManagementWebApp.Controllers
             //fetch students from the DB using Entity Framework here
             try
             {
-                studentList = service_sv.GetAll();
-                subjectList = service_mh.GetAll();
-                mng.AutoWork(ref studentList, subjectList);
+                studentList = service_sv.GetAll();              
+                mng.AutoWork(ref studentList);
 
                 studentList.Sort(new Comparison<Student>((x, y) => {
                     return int.Parse(x.Id.Substring(2)) - int.Parse(y.Id.Substring(2));
@@ -50,7 +49,6 @@ namespace StudentManagementWebApp.Controllers
             {
                 return RedirectToAction("ItemNotFound", "Error");
             }
-            //return View(studentList.OrderBy(s => int.Parse(s.Id)));
             return View(studentList);
         }
         #endregion
@@ -186,7 +184,7 @@ namespace StudentManagementWebApp.Controllers
         [AuthorizeRole(Roles = "ADMIN")]
         public ActionResult Delete(string id)
         {
-            var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
+            var std = studentList.Where(s => s.Id.Equals(id)).FirstOrDefault();
             studentList.Remove(std);
             service_sv.Remove(std.Id);
             return RedirectToAction("Index");
@@ -195,19 +193,65 @@ namespace StudentManagementWebApp.Controllers
 
 
         #region Course Register
+        
+        /// <summary>
+        /// Điều hướng đến trang tìm MSSV
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult DKHP()
+        public ActionResult PreDKHP()
         {
-            ViewBag.Subjects = subjectList;
-            ViewBag.TmpList = tmpSubjectList;
-            return View("CourseRegister");
-        }
-        [HttpGet]
-        public ActionResult SearchForm()
-        {
+            studentList = service_sv.GetAll();
+            mng.AutoWork(ref studentList);
             return View("SearchStudentToCR");
         }
+        /// <summary>
+        /// Check mssv và chuyển qua cổng ĐKHP 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PreDKHP(string id)
+        {
+            var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            if (std == null)
+            {
+                if (id.Equals(""))
+                {
+                    ViewBag.Error = "Vui lòng nhập mã sinh viên!";
+                }
+                else
+                {
+                    ViewBag.Error = $"Không tìm thấy sinh viên có mã ";
+                    ViewBag.Id = id;
+                }
+                return View("SearchStudentToCR");
+            }
 
+            return RedirectToAction("DKHP", new { id = std.Id });//Redierect thi phải new cái id nếu không sẽ bị lộn qua controller :v
+        }
+        /// <summary>
+        /// Controller của cổng ĐKHP
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult DKHP(string id)
+        {
+
+            var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            subjectList = service_mh.GetAll();
+            ViewBag.Subjects = subjectList.Except(std.CourseDetail.SubjectList.);
+            ViewBag.TmpList = tmpSubjectList;
+            return View("CourseRegister",
+            
+            );
+        }
+        //[HttpPost]
+        //public ActionResult DKHP(Student std)
+        //{
+        //    return View("CourseRegister");
+        //}
         [HttpPost]
         public ActionResult AddToTmpList(Subject x)
         {

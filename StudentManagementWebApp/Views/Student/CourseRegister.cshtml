@@ -9,9 +9,11 @@
     <h1 class="text-center text-white">Cổng Thông Tin Đăng Ký Học Phần</h1>
 
 </div>
-
 <div class="container">
-    <h2>Danh sách môn học hiện có</h2>
+    <h2 class="text-center">Sinh viên: <span class="font-weight-bolder">@Html.DisplayFor(model => model.Name)</span></h2>
+</div>
+<div class="container">
+    <h2>Danh sách học phần chưa đăng ký</h2>
     <div class="table-responsive text-center">
         <table class="table table-bordered" id="table_id" width="100%" cellspacing="0">
             <thead>

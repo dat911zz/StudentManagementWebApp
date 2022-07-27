@@ -252,6 +252,7 @@
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CourseService.cs" />
     <Compile Include="Services\ScoreService.cs" />
     <Compile Include="Services\ResultService.cs" />
     <Compile Include="Services\SubjectService.cs" />
