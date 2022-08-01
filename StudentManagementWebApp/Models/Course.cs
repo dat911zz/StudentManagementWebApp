@@ -11,17 +11,17 @@ namespace StudentManagementWebApp.Models
         /// <summary>
         /// Danh sách môn học sinh viên đã đăng ký
         /// </summary>
-        public virtual List<Result> SubjectList { get; set; }
+        public virtual List<Result> ResultList { get; set; }
 
         #endregion
         #region Constructors
         public Course(List<Result> sl)
         {
-            SubjectList = sl;
+            ResultList = sl;
         }
         public Course()
         {
-            SubjectList = new List<Result>();
+            ResultList = new List<Result>();
         }
         #endregion
     }

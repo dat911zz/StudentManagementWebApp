@@ -52,9 +52,9 @@ namespace StudentManagementWebApp.Utilites
 
             for (int i = 0; i < list_sv.Count; i++)
             {
-                for (int j = 0; j < list_sv[i].CourseDetail.SubjectList.Count; j++)
+                for (int j = 0; j < list_sv[i].CourseDetail.ResultList.Count; j++)
                 {
-                    ds.setScore(list_sv[i].CourseDetail.SubjectList[j].ScoreDetail, score1.Next(0, 10), score2.Next(2, 10));
+                    ds.setScore(list_sv[i].CourseDetail.ResultList[j].ScoreDetail, score1.Next(0, 10), score2.Next(2, 10));
                 }
             }
         }
@@ -116,7 +116,7 @@ namespace StudentManagementWebApp.Utilites
             dt.Columns.Add("Tên MH", typeof(string));
             dt.Columns.Add("Số tiết", typeof(int));
 
-            foreach (var item in sv.CourseDetail.SubjectList)
+            foreach (var item in sv.CourseDetail.ResultList)
             {
                 dt.Rows.Add(item.SubjectDetail.Name , item.SubjectDetail.NumOfLessons);
 
@@ -133,7 +133,7 @@ namespace StudentManagementWebApp.Utilites
             dt.Columns.Add("Điểm thành phần", typeof(int));
             dt.Columns.Add("Kết quả", typeof(string));
 
-            foreach (var item in sv.CourseDetail.SubjectList)
+            foreach (var item in sv.CourseDetail.ResultList)
             {
                 dt.Rows.Add(item.SubjectDetail.Name.ToString(), item.SubjectDetail.NumOfLessons, item.ScoreDetail.QT, item.ScoreDetail.TP, ds.isPass(item.ScoreDetail) == true ? "Đậu" : "Trượt");           
             }

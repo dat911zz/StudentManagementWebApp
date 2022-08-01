@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using StudentManagementWebApp.Container;
 using System.Web.Security;
 using System;
+using StudentManagementWebApp.Services;
 
 namespace StudentManagementWebApp.Controllers
 {
@@ -241,11 +242,22 @@ namespace StudentManagementWebApp.Controllers
 
             var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
             subjectList = service_mh.GetAll();
-            ViewBag.Subjects = subjectList.Except(std.CourseDetail.SubjectList.);
+            //ViewBag.Subjects = subjectList;
+            var tmpSList = new CourseService().GetSubjectList(std.CourseDetail.ResultList);
+            List<Subject> tmpList = new List<Subject>();
+
+            //foreach (var item in tmpSList)
+            //{
+            //    if (!subjectList.Where(x => x.SubjectId.Equals(subjectList.Any())
+            //    {
+            //        tmpList.Add(item);
+            //    }
+            //}
+
+
+            ViewBag.Subjects = tmpSList;
             ViewBag.TmpList = tmpSubjectList;
-            return View("CourseRegister",
-            
-            );
+            return View("CourseRegister", std);
         }
         //[HttpPost]
         //public ActionResult DKHP(Student std)

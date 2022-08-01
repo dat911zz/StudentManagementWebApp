@@ -144,7 +144,7 @@ namespace StudentManagementWebApp.Data.Database
                 {
                     while (reader.Read())
                     {
-                        sv.CourseDetail.SubjectList.Add( 
+                        sv.CourseDetail.ResultList.Add( 
                             new Result(
                                 new Subject(reader.GetString(1), reader.GetString(2), reader.GetInt32(3)),
                                 new Score(reader.GetDouble(4), reader.GetDouble(5))
@@ -180,7 +180,7 @@ namespace StudentManagementWebApp.Data.Database
                                 {
                                     //========Deep copy========= 
                                     Subject c = new Subject(tmp[mh++]);
-                                    list_sv[i].CourseDetail.SubjectList.Add(new Result(new Subject(c), new Score()));
+                                    list_sv[i].CourseDetail.ResultList.Add(new Result(new Subject(c), new Score()));
                                 }
                             }
                             

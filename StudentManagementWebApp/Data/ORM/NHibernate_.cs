@@ -106,7 +106,7 @@ namespace StudentManagementWebApp.Data.ORM
                     {
                         if (arr[i] == 1)
                         {
-                            x.CourseDetail.SubjectList.Add(new Result(new Subject(list_mh[i]), new Score()));
+                            x.CourseDetail.ResultList.Add(new Result(new Subject(list_mh[i]), new Score()));
                         }
                         
                     }

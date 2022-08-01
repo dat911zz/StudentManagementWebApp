@@ -43,8 +43,8 @@ namespace StudentManagementWebApp.Services
         public void AutoImportCTHP(Student sv, string maMH, string tenMH, int soTiet, double ScoreQT, double ScoreTP)
         {
             ResultService kqs = new ResultService();
-            sv.CourseDetail.SubjectList.Add(new Result(new Subject(maMH, tenMH, soTiet), new Score(ScoreQT, ScoreTP)));
-            //foreach (var item in sv.CourseDetail.SubjectList)
+            sv.CourseDetail.ResultList.Add(new Result(new Subject(maMH, tenMH, soTiet), new Score(ScoreQT, ScoreTP)));
+            //foreach (var item in sv.CourseDetail.ResultList)
             //{
             //    kqs.GetInfoAll(item);
             //}

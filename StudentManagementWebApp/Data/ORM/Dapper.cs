@@ -52,7 +52,7 @@ namespace StudentManagementWebApp.Data.ORM
                         if (tmp1[j] == 1)
                         {
                             Subject c = new Subject(tmp[j]);
-                            sv.CourseDetail.SubjectList.Add(new Result(new Subject(c), new Score()));
+                            sv.CourseDetail.ResultList.Add(new Result(new Subject(c), new Score()));
                         }
                     }
                 }              
