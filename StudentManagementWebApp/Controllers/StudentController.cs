@@ -192,7 +192,6 @@ namespace StudentManagementWebApp.Controllers
         }
         #endregion
 
-
         #region Course Register
         
         /// <summary>
@@ -253,7 +252,7 @@ namespace StudentManagementWebApp.Controllers
             //        tmpList.Add(item);
             //    }
             //}
-
+            //Chưa fix xong lỗi trừ list
 
             ViewBag.Subjects = tmpSList;
             ViewBag.TmpList = tmpSubjectList;
