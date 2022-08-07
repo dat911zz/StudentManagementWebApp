@@ -9,6 +9,7 @@ using StudentManagementWebApp.Container;
 using System.Web.Security;
 using System;
 using StudentManagementWebApp.Services;
+using StudentManagementWebApp.Utilites.Comparer;
 
 namespace StudentManagementWebApp.Controllers
 {
@@ -241,34 +242,27 @@ namespace StudentManagementWebApp.Controllers
 
             var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
             subjectList = service_mh.GetAll();
-            //ViewBag.Subjects = subjectList;
+            //Lấy ra danh sách môn học mà sinh viên đã đăng ký
             var tmpSList = new CourseService().GetSubjectList(std.CourseDetail.ResultList);
             List<Subject> tmpList = new List<Subject>();
 
-            //foreach (var item in tmpSList)
-            //{
-            //    if (!subjectList.Where(x => x.SubjectId.Equals(subjectList.Any())
-            //    {
-            //        tmpList.Add(item);
-            //    }
-            //}
-            //Chưa fix xong lỗi trừ list
-
-            ViewBag.Subjects = tmpSList;
+           
+            //Lấy ra danh sách môn học chưa đăng ký
+            ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
             ViewBag.TmpList = tmpSubjectList;
+            ViewBag.Std = std;
             return View("CourseRegister", std);
         }
-        //[HttpPost]
-        //public ActionResult DKHP(Student std)
-        //{
-        //    return View("CourseRegister");
-        //}
-        [HttpPost]
-        public ActionResult AddToTmpList(Subject x)
+        [HttpGet]
+        public ActionResult AddToTmpList(string id, string subId)
         {
-            tmpSubjectList.Add(x);
+            Student std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            tmpSubjectList.Add(new Subject(subjectList.Where(x => x.SubjectId.Equals(subId)).FirstOrDefault()));
+            List<Subject> tmpSList = new CourseService().GetSubjectList(std.CourseDetail.ResultList);
+            ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
+
             ViewBag.TmpList = tmpSubjectList;
-            return View("CourseRegister");
+            return View("CourseRegister", std);
         }
         #endregion
     }
