@@ -26,5 +26,10 @@ namespace StudentManagementWebApp.Controllers
         {
             return View("Page401");
         }
+        public ActionResult Expt(string mess)
+        {
+            ViewBag.Err = mess;
+            return View("Expt");
+        }
     }
 }

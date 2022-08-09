@@ -33,7 +33,6 @@ namespace StudentManagementWebApp.Utilites
         /// Đăng ký học phần tự động
         /// </summary>
         /// <param name="list_sv"></param>
-        /// <param name="list_mh"></param>
         public void AutoDKHP(ref List<Student> list_sv)
         {
             ICourseData CTHP_data = container.Resolve<ICourseData>();

@@ -2152,6 +2152,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Error\Expt.cshtml" />
     <None Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Student\CourseDetails.cshtml" />
     <Content Include="Views\Student\ResultDetails.cshtml" />

@@ -34,7 +34,7 @@
                             <td>@s.Name</td>
                             <td>@s.NumOfLessons</td>
                             <td>
-                                @Html.ActionLink("+","AddToTmpList", "Student", new { id = Model.Id ,subId = s.SubjectId}, htmlAttributes: new { @class="btn"})
+                                @Html.ActionLink("+","InQueue", "Student", new { id = Model.Id ,subId = s.SubjectId}, htmlAttributes: new { @class="btn"})
                             </td>
                         </tr>
                         stt++;
@@ -53,6 +53,7 @@
             <thead>
                 <tr>
                     <th class="text-center">STT</th>
+                    <th class="text-center">Mã Môn</th>
                     <th class="text-center">Tên Môn</th>
                     <th class="text-center">Số Tiết</th>
                     <th class="text-center">Loại khỏi danh sách</th>
@@ -65,6 +66,7 @@
                     {
                         <tr>
                             <td>@stt</td>
+                            <td>@s.SubjectId</td>
                             <td>@s.Name</td>
                             <td>@s.NumOfLessons</td>
                             <td>

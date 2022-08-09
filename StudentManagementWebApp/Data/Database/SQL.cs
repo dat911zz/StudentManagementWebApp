@@ -85,71 +85,77 @@ namespace StudentManagementWebApp.Data.Database
         //}
         public List<Student> GetAllSV()
         {
-            List<Student> list = new List<Student>();
-            SqlConnection conn = GetConnection();
-            conn.Open();
-            cmd = new SqlCommand("SELECT * FROM SinhVien", conn);
-            using (DbDataReader reader = cmd.ExecuteReader())
+            List<Student> list = new List<Student>();            
+            using (SqlConnection conn = GetConnection())
             {
-                if (reader.HasRows)
+                conn.Open();
+                cmd = new SqlCommand("SELECT * FROM SinhVien", conn);
+                using (DbDataReader reader = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    if (reader.HasRows)
                     {
-                        string mssv = reader.GetString(0);
-                        string tensv = reader.GetString(1);
-                        string gioitinh = reader.GetString(2);
-                        DateTime ngaysinh = reader.GetDateTime(3);
-                        string lop = reader.GetString(4);
-                        string Khoa = reader.GetString(5);
-                        Student sv = new Student(mssv, tensv, gioitinh, ngaysinh, lop, Khoa);
-                        list.Add(sv);
+                        while (reader.Read())
+                        {
+                            string mssv = reader.GetString(0);
+                            string tensv = reader.GetString(1);
+                            string gioitinh = reader.GetString(2);
+                            DateTime ngaysinh = reader.GetDateTime(3);
+                            string lop = reader.GetString(4);
+                            string Khoa = reader.GetString(5);
+                            Student sv = new Student(mssv, tensv, gioitinh, ngaysinh, lop, Khoa);
+                            list.Add(sv);
+                        }
                     }
                 }
             }
-            conn.Close();
             return list;
         }
         public List<Subject> GetAllMH()
         {
             List<Subject> list = new List<Subject>();
-            SqlConnection conn = GetConnection();
-            conn.Open();
-            cmd = new SqlCommand("SELECT * FROM MonHoc", conn);
-            using (DbDataReader reader = cmd.ExecuteReader())
+            using (SqlConnection conn = GetConnection())
             {
-                if (reader.HasRows)
+
+                conn.Open();
+                cmd = new SqlCommand("SELECT * FROM MonHoc", conn);
+                using (DbDataReader reader = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    if (reader.HasRows)
                     {
-                        string sid = reader.GetString(0);
-                        string name = reader.GetString(1);
-                        int sotiet = reader.GetInt32(2);
-                        Subject sv = new Subject(sid, name, sotiet);
-                        list.Add(sv);
+                        while (reader.Read())
+                        {
+                            string sid = reader.GetString(0);
+                            string name = reader.GetString(1);
+                            int sotiet = reader.GetInt32(2);
+                            Subject sv = new Subject(sid, name, sotiet);
+                            list.Add(sv);
+                        }
                     }
                 }
             }
-            conn.Close();
             return list;
         }     
         public void GetCTHP(ref Student sv)
         {
-            SqlConnection conn = GetConnection();
-            conn.Open();
-            cmd = new SqlCommand(@"SELECT * FROM DS_CTHP_SV WHERE MaSV = @MSSV", conn);
-            cmd.Parameters.AddWithValue("@MSSV", sv.Id);
-            using (DbDataReader reader = cmd.ExecuteReader())
+            
+            using (SqlConnection conn = GetConnection())
             {
-                if (reader.HasRows)
+                conn.Open();
+                cmd = new SqlCommand(@"SELECT * FROM DS_CTHP_SV WHERE MaSV = @MSSV", conn);
+                cmd.Parameters.AddWithValue("@MSSV", sv.Id);
+                using (DbDataReader reader = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    if (reader.HasRows)
                     {
-                        sv.CourseDetail.ResultList.Add( 
-                            new Result(
-                                new Subject(reader.GetString(1), reader.GetString(2), reader.GetInt32(3)),
-                                new Score(reader.GetDouble(4), reader.GetDouble(5))
-                                )
-                            );
+                        while (reader.Read())
+                        {
+                            sv.CourseDetail.ResultList.Add( 
+                                new Result(
+                                    new Subject(reader.GetString(1), reader.GetString(2), reader.GetInt32(3)),
+                                    new Score(reader.GetDouble(4), reader.GetDouble(5))
+                                    )
+                                );
+                        }
                     }
                 }
             }
@@ -159,66 +165,67 @@ namespace StudentManagementWebApp.Data.Database
             list_sv.ForEach(x => GetCTHP(ref x));
         }
         public void GetAllCTHP(ref List<Student> list_sv, List<Subject> list_mh)
-        {
-            SqlConnection conn = GetConnection();
-            conn.Open();
-            cmd = new SqlCommand("SELECT * FROM DKHP", conn);
-            using (DbDataReader reader = cmd.ExecuteReader())
+        {            
+            using (SqlConnection conn = GetConnection())
             {
-                int i = 0, mh = 0;
-                if (reader.HasRows)
+                conn.Open();
+                cmd = new SqlCommand("SELECT * FROM DKHP", conn);
+                using (DbDataReader reader = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    int i = 0, mh = 0;
+                    if (reader.HasRows)
                     {
-                        List<Subject> tmp = new List<Subject>(list_mh.ToArray());
-                        //-------------INPUT DATA----------------
-                        for (int col = 0; col < reader.FieldCount; col++)
+                        while (reader.Read())
                         {
-                            if (col > 1)
+                            List<Subject> tmp = new List<Subject>(list_mh.ToArray());
+                            //-------------INPUT DATA----------------
+                            for (int col = 0; col < reader.FieldCount; col++)
                             {
-                                if (reader.GetInt32(col) == 1)
+                                if (col > 1)
                                 {
-                                    //========Deep copy========= 
-                                    Subject c = new Subject(tmp[mh++]);
-                                    list_sv[i].CourseDetail.ResultList.Add(new Result(new Subject(c), new Score()));
-                                }
+                                    if (reader.GetInt32(col) == 1)
+                                    {
+                                        //========Deep copy========= 
+                                        Subject c = new Subject(tmp[mh++]);
+                                        list_sv[i].CourseDetail.ResultList.Add(new Result(new Subject(c), new Score()));
+                                    }
+                                }                            
                             }
-                            
+                            mh = 0;
+                            i++;
                         }
-                        mh = 0;
-                        i++;
                     }
+                    //Console.WriteLine();
                 }
-                //Console.WriteLine();
             }
-
-            conn.Close();
         }
         public List<User> GetAllUsers()
         {
             List<User> list = new List<User>();
-            SqlConnection conn = GetConnection();
-            conn.Open();
-            cmd = new SqlCommand("SELECT * FROM User_SV", conn);
-            using (DbDataReader reader = cmd.ExecuteReader())
+            
+            using (SqlConnection conn = GetConnection())
             {
-                if (reader.HasRows)
+                conn.Open();
+                cmd = new SqlCommand("SELECT * FROM User_SV", conn);
+                using (DbDataReader reader = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    if (reader.HasRows)
                     {
-                        User user = new User(
-                            reader.GetString(1),
-                            reader.GetString(2),
-                            reader.GetString(3),
-                            reader.GetString(4),
-                            reader.GetString(5),
-                            reader.GetString(6)
-                            );
-                        list.Add(user);
+                        while (reader.Read())
+                        {
+                            User user = new User(
+                                reader.GetString(1),
+                                reader.GetString(2),
+                                reader.GetString(3),
+                                reader.GetString(4),
+                                reader.GetString(5),
+                                reader.GetString(6)
+                                );
+                            list.Add(user);
+                        }
                     }
                 }
             }
-            conn.Close();
             return list;
         }
         public void Add(Student sv)

@@ -24,7 +24,7 @@ namespace StudentManagementWebApp.Controllers
         ISubjectService service_mh;
         static List<Student> studentList = new List<Student>();
         static List<Subject> subjectList = new List<Subject>();
-        List<Subject> tmpSubjectList = new List<Subject>(); 
+        public List<Subject> subjectQueue = new List<Subject>(); 
         public StudentController(Manager manager, IStudentService studentService, ISubjectService subjectService)
         {
             mng = manager;
@@ -36,7 +36,7 @@ namespace StudentManagementWebApp.Controllers
         [AuthorizeRole(Roles = "ADMIN, MODERATOR, USER")]
         public ActionResult Index()
         {
-            ViewBag.TotalStudents = studentList.Count;
+            
             //fetch students from the DB using Entity Framework here
             try
             {
@@ -46,10 +46,11 @@ namespace StudentManagementWebApp.Controllers
                 studentList.Sort(new Comparison<Student>((x, y) => {
                     return int.Parse(x.Id.Substring(2)) - int.Parse(y.Id.Substring(2));
                 }));
+                ViewBag.TotalStudents = studentList.Count;
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return RedirectToAction("ItemNotFound", "Error");
+                return RedirectToAction("Expt","Error", new { mess = ex.Message.ToString() });
             }
             return View(studentList);
         }
@@ -244,25 +245,22 @@ namespace StudentManagementWebApp.Controllers
             subjectList = service_mh.GetAll();
             //Lấy ra danh sách môn học mà sinh viên đã đăng ký
             var tmpSList = new CourseService().GetSubjectList(std.CourseDetail.ResultList);
-            List<Subject> tmpList = new List<Subject>();
 
-           
+            
             //Lấy ra danh sách môn học chưa đăng ký
             ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
-            ViewBag.TmpList = tmpSubjectList;
-            ViewBag.Std = std;
+            ViewBag.TmpList = subjectQueue;
             return View("CourseRegister", std);
         }
-        [HttpGet]
-        public ActionResult AddToTmpList(string id, string subId)
+        [HttpPost]
+        public ActionResult InQueue(string id, string subId)
         {
             Student std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
-            tmpSubjectList.Add(new Subject(subjectList.Where(x => x.SubjectId.Equals(subId)).FirstOrDefault()));
+            subjectQueue.Add(new Subject(subjectList.Where(x => x.SubjectId.Equals(subId)).FirstOrDefault()));
             List<Subject> tmpSList = new CourseService().GetSubjectList(std.CourseDetail.ResultList);
-            ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
-
-            ViewBag.TmpList = tmpSubjectList;
-            return View("CourseRegister", std);
+            //ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
+            
+            return RedirectToAction("DKHP", new { id = id});
         }
         #endregion
     }

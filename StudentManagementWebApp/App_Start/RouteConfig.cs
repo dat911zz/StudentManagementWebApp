@@ -27,17 +27,6 @@ namespace StudentManagementWebApp
                     id = UrlParameter.Optional 
                 }
             );
-
-            routes.MapRoute(
-                name: "Student",
-                url: "{controller}/{id}/{action}",
-                defaults: new 
-                { 
-                    controller = "Student", 
-                    action = "DKHP",
-                    id = UrlParameter.Optional
-                }
-            );
         }
     }
 }
