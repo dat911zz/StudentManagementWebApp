@@ -2,6 +2,7 @@
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Microsoft.AspNet.SignalR;
+using NLog;
 using StudentManagementWebApp.Filter;
 using System.Web;
 using System.Web.Mvc;
@@ -22,6 +23,11 @@ namespace StudentManagementWebApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            //NLog.Common.InternalLogger.LogLevel = NLog.LogLevel.Trace;
+            //NLog.Common.InternalLogger.LogToConsole = true;
+            //NLog.Common.InternalLogger.LogFile = @"${basedir}\internal-log.txt"; // On Linux one can use "/home/nlog-internal.txt"
+            Logger logger = LogManager.GetCurrentClassLogger();
+            logger.Info("Program started");
             // Calling Global action filter
             //GlobalFilters.Filters.Add(new AppExceptionHandler());
             new WindsorContainer().Install(FromAssembly.InDirectory(new AssemblyFilter(HttpRuntime.BinDirectory)));
@@ -60,6 +66,7 @@ namespace StudentManagementWebApp
         }
         protected void Application_Error()
         {
+            Logger logger = NLog.LogManager.GetCurrentClassLogger();
             var ex = Server.GetLastError();
             var httpException = ex as HttpException;
 
@@ -67,6 +74,7 @@ namespace StudentManagementWebApp
             {
                 // Not an HttpException, or HTTP error other than 404.
                 // Here: log error, send alert, etc.
+                logger.Fatal(ex, "Aplication Error!");
                 new HttpContextWrapper(Context).Response.Redirect("~/Error/PageNotFound");
             }
 

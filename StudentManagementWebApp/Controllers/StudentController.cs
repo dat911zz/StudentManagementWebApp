@@ -10,6 +10,7 @@ using System.Web.Security;
 using System;
 using StudentManagementWebApp.Services;
 using StudentManagementWebApp.Utilites.Comparer;
+using NLog;
 
 namespace StudentManagementWebApp.Controllers
 {
@@ -24,7 +25,10 @@ namespace StudentManagementWebApp.Controllers
         ISubjectService service_mh;
         static List<Student> studentList = new List<Student>();
         static List<Subject> subjectList = new List<Subject>();
-        public List<Subject> subjectQueue = new List<Subject>(); 
+        public List<Subject> subjectQueue = new List<Subject>();
+
+        public Logger logger = LogManager.GetCurrentClassLogger();
+
         public StudentController(Manager manager, IStudentService studentService, ISubjectService subjectService)
         {
             mng = manager;
@@ -35,8 +39,8 @@ namespace StudentManagementWebApp.Controllers
         // GET: Student
         [AuthorizeRole(Roles = "ADMIN, MODERATOR, USER")]
         public ActionResult Index()
-        {
-            
+        {           
+            /*LogManager.Shutdown(); */ // Remember to flush
             //fetch students from the DB using Entity Framework here
             try
             {
@@ -50,8 +54,10 @@ namespace StudentManagementWebApp.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex, "Error was sent from [StudentController - Index]");
                 return RedirectToAction("Expt","Error", new { mess = ex.Message.ToString() });
             }
+            logger.Info("Status: Loading student list completed");
             return View(studentList);
         }
         #endregion
@@ -65,6 +71,7 @@ namespace StudentManagementWebApp.Controllers
         [AuthorizeRole(Roles = "ADMIN")]
         public ActionResult Edit(string id)
         {
+            logger.Info($"Edit {id}");
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             if (std == null)
             {
@@ -99,6 +106,7 @@ namespace StudentManagementWebApp.Controllers
         [HttpGet]
         public ActionResult Details(string id)
         {
+            logger.Info($"Details {id}");
             var std = studentList.Where(s => s.Id.Equals(id.ToString())).FirstOrDefault();
             if(std == null)
             {
@@ -139,6 +147,7 @@ namespace StudentManagementWebApp.Controllers
         [AuthorizeRole(Roles = "ADMIN")]
         public ActionResult Create()
         {
+            logger.Info("Create");
             return View("Create");
         }
         [HttpPost]
@@ -187,6 +196,7 @@ namespace StudentManagementWebApp.Controllers
         [AuthorizeRole(Roles = "ADMIN")]
         public ActionResult Delete(string id)
         {
+            logger.Info($"Delete {id}");
             var std = studentList.Where(s => s.Id.Equals(id)).FirstOrDefault();
             studentList.Remove(std);
             service_sv.Remove(std.Id);

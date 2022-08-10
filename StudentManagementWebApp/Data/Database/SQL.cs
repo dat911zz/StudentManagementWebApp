@@ -71,18 +71,6 @@ namespace StudentManagementWebApp.Data.Database
                 da.Update(tb);
             }
         }
-        //public void FillGrid(DataGridView dgv)
-        //{
-        //    SqlConnection conn = GetConnection();
-        //    conn.Open();
-        //    cmd = new SqlCommand("SELECT * FROM Student", conn);
-        //    DataTable tbl = new DataTable();
-        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //    da.Fill(tbl);
-        //    dgv.DataSource = tbl;
-        //    dgv.ReadOnly = true;
-        //    conn.Close();
-        //}
         public List<Student> GetAllSV()
         {
             List<Student> list = new List<Student>();            
@@ -115,7 +103,6 @@ namespace StudentManagementWebApp.Data.Database
             List<Subject> list = new List<Subject>();
             using (SqlConnection conn = GetConnection())
             {
-
                 conn.Open();
                 cmd = new SqlCommand("SELECT * FROM MonHoc", conn);
                 using (DbDataReader reader = cmd.ExecuteReader())
@@ -136,8 +123,7 @@ namespace StudentManagementWebApp.Data.Database
             return list;
         }     
         public void GetCTHP(ref Student sv)
-        {
-            
+        {           
             using (SqlConnection conn = GetConnection())
             {
                 conn.Open();
