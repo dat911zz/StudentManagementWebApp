@@ -11,7 +11,7 @@ using StudentManagementWebApp.Interface.IData;
 namespace StudentManagementWebApp.Data.Database
 {
     //Class for XML Databse (for future)**** double ******* **** *****  
-    public class XML : IStudentData, ISubjectData, ICourseData
+    public class XML : IStudentData, ISubjectData
     {
         public void Add(Student sv)
         {
@@ -24,11 +24,6 @@ namespace StudentManagementWebApp.Data.Database
         }
 
         public void Add(Course cthp)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GetAllCTHP(ref List<Student> list_sv, List<Subject> list_mh)
         {
             throw new NotImplementedException();
         }

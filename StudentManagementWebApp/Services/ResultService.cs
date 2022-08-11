@@ -1,39 +1,35 @@
 ﻿using Castle.Windsor;
-using StudentManagementWebApp.Data.Database;
 using StudentManagementWebApp.Container;
 using StudentManagementWebApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StudentManagementWebApp.Interface.IServices;
+using StudentManagementWebApp.Interface.IData;
 
 namespace StudentManagementWebApp.Services
 {
-    public class ResultService
+    public class ResultService : IResultService
     {
-        WindsorContainer container;
+        IResultData _resultData;
 
-        public ResultService()
+        public ResultService(IResultData resultData)
         {
-            container = new WindsorContainer();
-            container.Install(new ServicesInstaller());
-            container.Dispose();
+            _resultData = resultData;
         }
-        public void GetInfoAll(Result kq)
+        public void Add(string id, List<Result> rl)
         {
-            GetInfoSubject(kq);
-            GetInfoScore(kq);         
+            _resultData.Add(id, rl);
         }
-        public void GetInfoSubject(Result kq)
+        public void Remove()
         {
-            SubjectService mhs = container.Resolve<SubjectService>();
-            mhs.GetInfo(kq.SubjectDetail);
+
         }
-        public void GetInfoScore(Result kq)
+        public void UpdateScore()
         {
-            ScoreService dsv = container.Resolve<ScoreService>();
-            dsv.GetInfo(kq.ScoreDetail);
+
+        }
+        public List<Result> GetResultList(string id)
+        {
+            return _resultData.GetResultList(id);
         }
     }
 }

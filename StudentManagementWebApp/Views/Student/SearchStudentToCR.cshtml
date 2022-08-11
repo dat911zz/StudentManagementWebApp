@@ -4,19 +4,20 @@
 }
 @using (Html.BeginForm("PreDKHP", "Student", FormMethod.Post, htmlAttributes: new { @id = "Form" }))
 {
+    <div class="jumbotron text-center">
+        <h2>Cổng Thông Tin Đăng Ký Học Phần</h2>
+    </div>
     <div class="search-form info-group mt-5">
-        <div class="form-group row">
-            <div class="col-6 w154" style="font-size: 20px">Mã sinh viên: </div>
-            <span class="col-6 w154">
-                <input type="text" name="id" id="" placeholder="Nhập mã sinh viên">
+        <div class="form-group row w-100">
+            <div class="col-md-4 pb-2 pt-2" style="font-size: 20px">Vui Lòng Nhập Mã Sinh Viên: </div>
+            <span class="col-md-8 pb-2 pt-2">
+                <span>
+                    <input type="text" name="id" id="" class="pl-3" style="height: 100%;" placeholder="Nhập mã sinh viên">      
+                    <input type="submit" value="Tiếp theo" class="btn btn-outline-primary" style=" height: 100%; margin-left: -1px; margin-top: -3px;" />               
+                </span>
                 <div class="text-danger">@ViewBag.Error <span class="font-weight-bolder">@ViewBag.Id</span></div>
 
             </span>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Tiếp theo" class="btn btn-outline-primary" />
-                </div>
-            </div>
         </div>
     </div>
 

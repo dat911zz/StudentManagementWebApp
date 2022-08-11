@@ -28,27 +28,6 @@ namespace StudentManagementWebApp.Services
         {
             return _svData.GetAllSV();
         }
-        //Lấy thông tin Sinh Viên
-        public void GetInfo(Student sv)
-        {           
-            Console.Write($"\tMSSV: {sv.Id}" + Environment.NewLine +
-                $"\tHọ tên: {sv.Name}" + Environment.NewLine +
-                $"\tGiới tính: {sv.Gender}" + Environment.NewLine +
-                $"\tNgày sinh: {sv.DayOfBirth.ToShortDateString()}" + Environment.NewLine +
-                $"\tLớp: {sv.ClassId}" + Environment.NewLine +
-                $"\tKhóa: {sv.CourseId}" + Environment.NewLine
-                );
-        }
-        //Auto DKHP cho Sinh Viên
-        public void AutoImportCTHP(Student sv, string maMH, string tenMH, int soTiet, double ScoreQT, double ScoreTP)
-        {
-            ResultService kqs = new ResultService();
-            sv.CourseDetail.ResultList.Add(new Result(new Subject(maMH, tenMH, soTiet), new Score(ScoreQT, ScoreTP)));
-            //foreach (var item in sv.CourseDetail.ResultList)
-            //{
-            //    kqs.GetInfoAll(item);
-            //}
-        }
 
         public void Remove(string id)
         {

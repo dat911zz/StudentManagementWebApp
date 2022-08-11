@@ -1,5 +1,6 @@
 ﻿using Castle.MicroKernel;
 using Castle.Windsor;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,19 @@ namespace StudentManagementWebApp.Container
         [HandleError]
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-
-            if (controllerType != null && container.Kernel.HasComponent(controllerType))
-                return (IController)container.Resolve(controllerType);
-            return null;//Sửa đổi vì nếu để câu lệnh dưới sẽ dính exception
-            //return base.GetControllerInstance(requestContext, controllerType);
-
+            try
+            {
+                if (controllerType != null && container.Kernel.HasComponent(controllerType))
+                    return (IController)container.Resolve(controllerType);
+                return null;//Sửa đổi vì nếu để câu lệnh dưới sẽ dính exception
+                            //return base.GetControllerInstance(requestContext, controllerType);
+            }
+            catch (Exception ex)
+            {
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex, "Error was sent from [WindsorControllerFactory]");
+                return null;
+            }
         }
 
         public override void ReleaseController(IController controller)

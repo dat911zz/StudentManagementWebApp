@@ -13,7 +13,11 @@
         public double TP { get; set; }
         #endregion
         #region Constructors
-        public Score() { }
+        public Score() 
+        {
+            QT = 0;
+            TP = 0;
+        }
         public Score(double qT, double tP)
         {
             QT = qT;

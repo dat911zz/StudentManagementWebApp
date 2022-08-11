@@ -124,6 +124,7 @@
             console.log("+");
             $('#delValName').text(val);
             console.log($('#delValName').text(val));
+            console.log('@Url.Action("InQueue","Student")');
             $('#del_confirmModal').modal('show');
         }
         var deleteData = function () {
@@ -145,15 +146,14 @@
                 },
                 error: function () {
                     $("#del_confirmModal").modal('hide');
-                    console.log("Fail");
+                    console.log("Failed");
                     location.href = '@Url.Action("Index","Student")';
                 }
             });
         }
-        //var addSubjectIntoCargo(val){
-
-        //}
+        
     </script>
+    <script src="~/Scripts/Customs/CR.js"></script>
     <!-- Scripts for chat hub-->
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
     <script src="~/signalr/hubs"></script>

@@ -11,7 +11,6 @@ namespace StudentManagementWebApp.Interface.IServices
     {
         List<Student> GetAll();
         Student Create(string ma, string ten, string gioitinh, DateTime ns, string lop, string Khóa);
-        void GetInfo(Student sv);
         void Add(Student sv);
         void Remove(string id);
         void Update(Student sv);

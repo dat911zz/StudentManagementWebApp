@@ -1,4 +1,5 @@
-﻿using StudentManagementWebApp.Interface.IData;
+﻿using NLog;
+using StudentManagementWebApp.Interface.IData;
 using StudentManagementWebApp.Models;
 using StudentManagementWebApp.Utilites;
 using System;
@@ -12,7 +13,7 @@ namespace StudentManagementWebApp.Data.Database
     /// <summary>
     /// Interacting with SQL Databse 
     /// </summary>
-    public class SQL : IStudentData, ISubjectData, ICourseData, IUsersData
+    public class SQL : IStudentData, ISubjectData, IUsersData, IResultData
     {
         //---log test server name : DESKTOP-GUE0JS7
         private SqlCommand cmd;
@@ -46,14 +47,6 @@ namespace StudentManagementWebApp.Data.Database
             string username = "test01";
             string password = "1234";          
             return GetConnection(datasource, database, username, password);
-        }
-        public DataTable SetDataStudent()
-        {
-            return SetDataTable("dataGridView1", "SELECT * FROM SinhVien");
-        }
-        public DataTable SetDataSubject()
-        {
-            return SetDataTable("dataGridView1", "SELECT * FROM MonHoc");
         }
         public DataTable SetDataTable(string datagridview, string query)
         {
@@ -122,20 +115,25 @@ namespace StudentManagementWebApp.Data.Database
             }
             return list;
         }     
-        public void GetCTHP(ref Student sv)
-        {           
-            using (SqlConnection conn = GetConnection())
+        /// <summary>
+        /// Lấy thông tin học phần (môn học + điểm) từ DB cập nhật cho toàn bộ sinh viên
+        /// </summary>
+        /// <param name="sv"></param>
+        public List<Result> GetResultList(string id)
+        {
+            List<Result> rsl = new List<Result>();
+            using (SqlConnection conn = GetConnection())//Để Close connection đúng cách nên xài using ;v
             {
                 conn.Open();
                 cmd = new SqlCommand(@"SELECT * FROM DS_CTHP_SV WHERE MaSV = @MSSV", conn);
-                cmd.Parameters.AddWithValue("@MSSV", sv.Id);
+                cmd.Parameters.AddWithValue("@MSSV", id);
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
-                            sv.CourseDetail.ResultList.Add( 
+                            rsl.Add(
                                 new Result(
                                     new Subject(reader.GetString(1), reader.GetString(2), reader.GetInt32(3)),
                                     new Score(reader.GetDouble(4), reader.GetDouble(5))
@@ -145,45 +143,7 @@ namespace StudentManagementWebApp.Data.Database
                     }
                 }
             }
-        }
-        public void GetAllCTHP(ref List<Student> list_sv)
-        {
-            list_sv.ForEach(x => GetCTHP(ref x));
-        }
-        public void GetAllCTHP(ref List<Student> list_sv, List<Subject> list_mh)
-        {            
-            using (SqlConnection conn = GetConnection())
-            {
-                conn.Open();
-                cmd = new SqlCommand("SELECT * FROM DKHP", conn);
-                using (DbDataReader reader = cmd.ExecuteReader())
-                {
-                    int i = 0, mh = 0;
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            List<Subject> tmp = new List<Subject>(list_mh.ToArray());
-                            //-------------INPUT DATA----------------
-                            for (int col = 0; col < reader.FieldCount; col++)
-                            {
-                                if (col > 1)
-                                {
-                                    if (reader.GetInt32(col) == 1)
-                                    {
-                                        //========Deep copy========= 
-                                        Subject c = new Subject(tmp[mh++]);
-                                        list_sv[i].CourseDetail.ResultList.Add(new Result(new Subject(c), new Score()));
-                                    }
-                                }                            
-                            }
-                            mh = 0;
-                            i++;
-                        }
-                    }
-                    //Console.WriteLine();
-                }
-            }
+            return rsl;
         }
         public List<User> GetAllUsers()
         {
@@ -301,6 +261,42 @@ namespace StudentManagementWebApp.Data.Database
 
             int rowsAffect = cmd.ExecuteNonQuery();
             conn.Close();
+        }
+
+
+        public void AddPerResult(string id, Result rs)
+        {
+            using (SqlConnection conn = GetConnection())
+            {
+                try
+                {
+                        conn.Open();
+
+                        cmd = new SqlCommand(@"INSERT INTO HocPhan VALUES (@msv, @mmh, @qt, @tp)", conn);
+
+                        cmd.Parameters.AddWithValue("@msv", id);
+                        cmd.Parameters.AddWithValue("@mmh", rs.SubjectDetail.SubjectId);
+                        cmd.Parameters.AddWithValue("@qt", rs.ScoreDetail.QT);
+                        cmd.Parameters.AddWithValue("@tp", rs.ScoreDetail.TP);
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Logger logger = LogManager.GetCurrentClassLogger();
+                    logger.Error(ex, "Error was sent from [SQL]");
+                    return;
+                }
+
+            }
+            
+        }
+        public void Add(string id, List<Result> rl)
+        {
+            rl.ForEach(x =>
+            {
+                AddPerResult(id, x);
+            });
         }
     }
 }

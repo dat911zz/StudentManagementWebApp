@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace StudentManagementWebApp.Data.ORM
 {
-    public class NHibernate_ : IStudentData, ISubjectData, ICourseData
+    public class NHibernate_ : IStudentData, ISubjectData
     {
         private string connectionString;
         public NHibernate_(string connectionString)
@@ -91,28 +91,6 @@ namespace StudentManagementWebApp.Data.ORM
                 list_mh = session.Query<Subject>().ToList();
             }
             return list_mh;
-        }
-        public void GetAllCTHP(ref List<Student> list_sv, List<Subject> list_mh)
-        {
-            int count = 0;
-
-            using (ISession session = OpenSession())
-            {
-                var list_hp = session.Query<DKHP>().ToList();
-                list_sv.ForEach(x =>
-                {
-                    var arr = list_hp[count++].ToArray();
-                    for (int i = 0; i < list_mh.Count; i++)
-                    {
-                        if (arr[i] == 1)
-                        {
-                            x.CourseDetail.ResultList.Add(new Result(new Subject(list_mh[i]), new Score()));
-                        }
-                        
-                    }
-                });
-                
-            }
         }
         public void Add(Student sv)
         {

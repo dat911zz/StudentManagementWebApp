@@ -24,38 +24,50 @@ namespace StudentManagementWebApp.Utilites
             container.Dispose();
             #endregion
         }
-        public void AutoWork(ref List<Student> list_sv)
-        {
-            AutoDKHP(ref list_sv);
-            //AutoImportScore(list_sv);
-        }
-        /// <summary>
-        /// Đăng ký học phần tự động
-        /// </summary>
-        /// <param name="list_sv"></param>
-        public void AutoDKHP(ref List<Student> list_sv)
-        {
-            ICourseData CTHP_data = container.Resolve<ICourseData>();
-            //CTHP_data.GetAllCTHP(ref list_sv, list_mh);
-            CTHP_data.GetAllCTHP(ref list_sv);
-        }
+        //public void AutoWork(ref List<Student> list_sv)
+        //{
+        //    AutoDKHP(ref list_sv);
+        //    //AutoImportScore(list_sv);
+        //}
+        ///// <summary>
+        ///// Đăng ký học phần tự động
+        ///// </summary>
+        ///// <param name="list_sv"></param>
+        //public void AutoDKHP(ref List<Student> list_sv)
+        //{
+        //    ICourseData CTHP_data = container.Resolve<ICourseData>();
+        //    CTHP_data.GetAllCTHP(ref list_sv);
+        //}
         /// <summary>
         /// Nhập điểm tự động
         /// </summary>
         /// <param name="list_sv"></param>
-        public void AutoImportScore(List<Student> list_sv)
-        {
-            Random score1 = new Random();
-            Random score2 = new Random();
-            ScoreService ds = container.Resolve<ScoreService>();
+        //public void AutoImport
+        //    (List<Student> list_sv)
+        //{
+        //    Random score1 = new Random();
+        //    Random score2 = new Random();
+        //    ScoreService ds = container.Resolve<ScoreService>();
 
-            for (int i = 0; i < list_sv.Count; i++)
-            {
-                for (int j = 0; j < list_sv[i].CourseDetail.ResultList.Count; j++)
-                {
-                    ds.setScore(list_sv[i].CourseDetail.ResultList[j].ScoreDetail, score1.Next(0, 10), score2.Next(2, 10));
-                }
-            }
+        //    for (int i = 0; i < list_sv.Count; i++)
+        //    {
+        //        for (int j = 0; j < list_sv[i].CourseDetail.ResultList.Count; j++)
+        //        {
+        //            ds.setScore(list_sv[i].CourseDetail.ResultList[j].ScoreDetail, score1.Next(0, 10), score2.Next(2, 10));
+        //        }
+        //    }
+        //}
+
+        /// <summary>
+        /// Trích xuất danh sách môn học từ ds kết quả
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public List<Subject> GetSubjectList(List<Result> list)
+        {
+            List<Subject> sl = new List<Subject>();
+            list.ForEach(x => sl.Add(x.SubjectDetail));
+            return sl;
         }
         /// <summary>
         /// Chuyển đổi DataTable -> HTML Table

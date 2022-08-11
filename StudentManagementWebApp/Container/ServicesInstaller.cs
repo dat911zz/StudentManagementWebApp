@@ -25,18 +25,18 @@ namespace StudentManagementWebApp.Container
             //Services only
             container.Register(
                 Component
-                    .For<ISubjectData, IStudentData, ICourseData, IUsersData>()
+                    .For<IStudentData, ISubjectData, IUsersData, IResultData>()
                     .ImplementedBy<SQL>()
                     .LifestyleTransient());
             container.Register(
                 Component
-                    .For<ISubjectData, IStudentData, ICourseData>()
+                    .For<ISubjectData, IStudentData>()
                     .ImplementedBy<Data.ORM.NHibernate_>()
                     .DependsOn(Dependency.OnValue("connectionString", DatabaseHelper.GenerateConnectionString("", "SinhVien", "test01", "1234")))
                     );
             container.Register(
                 Component
-                    .For<ISubjectData, IStudentData, ICourseData>()
+                    .For<ISubjectData, IStudentData>()
                     .ImplementedBy<Data.ORM.Dapper>()
                     .DependsOn(Dependency.OnValue("connectionString", DatabaseHelper.GenerateConnectionString("", "SinhVien", "test01", "1234")))
                     );
@@ -59,13 +59,18 @@ namespace StudentManagementWebApp.Container
                     .LifestyleTransient());
             container.Register(
                 Component
-                    .For<ScoreService>()
+                    .For<ICourseService>()
+                    .ImplementedBy<CourseService>()
                     .LifestyleTransient());
             container.Register(
                 Component
-                    .For<ResultService>()
+                    .For<IResultService>()
+                    .ImplementedBy<ResultService>()
                     .LifestyleTransient());
-
+            container.Register(
+                Component
+                .For<ScoreService>()
+                .LifestyleTransient());
         }
     }
 }

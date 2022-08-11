@@ -33,15 +33,6 @@ namespace StudentManagementWebApp.Services
         public List<Subject> GetAll()
         {
             return _mhData.GetAllMH();
-        }
-
-        //Lấy thông tin môn học
-        public virtual void GetInfo(Subject mh)
-        {
-            Console.Write($"\tTên môn: {mh.Name}" + Environment.NewLine +
-                $"\tSố tiết: {mh.NumOfLessons}" + Environment.NewLine            
-                );
-        }
-        
+        }      
     }
 }

@@ -23,30 +23,32 @@ namespace StudentManagementWebApp.Controllers
         
         IStudentService service_sv;
         ISubjectService service_mh;
+        ICourseService service_cs;
+
         static List<Student> studentList = new List<Student>();
         static List<Subject> subjectList = new List<Subject>();
-        public List<Subject> subjectQueue = new List<Subject>();
+        static List<Subject> subjectQueue = new List<Subject>();
 
         public Logger logger = LogManager.GetCurrentClassLogger();
 
-        public StudentController(Manager manager, IStudentService studentService, ISubjectService subjectService)
+        public StudentController(Manager manager, IStudentService studentService, ISubjectService subjectService, ICourseService courseService)
         {
             mng = manager;
             service_sv = studentService;
             service_mh = subjectService;
+            service_cs = courseService;
         }
         #region Index
         // GET: Student
         [AuthorizeRole(Roles = "ADMIN, MODERATOR, USER")]
         public ActionResult Index()
         {           
-            /*LogManager.Shutdown(); */ // Remember to flush
-            //fetch students from the DB using Entity Framework here
             try
             {
+                //Lấy ds sinh viên + ĐKHP
                 studentList = service_sv.GetAll();              
-                mng.AutoWork(ref studentList);
-
+                studentList.ForEach(x => x.CourseDetail = service_cs.GetCourse(x.Id));
+                //Sort list 
                 studentList.Sort(new Comparison<Student>((x, y) => {
                     return int.Parse(x.Id.Substring(2)) - int.Parse(y.Id.Substring(2));
                 }));
@@ -214,7 +216,7 @@ namespace StudentManagementWebApp.Controllers
         public ActionResult PreDKHP()
         {
             studentList = service_sv.GetAll();
-            mng.AutoWork(ref studentList);
+            studentList.ForEach(x => x.CourseDetail = service_cs.GetCourse(x.Id));
             return View("SearchStudentToCR");
         }
         /// <summary>
@@ -250,28 +252,82 @@ namespace StudentManagementWebApp.Controllers
         [HttpGet]
         public ActionResult DKHP(string id)
         {
+            try
+            {
+                var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
+                //Lấy toàn bộ môn học
+                subjectList = service_mh.GetAll();
+                //Lấy ra danh sách môn học mà sinh viên đã đăng ký
+                var tmpSList = mng.GetSubjectList(std.CourseDetail.ResultList);
 
-            var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
-            subjectList = service_mh.GetAll();
-            //Lấy ra danh sách môn học mà sinh viên đã đăng ký
-            var tmpSList = new CourseService().GetSubjectList(std.CourseDetail.ResultList);
-
-            
-            //Lấy ra danh sách môn học chưa đăng ký
-            ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
-            ViewBag.TmpList = subjectQueue;
-            return View("CourseRegister", std);
+                //Lấy ra danh sách môn học chưa đăng ký
+                ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer()).Except(subjectQueue, new SubjectEComparer());
+                //Nạp danh sách môn học trong hàng chờ vào View
+                ViewBag.TmpList = subjectQueue;
+                return View("CourseRegister", std);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Error was sent from [StudentController - DKHP]");
+                return RedirectToAction("Expt", "Error", new { mess = ex.Message.ToString() });
+            }            
         }
+        // Student/InQueue/Id&SubId
         [HttpPost]
         public ActionResult InQueue(string id, string subId)
         {
             Student std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
-            subjectQueue.Add(new Subject(subjectList.Where(x => x.SubjectId.Equals(subId)).FirstOrDefault()));
-            List<Subject> tmpSList = new CourseService().GetSubjectList(std.CourseDetail.ResultList);
-            //ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
+            var picked = new Subject(subjectList.Where(x => x.SubjectId.Equals(subId)).FirstOrDefault());
+            if (subjectQueue.Where(x => x.SubjectId.Equals(picked.SubjectId)).FirstOrDefault() == null)
+            {
+                subjectQueue.Add(picked);
+            }
             
-            return RedirectToAction("DKHP", new { id = id});
+            List<Subject> tmpSList = mng.GetSubjectList(std.CourseDetail.ResultList);
+            ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
+            ViewBag.TmpList = subjectQueue;
+
+            return View("CourseRegister", std);
         }
+        // Student/DeQueue/Id&SubId
+        [HttpPost]
+        public ActionResult DeQueue(string id, string subId)
+        {
+            Student std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            var picked = new Subject(subjectList.Where(x => x.SubjectId.Equals(subId)).FirstOrDefault());
+            try
+            {
+                subjectQueue.RemoveAt(subjectQueue.FindIndex(x => x.SubjectId.Equals(picked.SubjectId)));
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Error was sent from [StudentController - DeQueue]");
+                return RedirectToAction("Expt", "Error", new { mess = ex.Message.ToString() });
+            }
+
+            List<Subject> tmpSList = mng.GetSubjectList(std.CourseDetail.ResultList);
+            ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
+            ViewBag.TmpList = subjectQueue;
+
+            return View("CourseRegister", std);
+        }
+        [HttpPost]
+        public ActionResult CommitDKHP(string id)
+        {
+            Student std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            //List<Subject> -> List<Result> ?
+            service_cs.AddCourse(id, subjectQueue);
+            subjectQueue.Clear();
+            //Đồng bộ hóa với DB
+            studentList.ForEach(x => x.CourseDetail = service_cs.GetCourse(x.Id));
+
+            List<Subject> tmpSList = mng.GetSubjectList(std.CourseDetail.ResultList);
+            ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
+            ViewBag.TmpList = subjectQueue;
+
+            return View("CourseRegister", std);
+        }
+
         #endregion
     }
 }

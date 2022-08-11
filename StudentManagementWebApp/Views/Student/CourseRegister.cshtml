@@ -9,75 +9,81 @@
 </div>
 <div class="container">
     <h2 class="text-center">Sinh viên: <span class="font-weight-bolder">@Html.DisplayFor(model => model.Name)</span></h2>
+    <h2 class="text-center">MSSV: <span id="id_SV" class="font-weight-bolder">@Html.DisplayFor(model => model.Id)</span></h2>
 </div>
-<div class="container">
-    <h2>Danh sách học phần chưa đăng ký</h2>
-    <div class="table-responsive text-center">
-        <table class="table table-bordered" id="table_id" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th class="text-center">STT</th>
-                    <th class="text-center">Mã Môn</th>
-                    <th class="text-center">Tên Môn</th>
-                    <th class="text-center">Số Tiết</th>
-                    <th class="text-center">Thêm vào danh sách đăng ký</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    int stt = 1;
-                    foreach (StudentManagementWebApp.Models.Subject s in ViewBag.Subjects)
-                    {
-                        <tr>
-                            <td>@stt</td>
-                            <td>@s.SubjectId</td>
-                            <td>@s.Name</td>
-                            <td>@s.NumOfLessons</td>
-                            <td>
-                                @Html.ActionLink("+","InQueue", "Student", new { id = Model.Id ,subId = s.SubjectId}, htmlAttributes: new { @class="btn"})
-                            </td>
-                        </tr>
-                        stt++;
+<div class="container-fluid">
+    <div class="container">
+        <h2>Danh sách học phần chưa đăng ký</h2>
+        <div class="table-responsive text-center">
+            <table class="table table-bordered" id="table_id" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-center">STT</th>
+                        <th class="text-center">Mã Môn</th>
+                        <th class="text-center">Tên Môn</th>
+                        <th class="text-center">Số Tiết</th>
+                        <th class="text-center">Thêm vào danh sách đăng ký</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int stt = 1;
+                        foreach (StudentManagementWebApp.Models.Subject s in ViewBag.Subjects)
+                        {
+                            <tr>
+                                <td>@stt</td>
+                                <td>@s.SubjectId</td>
+                                <td>@s.Name</td>
+                                <td>@s.NumOfLessons</td>
+                                <td>
+                                    @*@Html.ActionLink("+","InQueue", "Student", new { id = Model.Id}, htmlAttributes: new { @class="btn"})*@
+                                    <a id="@s.SubjectId" class="btn btn-success font-weight-bold" onclick="confirmQ('@s.SubjectId')">+</a>
+                                </td>
+                            </tr>
+                            stt++;
+                        }
                     }
-                }
-            </tbody>
+                </tbody>
             
-        </table>
+            </table>
+        </div>
     </div>
-</div>
 
-<div class="container">
-    <h2>Danh sách môn đang chờ đăng ký</h2>
-    <div class="table-responsive text-center">
-        <table class="table table-bordered" id="table_id1" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th class="text-center">STT</th>
-                    <th class="text-center">Mã Môn</th>
-                    <th class="text-center">Tên Môn</th>
-                    <th class="text-center">Số Tiết</th>
-                    <th class="text-center">Loại khỏi danh sách</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    stt = 1;
-                    foreach (StudentManagementWebApp.Models.Subject s in ViewBag.TmpList)
-                    {
-                        <tr>
-                            <td>@stt</td>
-                            <td>@s.SubjectId</td>
-                            <td>@s.Name</td>
-                            <td>@s.NumOfLessons</td>
-                            <td>
-                                -
-                            </td>
-                        </tr>
-                        stt++;
+    <div class="container">
+        <h2>Danh sách môn đang chờ đăng ký</h2>
+        <div class="table-responsive text-center">
+            <table class="table table-bordered" id="table_id1" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-center">STT</th>
+                        <th class="text-center">Mã Môn</th>
+                        <th class="text-center">Tên Môn</th>
+                        <th class="text-center">Số Tiết</th>
+                        <th class="text-center">Loại khỏi danh sách</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        stt = 1;
+                        foreach (StudentManagementWebApp.Models.Subject s in ViewBag.TmpList)
+                        {
+                            <tr>
+                                <td>@stt</td>
+                                <td>@s.SubjectId</td>
+                                <td>@s.Name</td>
+                                <td>@s.NumOfLessons</td>
+                                <td>
+                                    <a id="@s.SubjectId" class="btn btn-danger font-weight-bold" onclick="confirmDQ('@s.SubjectId')">-</a>
+                                </td>
+                            </tr>
+                            stt++;
+                        }
                     }
-                }
-            </tbody>
-
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center mt-4">
+            <a id="submitDKHP" class="btn btn-outline-success w-100 font-weight-bold" onclick="confirmDKHP('@Html.DisplayFor(modal => modal.Id)')">Đăng Ký</a>
+        </div>
     </div>
 </div>

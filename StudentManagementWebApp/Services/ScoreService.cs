@@ -32,12 +32,5 @@ namespace StudentManagementWebApp.Services
         {
             return finnalScore(d) >= 4;
         }
-        //Lấy thông tin điểm
-        public virtual void GetInfo(Score d)
-        {
-            Console.Write($"\tĐiểm thành phần: {d.TP}" + Environment.NewLine +
-                $"\tĐiểm qua trình: {d.QT}" + Environment.NewLine
-                );
-        }
     }
 }
