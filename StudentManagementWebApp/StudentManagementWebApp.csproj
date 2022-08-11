@@ -294,7 +294,6 @@
     <Content Include="Content\Customs\navbar.css" />
     <Content Include="Content\Customs\sb-admin-2.css" />
     <Content Include="Content\Customs\sb-admin-2.min.css" />
-    <Content Include="Content\Customs\Test.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Data\ORM\hibernate.cfg.xml" />
@@ -2069,8 +2068,6 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ClassDiagram1.cd" />
-    <Content Include="ClassDiagram2.cd" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
