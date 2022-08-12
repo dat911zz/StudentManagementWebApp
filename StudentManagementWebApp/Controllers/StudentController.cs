@@ -20,10 +20,10 @@ namespace StudentManagementWebApp.Controllers
     {
         
         Manager mng;
-        
-        IStudentService service_sv;
-        ISubjectService service_mh;
-        ICourseService service_cs;
+        //Chỉ đọc
+        private readonly IStudentService service_sv;
+        private readonly ISubjectService service_mh;
+        private readonly ICourseService service_cs;
 
         static List<Student> studentList = new List<Student>();
         static List<Subject> subjectList = new List<Subject>();
