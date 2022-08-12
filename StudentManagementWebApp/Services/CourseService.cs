@@ -27,5 +27,10 @@ namespace StudentManagementWebApp.Services
             
             _rsv.Add(id, c.ResultList);
         }
+
+        public void UpdateScore(string id, string mmh, float dqt, float dtp)
+        {
+            _rsv.UpdateScore(id, mmh, dqt, dtp);
+        }
     }
 }

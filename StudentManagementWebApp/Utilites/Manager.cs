@@ -69,6 +69,26 @@ namespace StudentManagementWebApp.Utilites
             list.ForEach(x => sl.Add(x.SubjectDetail));
             return sl;
         }
+        public static string ConvertSubjecttListToSelectTag(List<Subject> list)
+        {
+            /*     
+             <!--<select name="DS1" id="" class="w-100">-->
+                    <!--<optgroup label="Danh sách số">
+                        <option value="1">Danh sách 1</option>
+                        <option value="2">Danh sách 2</option>
+                        <option value="3">Danh sách 3</option>
+                        <option value="4">Danh sách 4</option>
+                    </optgroup>
+                </select>-->         
+             */
+            string html = "";
+            html += @"<select id='subjectList' class='w-100' placeholder='Chọn môn học'>";
+            list.ForEach(x => {
+                html += "<option value ='" + x.SubjectId + "'>" + x.Name + "</option>" ;
+            });
+            html += "</select>";
+            return html;
+        }
         /// <summary>
         /// Chuyển đổi DataTable -> HTML Table
         /// </summary>

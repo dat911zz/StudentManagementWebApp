@@ -23,9 +23,9 @@ namespace StudentManagementWebApp.Services
         {
 
         }
-        public void UpdateScore()
+        public void UpdateScore(string id, string mmh, float dqt, float dtp)
         {
-
+            _resultData.UpdateScore(id, mmh, dqt, dtp);
         }
         public List<Result> GetResultList(string id)
         {

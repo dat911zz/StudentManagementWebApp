@@ -306,7 +306,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\Customs\CR.js" />
+    <Content Include="Scripts\Customs\Custom_01.js" />
     <Content Include="Scripts\Customs\sb-admin-2.js" />
     <Content Include="Scripts\Customs\sb-admin-2.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -2178,7 +2178,9 @@
     <Content Include="Views\Shared\_SideBar.cshtml" />
     <Content Include="Views\Shared\_ConfirmForm.cshtml" />
     <Content Include="Views\Student\CourseRegister.cshtml" />
-    <Content Include="Views\Student\SearchStudentToCR.cshtml" />
+    <Content Include="Views\Student\SearchIdToCR.cshtml" />
+    <Content Include="Views\Student\ScoreUpdater.cshtml" />
+    <Content Include="Views\Student\SearchIdToSU.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

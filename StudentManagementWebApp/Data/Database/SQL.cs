@@ -32,7 +32,7 @@ namespace StudentManagementWebApp.Data.Database
             //Cần kiểm soát quyền truy cập vào CSDL
             //Nếu để như vầy sẽ bị lộ tài khoản
             //Tham khảo tại đây: https://viblo.asia/p/bai-toan-phan-quyen-van-de-muon-thuo-1VgZvw9mlAw
-            return conn1;
+            return conn2;
 
         }
         //Test kết nối với mẫu chuỗi kết nối
@@ -230,40 +230,40 @@ namespace StudentManagementWebApp.Data.Database
         }
 
         public void Remove(string id)
-        {           
-            SqlConnection conn = GetConnection();
-            conn.Open();
-            cmd = new SqlCommand($@"exec fk_delete_mssv '{id}'", conn);
-            int rowsAffected = cmd.ExecuteNonQuery();
-            conn.Close();
+        {
+            using (SqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                cmd = new SqlCommand($@"exec fk_delete_mssv '{id}'", conn);
+                int rowsAffected = cmd.ExecuteNonQuery();
+            } 
         }
 
         public void Update(Student sv)
         {
-            SqlConnection conn = GetConnection();
-            conn.Open();
-            cmd = new SqlCommand($@" 
-            SET DATEFORMAT DMY
-            update SinhVien
-            set TenSV = @name, GioiTinh = @gender, NgaySinh = @date, Lop = @classId, Khoa = @courseId
-            where MaSV = @id
-            ", conn);
+            using (SqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                cmd = new SqlCommand($@" 
+                SET DATEFORMAT DMY
+                update SinhVien
+                set TenSV = @name, GioiTinh = @gender, NgaySinh = @date, Lop = @classId, Khoa = @courseId
+                where MaSV = @id
+                ", conn);
 
-            #region Using Parameter to prevent SQL Injection
+                #region Using Parameter to prevent SQL Injection
 
-            cmd.Parameters.AddWithValue("@name", sv.Name);
-            cmd.Parameters.AddWithValue("@gender", sv.Gender);
-            cmd.Parameters.AddWithValue("@date", sv.DayOfBirth);
-            cmd.Parameters.AddWithValue("@classId", sv.ClassId);
-            cmd.Parameters.AddWithValue("@courseId", sv.CourseId);
-            cmd.Parameters.AddWithValue("@id", sv.Id);
-            #endregion
+                cmd.Parameters.AddWithValue("@name", sv.Name);
+                cmd.Parameters.AddWithValue("@gender", sv.Gender);
+                cmd.Parameters.AddWithValue("@date", sv.DayOfBirth);
+                cmd.Parameters.AddWithValue("@classId", sv.ClassId);
+                cmd.Parameters.AddWithValue("@courseId", sv.CourseId);
+                cmd.Parameters.AddWithValue("@id", sv.Id);
+                #endregion
 
-            int rowsAffect = cmd.ExecuteNonQuery();
-            conn.Close();
+                cmd.ExecuteNonQuery();
+            }          
         }
-
-
         public void AddPerResult(string id, Result rs)
         {
             using (SqlConnection conn = GetConnection())
@@ -297,6 +297,32 @@ namespace StudentManagementWebApp.Data.Database
             {
                 AddPerResult(id, x);
             });
+        }
+        public void UpdateScore(string id, string mmh, float dqt, float dtp)
+        {
+            using (SqlConnection conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    cmd = new SqlCommand(@" UPDATE HOCPHAN
+                                        SET DiemQT = @dqt, DiemTP = @dtp
+                                        WHERE MaSV = @id AND MaMH = @mmh", conn);
+
+                    cmd.Parameters.AddWithValue("@dqt", dqt);
+                    cmd.Parameters.AddWithValue("@dtp", dtp);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@mmh", mmh);
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Logger logger = LogManager.GetCurrentClassLogger();
+                    logger.Error(ex, "Error was sent from [SQL]");
+                    return;
+                }             
+            }
         }
     }
 }

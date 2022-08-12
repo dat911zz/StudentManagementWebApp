@@ -38,6 +38,12 @@ namespace StudentManagementWebApp.Controllers
             service_mh = subjectService;
             service_cs = courseService;
         }
+        [NonAction]
+        public void GetData()
+        {
+            studentList = service_sv.GetAll();
+            studentList.ForEach(x => x.CourseDetail = service_cs.GetCourse(x.Id));
+        }
         #region Index
         // GET: Student
         [AuthorizeRole(Roles = "ADMIN, MODERATOR, USER")]
@@ -46,8 +52,7 @@ namespace StudentManagementWebApp.Controllers
             try
             {
                 //Lấy ds sinh viên + ĐKHP
-                studentList = service_sv.GetAll();              
-                studentList.ForEach(x => x.CourseDetail = service_cs.GetCourse(x.Id));
+                GetData();
                 //Sort list 
                 studentList.Sort(new Comparison<Student>((x, y) => {
                     return int.Parse(x.Id.Substring(2)) - int.Parse(y.Id.Substring(2));
@@ -205,7 +210,6 @@ namespace StudentManagementWebApp.Controllers
             return RedirectToAction("Index");
         }
         #endregion
-
         #region Course Register
         
         /// <summary>
@@ -215,9 +219,8 @@ namespace StudentManagementWebApp.Controllers
         [HttpGet]
         public ActionResult PreDKHP()
         {
-            studentList = service_sv.GetAll();
-            studentList.ForEach(x => x.CourseDetail = service_cs.GetCourse(x.Id));
-            return View("SearchStudentToCR");
+            GetData();
+            return View("SearchIdToCR");
         }
         /// <summary>
         /// Check mssv và chuyển qua cổng ĐKHP 
@@ -239,7 +242,7 @@ namespace StudentManagementWebApp.Controllers
                     ViewBag.Error = $"Không tìm thấy sinh viên có mã ";
                     ViewBag.Id = id;
                 }
-                return View("SearchStudentToCR");
+                return View("SearchIdToCR");
             }
 
             return RedirectToAction("DKHP", new { id = std.Id });//Redierect thi phải new cái id nếu không sẽ bị lộn qua controller :v
@@ -297,7 +300,10 @@ namespace StudentManagementWebApp.Controllers
             var picked = new Subject(subjectList.Where(x => x.SubjectId.Equals(subId)).FirstOrDefault());
             try
             {
-                subjectQueue.RemoveAt(subjectQueue.FindIndex(x => x.SubjectId.Equals(picked.SubjectId)));
+                if (subjectQueue.Count >= 0)
+                {
+                    subjectQueue.RemoveAt(subjectQueue.FindIndex(x => x.SubjectId.Equals(picked.SubjectId)));
+                }
             }
             catch (Exception ex)
             {
@@ -319,7 +325,7 @@ namespace StudentManagementWebApp.Controllers
             service_cs.AddCourse(id, subjectQueue);
             subjectQueue.Clear();
             //Đồng bộ hóa với DB
-            studentList.ForEach(x => x.CourseDetail = service_cs.GetCourse(x.Id));
+            GetData();
 
             List<Subject> tmpSList = mng.GetSubjectList(std.CourseDetail.ResultList);
             ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
@@ -327,7 +333,59 @@ namespace StudentManagementWebApp.Controllers
 
             return View("CourseRegister", std);
         }
+        #endregion
 
+        #region Score Updater
+        [HttpGet]
+        public ActionResult PreScoreUpdater()
+        {
+            GetData();
+            return View("SearchIdToSU");
+        }
+        [HttpPost]
+        public ActionResult PreScoreUpdater(string id)
+        {
+            var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            if (std == null)
+            {
+                if (id.Equals(""))
+                {
+                    ViewBag.Error = "Vui lòng nhập mã sinh viên!";
+                }
+                else
+                {
+                    ViewBag.Error = $"Không tìm thấy sinh viên có mã ";
+                    ViewBag.Id = id;
+                }
+                return View("SearchIdToSU");
+            }
+
+            return RedirectToAction("ScoreUpdater", new { id = std.Id });//Redierect thi phải new cái id nếu không sẽ bị lộn qua controller :v
+        }
+        [HttpGet]
+        public ActionResult ScoreUpdater(string id)
+        {
+            studentList.ForEach(x => x.CourseDetail = service_cs.GetCourse(x.Id));
+            var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            if (std == null)
+            {
+                return RedirectToAction("ItemNotFound", "Error");
+            }
+            ViewBag.Id = id;
+            //Đẩy kết quả ra view
+            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadScoreSVIntoDataTable(std));
+
+            //Bind dropdown
+            ViewBag.dropdownList = Manager.ConvertSubjecttListToSelectTag(mng.GetSubjectList(std.CourseDetail.ResultList));
+            return View("ScoreUpdater", std);
+        }
+        [HttpPost]
+        public ActionResult ScoreUpdater(string id, string mmh, float dqt, float dtp)
+        {
+            var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            service_cs.UpdateScore(id, mmh, dqt, dtp);           
+            return RedirectToAction("ScoreUpdater", new { id });
+        }
         #endregion
     }
 }

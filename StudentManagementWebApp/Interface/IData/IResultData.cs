@@ -15,7 +15,7 @@ namespace StudentManagementWebApp.Interface.IData
         /// <param name="id"></param>
         /// <returns></returns>
         List<Result> GetResultList(string id);
-
         void Add(string id, List<Result> rl);
+        void UpdateScore(string id, string mmh, float dqt, float dtp);
     }
 }

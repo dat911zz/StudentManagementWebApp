@@ -11,7 +11,7 @@ namespace StudentManagementWebApp.Controllers
     public class ChatController : Controller
     {
         // GET: Chat
-        [AuthorizeRole(Roles = "ADMIN, MODERATOR")]
+        [AuthorizeRole(Roles = "ADMIN, MODERATOR, USER")]
         public ActionResult Index()
         {
             return View();
