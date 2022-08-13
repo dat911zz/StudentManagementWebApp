@@ -7,5 +7,21 @@
     <p>
         Bấm vào nút sau để xem thông tin hiệu trưởng <br /> <br />
         <a class="btn btn-success" href="https://github.com/dat911zz">Click me!  &raquo;</a>
+
     </p>
+        @{ 
+            try
+            {
+                string myCon = System.Configuration.ConfigurationManager.ConnectionStrings["myConnection"].ConnectionString;
+                if (myCon != null)
+                {
+                    @Html.Display("My connection string is :" + myCon)
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
 </div>

@@ -34,5 +34,14 @@ namespace StudentManagementWebApp.Controllers
             ViewBag.Message = "Intro page";
             return View();
         }
+        [AllowAnonymous]
+        public ActionResult UserManagement()
+        {
+            //https://localhost:44387/Manage/Index
+            string domainName = Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+            //Response.Redirect("https://" + domainName + "/Manage/Index");
+            return Redirect("https://" + domainName + "/Manage/Index");
+            
+        }
     }
 }

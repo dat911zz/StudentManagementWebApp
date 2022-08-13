@@ -1,17 +1,20 @@
-﻿.pad-top-15{
+﻿.pad-top-15 {
     padding-top: 15px;
 }
-.margin-top-15{
+
+.margin-top-15 {
     margin-top: 15px;
 }
-.margin-r-10{
+
+.margin-r-10 {
     margin-right: 10px;
 }
-.float-right{
+
+.float-right {
     float: right;
 }
 /*Tùy chỉnh cho Nav bar*/
-.switcher{
+.switcher {
     z-index: 20;
 }
 
@@ -20,7 +23,8 @@
 .navbar-inverse .navbar-nav > li > a {
     color: #fff;
 }
-    .navbar-inverse .navbar-nav > li > a:hover, 
+
+    .navbar-inverse .navbar-nav > li > a:hover,
     .navbar-inverse .navbar-nav > li > a:focus {
         background-color: #ffffff;
         color: #384289;
@@ -32,32 +36,33 @@
     color: #000;
     background-color: transparent !important;
 }
-    #wrapper #bg {
-        background: url(/Assets/anony.png) !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        background-size: 70vh !important; 
-        content: "";
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 220px;
-        opacity: 0.15;
-        z-index: -100;
-        position: absolute;
-    }
+
+#wrapper #bg {
+    background: url(/Assets/anony.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 70vh !important;
+    content: "";
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 220px;
+    opacity: 0.15;
+    z-index: -100;
+    position: absolute;
+}
 
 
 
-table.dataTable tbody td{
+table.dataTable tbody td {
     vertical-align: middle;
 }
 
 .btn-group > .btn-group:not(:first-child), .btn-group > .btn:not(:first-child) {
-     margin-left: 0px; 
+    margin-left: 0px;
 }
 
-.table{
+.table {
     color: #000;
 }
 
@@ -74,6 +79,6 @@ table.dataTable tbody td{
     width: 100%;
 }
 
-.w154{
+.w154 {
     width: 154px;
 }

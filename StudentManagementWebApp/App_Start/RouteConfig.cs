@@ -27,6 +27,7 @@ namespace StudentManagementWebApp
                     id = UrlParameter.Optional 
                 }
             );
+            
         }
     }
 }

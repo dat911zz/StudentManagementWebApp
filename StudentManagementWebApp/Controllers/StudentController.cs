@@ -19,30 +19,30 @@ namespace StudentManagementWebApp.Controllers
     public class StudentController : Controller
     {
         
-        Manager mng;
+        private readonly Manager _mng;
         //Chỉ đọc
-        private readonly IStudentService service_sv;
-        private readonly ISubjectService service_mh;
-        private readonly ICourseService service_cs;
+        private readonly IStudentService _service_sv;
+        private readonly ISubjectService _service_mh;
+        private readonly ICourseService _service_cs;
 
         static List<Student> studentList = new List<Student>();
         static List<Subject> subjectList = new List<Subject>();
         static List<Subject> subjectQueue = new List<Subject>();
 
-        public Logger logger = LogManager.GetCurrentClassLogger();
+        private readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         public StudentController(Manager manager, IStudentService studentService, ISubjectService subjectService, ICourseService courseService)
         {
-            mng = manager;
-            service_sv = studentService;
-            service_mh = subjectService;
-            service_cs = courseService;
+            _mng = manager;
+            _service_sv = studentService;
+            _service_mh = subjectService;
+            _service_cs = courseService;
         }
         [NonAction]
         public void GetData()
         {
-            studentList = service_sv.GetAll();
-            studentList.ForEach(x => x.CourseDetail = service_cs.GetCourse(x.Id));
+            studentList = _service_sv.GetAll();
+            studentList.ForEach(x => x.CourseDetail = _service_cs.GetCourse(x.Id));
         }
         #region Index
         // GET: Student
@@ -63,7 +63,7 @@ namespace StudentManagementWebApp.Controllers
             {
                 logger.Error(ex, "Error was sent from [StudentController - Index]");
                 return RedirectToAction("Expt","Error", new { mess = ex.Message.ToString() });
-            }
+            }           
             logger.Info("Status: Loading student list completed");
             return View(studentList);
         }
@@ -97,7 +97,7 @@ namespace StudentManagementWebApp.Controllers
             if (ModelState.IsValid)
             {
                 //update student in DB using EntityFramework in real-life application
-                service_sv.Update(std);
+                _service_sv.Update(std);
 
                 //update list by removing old student and adding updated student for demo purpose
                 var student = studentList.Where(s => s.Id == std.Id).FirstOrDefault();
@@ -120,7 +120,7 @@ namespace StudentManagementWebApp.Controllers
                 return RedirectToAction("ItemNotFound", "Error");
             }
 
-            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadSubjectSVIntoDataTable(std));           
+            ViewBag.ResultList = Manager.ConvertDataTableToHTML(_mng.UploadSubjectSVIntoDataTable(std));           
             return View(std);
         }
         [HttpGet]
@@ -132,7 +132,7 @@ namespace StudentManagementWebApp.Controllers
                 return RedirectToAction("ItemNotFound", "Error");
             }
             ViewBag.Id = id;
-            ViewBag.CourseList = Manager.ConvertDataTableToHTML(mng.UploadSubjectSVIntoDataTable(std));
+            ViewBag.CourseList = Manager.ConvertDataTableToHTML(_mng.UploadSubjectSVIntoDataTable(std));
 
             return View("CourseDetails");
         }
@@ -145,7 +145,7 @@ namespace StudentManagementWebApp.Controllers
                 return RedirectToAction("ItemNotFound", "Error");
             }
             ViewBag.Id = id;
-            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadScoreSVIntoDataTable(std));
+            ViewBag.ResultList = Manager.ConvertDataTableToHTML(_mng.UploadScoreSVIntoDataTable(std));
             return View("ResultDetails");
         }
         #endregion
@@ -191,7 +191,7 @@ namespace StudentManagementWebApp.Controllers
 
                 }
                 
-                service_sv.Add(std);
+                _service_sv.Add(std);
                 studentList.Add(std);
                 return RedirectToAction("Index");
             }
@@ -206,7 +206,7 @@ namespace StudentManagementWebApp.Controllers
             logger.Info($"Delete {id}");
             var std = studentList.Where(s => s.Id.Equals(id)).FirstOrDefault();
             studentList.Remove(std);
-            service_sv.Remove(std.Id);
+            _service_sv.Remove(std.Id);
             return RedirectToAction("Index");
         }
         #endregion
@@ -259,9 +259,9 @@ namespace StudentManagementWebApp.Controllers
             {
                 var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
                 //Lấy toàn bộ môn học
-                subjectList = service_mh.GetAll();
+                subjectList = _service_mh.GetAll();
                 //Lấy ra danh sách môn học mà sinh viên đã đăng ký
-                var tmpSList = mng.GetSubjectList(std.CourseDetail.ResultList);
+                var tmpSList = _mng.GetSubjectList(std.CourseDetail.ResultList);
 
                 //Lấy ra danh sách môn học chưa đăng ký
                 ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer()).Except(subjectQueue, new SubjectEComparer());
@@ -286,7 +286,7 @@ namespace StudentManagementWebApp.Controllers
                 subjectQueue.Add(picked);
             }
             
-            List<Subject> tmpSList = mng.GetSubjectList(std.CourseDetail.ResultList);
+            List<Subject> tmpSList = _mng.GetSubjectList(std.CourseDetail.ResultList);
             ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
             ViewBag.TmpList = subjectQueue;
 
@@ -311,7 +311,7 @@ namespace StudentManagementWebApp.Controllers
                 return RedirectToAction("Expt", "Error", new { mess = ex.Message.ToString() });
             }
 
-            List<Subject> tmpSList = mng.GetSubjectList(std.CourseDetail.ResultList);
+            List<Subject> tmpSList = _mng.GetSubjectList(std.CourseDetail.ResultList);
             ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
             ViewBag.TmpList = subjectQueue;
 
@@ -322,12 +322,12 @@ namespace StudentManagementWebApp.Controllers
         {
             Student std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
             //List<Subject> -> List<Result> ?
-            service_cs.AddCourse(id, subjectQueue);
+            _service_cs.AddCourse(id, subjectQueue);
             subjectQueue.Clear();
             //Đồng bộ hóa với DB
             GetData();
 
-            List<Subject> tmpSList = mng.GetSubjectList(std.CourseDetail.ResultList);
+            List<Subject> tmpSList = _mng.GetSubjectList(std.CourseDetail.ResultList);
             ViewBag.Subjects = subjectList.Except(tmpSList, new SubjectEComparer());
             ViewBag.TmpList = subjectQueue;
 
@@ -365,7 +365,7 @@ namespace StudentManagementWebApp.Controllers
         [HttpGet]
         public ActionResult ScoreUpdater(string id)
         {
-            studentList.ForEach(x => x.CourseDetail = service_cs.GetCourse(x.Id));
+            studentList.ForEach(x => x.CourseDetail = _service_cs.GetCourse(x.Id));
             var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
             if (std == null)
             {
@@ -373,17 +373,17 @@ namespace StudentManagementWebApp.Controllers
             }
             ViewBag.Id = id;
             //Đẩy kết quả ra view
-            ViewBag.ResultList = Manager.ConvertDataTableToHTML(mng.UploadScoreSVIntoDataTable(std));
+            ViewBag.ResultList = Manager.ConvertDataTableToHTML(_mng.UploadScoreSVIntoDataTable(std));
 
             //Bind dropdown
-            ViewBag.dropdownList = Manager.ConvertSubjecttListToSelectTag(mng.GetSubjectList(std.CourseDetail.ResultList));
+            ViewBag.dropdownList = Manager.ConvertSubjecttListToSelectTag(_mng.GetSubjectList(std.CourseDetail.ResultList));
             return View("ScoreUpdater", std);
         }
         [HttpPost]
         public ActionResult ScoreUpdater(string id, string mmh, float dqt, float dtp)
         {
             var std = studentList.Where(x => x.Id.Equals(id)).FirstOrDefault();
-            service_cs.UpdateScore(id, mmh, dqt, dtp);           
+            _service_cs.UpdateScore(id, mmh, dqt, dtp);           
             return RedirectToAction("ScoreUpdater", new { id });
         }
         #endregion

@@ -144,6 +144,5 @@ namespace StudentManagementWebApp.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index","Home");
         }
-
     }
 }

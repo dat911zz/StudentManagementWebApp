@@ -288,9 +288,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Customs\ChatHub.css" />
-    <Content Include="Content\Customs\CustomTable_1.css" />
     <Content Include="Content\Customs\Custom_1.razor.css" />
+    <Content Include="Content\Customs\Custom_1.razor.min.css">
+      <DependentUpon>Custom_1.razor.css</DependentUpon>
+    </Content>
     <Content Include="Content\Customs\Login.razor.css" />
+    <Content Include="Content\Customs\Login.razor.min.css">
+      <DependentUpon>Login.razor.css</DependentUpon>
+    </Content>
     <Content Include="Content\Customs\navbar.css" />
     <Content Include="Content\Customs\sb-admin-2.css" />
     <Content Include="Content\Customs\sb-admin-2.min.css" />
@@ -307,6 +312,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Customs\Custom_01.js" />
+    <Content Include="Scripts\Customs\Login.razor.min.js">
+      <DependentUpon>Login.razor.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Customs\sb-admin-2.js" />
     <Content Include="Scripts\Customs\sb-admin-2.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -2068,6 +2076,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="bundleconfig.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

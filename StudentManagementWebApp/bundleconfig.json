@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "Scripts/Customs/Login.razor.min.js",
+    "inputFiles": [
+      "Scripts/Customs/Login.razor.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/Customs/CustomTable_1.min.css",
+    "inputFiles": [
+      "Content/Customs/CustomTable_1.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/Customs/Login.razor.min.css",
+    "inputFiles": [
+      "Content/Customs/Login.razor.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/Customs/Custom_1.razor.min.css",
+    "inputFiles": [
+      "Content/Customs/Custom_1.razor.css"
+    ]
+  }
+]
