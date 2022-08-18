@@ -27,9 +27,11 @@ namespace StudentManagementWebApp.Data.Database
         //Khởi tạo kết nối tới CSDL
         public SqlConnection GetConnection(string datasource, string database, string username, string password)
         {
+            //Local DB for testing
             SqlConnection conn1 = new SqlConnection(DatabaseHelper.GenerateConnectionString(datasource, database, username, password));
+            //BD on Deployment enviroment
             SqlConnection conn2 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["myConnection"].ConnectionString);//Protect ConnectionString
-            return conn2;
+            return conn1;
 
         }
         //Test kết nối với mẫu chuỗi kết nối
