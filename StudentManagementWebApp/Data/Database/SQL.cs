@@ -31,7 +31,7 @@ namespace StudentManagementWebApp.Data.Database
             SqlConnection conn1 = new SqlConnection(DatabaseHelper.GenerateConnectionString(datasource, database, username, password));
             //BD on Deployment enviroment
             SqlConnection conn2 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["myConnection"].ConnectionString);//Protect ConnectionString
-            return conn1;
+            return conn2;
 
         }
         //Test kết nối với mẫu chuỗi kết nối
