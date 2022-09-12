@@ -84,8 +84,7 @@
       <error statusCode="404" redirect="~/Error/PageNotFound" />
       <error statusCode="401" redirect="~/Error/Unauthorized" />
     </customErrors>
-    <globalization culture="vi-VN" uiCulture="vi-VN" fileEncoding="utf-8">
-    </globalization>
+    <globalization culture="vi-VN" uiCulture="vi-VN" fileEncoding="utf-8"/>
   </system.web>
   <system.webServer>
     <validation validateIntegratedModeConfiguration="false" />

@@ -30,7 +30,7 @@ namespace StudentManagementWebApp.Data.Database
             //Local DB for testing
             SqlConnection conn1 = new SqlConnection(DatabaseHelper.GenerateConnectionString(datasource, database, username, password));
             //BD on Deployment enviroment
-            SqlConnection conn2 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["myConnection"].ConnectionString);//Protect ConnectionString
+            SqlConnection conn2 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["cnstr"].ConnectionString);//Protect ConnectionString
             return conn2;
 
         }
@@ -151,7 +151,7 @@ namespace StudentManagementWebApp.Data.Database
             using (SqlConnection conn = GetConnection())
             {
                 conn.Open();
-                cmd = new SqlCommand("SELECT * FROM User_SV", conn);
+                cmd = new SqlCommand("SELECT * FROM SVUser", conn);
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -214,7 +214,7 @@ namespace StudentManagementWebApp.Data.Database
         {
             SqlConnection conn = GetConnection();
             conn.Open();
-            cmd = new SqlCommand(@"INSERT INTO Users VALUES (@fname, @lname, @email, @username, @hash, 'USER');", conn);
+            cmd = new SqlCommand(@"INSERT INTO SVUser VALUES (@fname, @lname, @email, @username, @hash);", conn);
             #region Using Parameter to prevent SQL Injection
 
             cmd.Parameters.AddWithValue("@fname", user.FirstName);
