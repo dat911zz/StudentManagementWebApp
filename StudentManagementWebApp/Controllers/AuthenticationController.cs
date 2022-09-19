@@ -2,9 +2,14 @@
 using StudentManagementWebApp.Utilites;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -47,7 +52,8 @@ namespace StudentManagementWebApp.Controllers
 
                 if (checkMail == null && checkUsername == null)
                 {
-                    _user.Hash = GetMD5(_user.Password);
+                    //_user.Hash = GetMD5(_user.Password);
+                    _user.Hash = EncryptUsingCertificate(_user.Password);
                     usersService.Add(_user);
                     return RedirectToAction("Index");
                 }
@@ -83,7 +89,8 @@ namespace StudentManagementWebApp.Controllers
             {
                 Models.User data = new Models.User();
                 //Hashing and compare with DB
-                var f_password = GetMD5(password);
+                //var f_password = GetMD5(password);
+                var f_password = EncryptUsingCertificate(password);
                 //var data = _db.Users.Where(s => s.UserName.Equals(email) && s.Password.Equals(f_password)).ToList();
                 data = usersService.GetAll()
                     .Where(x =>
@@ -102,11 +109,8 @@ namespace StudentManagementWebApp.Controllers
                     //{
                     //    Session["Role"] = "Manager";
                     //}
-
-                    
-
                     FormsAuthentication.SetAuthCookie(data.UserName, false);
-                    var authTicket = new FormsAuthenticationTicket(1, data.UserName, DateTime.Now, DateTime.Now.AddHours(2), false, data.RoleId);
+                    var authTicket = new FormsAuthenticationTicket(1, data.UserName, DateTime.Now, DateTime.Now.AddMinutes(1), false, data.RoleId);
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
@@ -137,7 +141,28 @@ namespace StudentManagementWebApp.Controllers
             }
             return byte2String;
         }
-
+        public static string EncryptUsingCertificate(string data)
+        {
+            try
+            {
+                byte[] byteData = Encoding.UTF8.GetBytes(data);
+                string path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath , "/vendor/certificates/mycert.pem");
+                var collection = new X509Certificate2Collection();
+                collection.Import(path);
+                var certificate = collection[0];
+                var output = "";
+                using (RSA csp = (RSA)certificate.PublicKey.Key)
+                {
+                    byte[] bytesEncrypted = csp.Encrypt(byteData, RSAEncryptionPadding.OaepSHA1);
+                    output = Convert.ToBase64String(bytesEncrypted);
+                }
+                return output;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message + "";
+            }
+        }
         //Logout
         public ActionResult Logout()
         {

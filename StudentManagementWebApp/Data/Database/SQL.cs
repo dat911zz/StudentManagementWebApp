@@ -214,7 +214,7 @@ namespace StudentManagementWebApp.Data.Database
         {
             SqlConnection conn = GetConnection();
             conn.Open();
-            cmd = new SqlCommand(@"INSERT INTO SVUser VALUES (@fname, @lname, @email, @username, @hash);", conn);
+            cmd = new SqlCommand(@"INSERT INTO SVUser VALUES (@fname, @lname, @email, @username, @hash, 'USER');", conn);
             #region Using Parameter to prevent SQL Injection
 
             cmd.Parameters.AddWithValue("@fname", user.FirstName);

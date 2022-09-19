@@ -2193,6 +2193,12 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Error\Expt.cshtml" />
+    <Content Include="vendor\certificates\mycert.pem" />
+    <Content Include="vendor\certificates\mycertprivatekey.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="vendor\certificates\privatekey.pem" />
+    <Content Include="vendor\certificates\publickey.pem" />
     <None Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Student\CourseDetails.cshtml" />
     <Content Include="Views\Student\ResultDetails.cshtml" />
