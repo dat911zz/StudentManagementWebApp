@@ -52,8 +52,8 @@ namespace StudentManagementWebApp.Controllers
 
                 if (checkMail == null && checkUsername == null)
                 {
-                    //_user.Hash = GetMD5(_user.Password);
-                    _user.Hash = EncryptUsingCertificate(_user.Password);
+                    _user.Hash = GetMD5(_user.Password);
+                    //_user.Hash = EncryptUsingCertificate(_user.Password);
                     usersService.Add(_user);
                     return RedirectToAction("Index");
                 }
@@ -89,8 +89,8 @@ namespace StudentManagementWebApp.Controllers
             {
                 Models.User data = new Models.User();
                 //Hashing and compare with DB
-                //var f_password = GetMD5(password);
-                var f_password = EncryptUsingCertificate(password);
+                var f_password = GetMD5(password);
+                //var f_password = EncryptUsingCertificate(password);
                 //var data = _db.Users.Where(s => s.UserName.Equals(email) && s.Password.Equals(f_password)).ToList();
                 data = usersService.GetAll()
                     .Where(x =>
