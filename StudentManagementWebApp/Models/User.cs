@@ -10,10 +10,10 @@ namespace StudentManagementWebApp.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idUser { get; set; }
         [Required(ErrorMessage = "Vui lòng điền vào trường này")]
-        [StringLength(50, MinimumLength = 2)]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Kích thước tối thiểu từ 2 -> 50 ký tự")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Vui lòng điền vào trường này")]
-        [StringLength(50, MinimumLength = 2)]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Kích thước tối thiểu từ 2 -> 50 ký tự")]
         public string LastName { get; set; }
         [Required(ErrorMessage = "Vui lòng điền vào trường này")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Hãy nhập địa chỉ email hợp lệ.\nExample@gmail.com")]
