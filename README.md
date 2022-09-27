@@ -6,4 +6,4 @@ Link demo: <a href="dat911zz.somee.com/">dat911zz.somee.com</a>
 <span> <img src="https://img.shields.io/github/commit-activity/m/dat911zz/StudentManagementWebApp"/> </span>
 <span> <img src="https://img.shields.io/github/languages/count/dat911zz/StudentManagementWebApp"/> </span>
 
-![](https://komarev.com/ghpvc/?username=dat911zz)
+![View](https://komarev.com/ghpvc/?username=dat911zz)
