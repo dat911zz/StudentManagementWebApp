@@ -1,5 +1,5 @@
 ﻿using Castle.Windsor;
-using StudentManagementWebApp.Data.Database;
+using StudentManagementWebApp.Core.Data.Database;
 using StudentManagementWebApp.Container;
 using StudentManagementWebApp.Interface.IData;
 using StudentManagementWebApp.Models;

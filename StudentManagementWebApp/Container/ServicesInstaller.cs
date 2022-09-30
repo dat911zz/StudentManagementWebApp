@@ -2,7 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using StudentManagementWebApp.Utilites;
-using StudentManagementWebApp.Data.Database;
+using StudentManagementWebApp.Core.Data.Database;
 using StudentManagementWebApp.Interface.IData;
 using StudentManagementWebApp.Interface.IServices;
 using StudentManagementWebApp.Models;
@@ -31,13 +31,13 @@ namespace StudentManagementWebApp.Container
             container.Register(
                 Component
                     .For<ISubjectData, IStudentData>()
-                    .ImplementedBy<Data.ORM.NHibernate_>()
+                    .ImplementedBy<Core.Data.ORM.NHibernate_>()
                     .DependsOn(Dependency.OnValue("connectionString", DatabaseHelper.GenerateConnectionString("", "SinhVien", "test01", "1234")))
                     );
             container.Register(
                 Component
                     .For<ISubjectData, IStudentData>()
-                    .ImplementedBy<Data.ORM.Dapper>()
+                    .ImplementedBy<Core.Data.ORM.Dapper>()
                     .DependsOn(Dependency.OnValue("connectionString", DatabaseHelper.GenerateConnectionString("", "SinhVien", "test01", "1234")))
                     );
             

@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
-namespace StudentManagementWebApp.Data.Database
+namespace StudentManagementWebApp.Core.Data.Database
 {
     /// <summary>
     /// Interacting with SQL Databse 

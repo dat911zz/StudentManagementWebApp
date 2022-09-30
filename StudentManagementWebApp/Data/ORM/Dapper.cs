@@ -4,7 +4,7 @@ using StudentManagementWebApp.Models;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace StudentManagementWebApp.Data.ORM
+namespace StudentManagementWebApp.Core.Data.ORM
 {
     /// <summary>
     /// Class for Dapper Library

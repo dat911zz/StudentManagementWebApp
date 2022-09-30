@@ -15,7 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentManagementWebApp.Data.ORM
+namespace StudentManagementWebApp.Core.Data.ORM
 {
     public class NHibernate_ : IStudentData, ISubjectData
     {

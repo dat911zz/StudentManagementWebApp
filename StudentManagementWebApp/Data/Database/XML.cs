@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using StudentManagementWebApp.Interface.IData;
 
-namespace StudentManagementWebApp.Data.Database
+namespace StudentManagementWebApp.Core.Data.Database
 {
     //Class for XML Databse (for future)**** double ******* **** *****  
     public class XML : IStudentData, ISubjectData
