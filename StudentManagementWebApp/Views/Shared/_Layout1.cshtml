@@ -107,6 +107,7 @@
     <script src="~/Scripts/Customs/sb-admin-2.min.js"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
+        
         $(document).ready(function () {
             $('#table_id').DataTable();
         });
@@ -118,8 +119,6 @@
                 $('#Form').submit();
             });
         });
-    </script>
-    <script>
         var deleteConfirm = function (val) {
             console.log("+");
             $('#delValName').text(val);
@@ -151,7 +150,19 @@
                 }
             });
         }
-        
+        $(document).ready(function () {
+            var $j = jQuery.noConflict();
+            $j("#DayOfBirth").datepicker({
+                dateFormat: "dd/mm/yy",
+                showStatus: true,
+                showWeeks: true,
+                currentText: 'Now',
+                autoSize: true,
+                gotoCurrent: true,
+                showAnim: 'blind',
+                highlightWeek: true
+            });
+        });
     </script>
     <script src="~/Scripts/Customs/Custom_01.js"></script>
     <!-- Scripts for chat hub-->

@@ -263,7 +263,6 @@
     <Compile Include="Core\Interface\IServices\ISubjectService.cs" />
     <Compile Include="Core\Interface\IServices\IStudentService.cs" />
     <Compile Include="Core\Interface\IServices\IUsersService.cs" />
-    <Compile Include="Models\AuthorizeEntryPermission.cs" />
     <Compile Include="Models\AuthorizeRoleAttribute.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\DKHP.cs" />

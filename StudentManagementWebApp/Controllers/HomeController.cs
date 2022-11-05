@@ -14,7 +14,7 @@ namespace StudentManagementWebApp.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View();
+           return View();
         }
         [AllowAnonymous]
         public ActionResult About()

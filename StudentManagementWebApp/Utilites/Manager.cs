@@ -160,8 +160,8 @@ namespace StudentManagementWebApp.Utilites
             DataTable dt = new DataTable();
             dt.Columns.Add("Tên MH", typeof(string));
             dt.Columns.Add("Số tiết", typeof(int));
-            dt.Columns.Add("Điểm quá trình", typeof(int));
-            dt.Columns.Add("Điểm thành phần", typeof(int));
+            dt.Columns.Add("Điểm quá trình", typeof(double));
+            dt.Columns.Add("Điểm thành phần", typeof(double));
             dt.Columns.Add("Kết quả", typeof(string));
 
             foreach (var item in sv.CourseDetail.ResultList)

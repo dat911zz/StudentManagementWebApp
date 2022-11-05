@@ -30,7 +30,7 @@ namespace StudentManagementWebApp.Models
         [Required(ErrorMessage = "Vui lòng chọn ngày!")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Ngày Sinh")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]//Định dạng xuất cho kiểu ngày giờ 
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]//Định dạng xuất cho kiểu ngày giờ 
         public virtual DateTime DayOfBirth { get; set; }
         /// <summary>
         /// Lớp

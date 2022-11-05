@@ -58,6 +58,8 @@ namespace StudentManagementWebApp.Controllers
                     return int.Parse(x.Id.Substring(2)) - int.Parse(y.Id.Substring(2));
                 }));
                 ViewBag.TotalStudents = studentList.Count;
+                float a = 9.52f;
+                ViewBag.TestFloat = a;
             }
             catch (Exception ex)
             {
