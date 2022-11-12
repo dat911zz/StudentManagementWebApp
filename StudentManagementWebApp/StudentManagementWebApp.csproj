@@ -2094,6 +2094,8 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\dat911zz-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\dat911zz-001-site1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Customs\Login.razor.js" />
     <Content Include="Scripts\Index.js" />

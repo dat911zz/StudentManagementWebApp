@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentManagementWebApp.Models
@@ -7,8 +8,7 @@ namespace StudentManagementWebApp.Models
     {
         #region Properties     
         [Key, Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int idUser { get; set; }
+        public string idUser { get; set; }
         [Required(ErrorMessage = "Vui lòng điền vào trường này")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Kích thước tối thiểu từ 2 -> 50 ký tự")]
         public string FirstName { get; set; }
@@ -44,7 +44,7 @@ namespace StudentManagementWebApp.Models
         #region Constructors
         public User() 
         {
-            idUser = 0;
+            idUser = DateTime.Now.ToFileTimeUtc().ToString();
         }
         /// <summary>
         /// For Register and Login
@@ -56,7 +56,7 @@ namespace StudentManagementWebApp.Models
         /// <param name="password"></param>
         /// <param name="confirmPassword"></param>
         /// <param name="RoleId"></param>
-        public User(int idUser, string firstName, string lastName, string email, string userName, string password, string confirmPassword, string RoleId)
+        public User(string idUser, string firstName, string lastName, string email, string userName, string password, string confirmPassword, string RoleId)
         {
             this.idUser = idUser;
             FirstName = firstName;
@@ -79,6 +79,7 @@ namespace StudentManagementWebApp.Models
         /// <param name="RoleId"></param>
         public User(string firstName, string lastName, string email, string userName, string hash, string RoleId)
         {
+            idUser = DateTime.Now.ToFileTimeUtc().ToString();
             FirstName = firstName;
             LastName = lastName;
             Email = email;

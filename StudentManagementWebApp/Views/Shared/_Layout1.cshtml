@@ -23,6 +23,14 @@
     <link rel="stylesheet" href="@Url.Content("~/Content/Customs/navbar.css")" media="all" />
     <link rel="stylesheet" href="~/Content/Customs/Custom_1.razor.min.css" media="all" />
     <link rel="stylesheet" href="@Url.Content("//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css")" media="all" />
+    <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <!--<script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>-->
+    <!-- Custom scripts for all pages-->
+    <script src="~/Scripts/Customs/sb-admin-2.min.js"></script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
 </head>
 <body id="page-top">
@@ -94,20 +102,10 @@
     </div>
 
     <!-- Confirm Modal-->
-    @Html.Partial("_ConfirmForm")
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="~/Scripts/Customs/sb-admin-2.min.js"></script>
-    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script>
-        
+    @Html.Partial("_ConfirmForm")   
+<script>
+    jQuery(function ($) {
+        console.log('Hello j quay tay');
         $(document).ready(function () {
             $('#table_id').DataTable();
         });
@@ -151,8 +149,8 @@
             });
         }
         $(document).ready(function () {
-            var $j = jQuery.noConflict();
-            $j("#DayOfBirth").datepicker({
+            console.log($('#DayOfBirth'));
+            $("#DayOfBirth").datepicker({
                 dateFormat: "dd/mm/yy",
                 showStatus: true,
                 showWeeks: true,
@@ -163,7 +161,9 @@
                 highlightWeek: true
             });
         });
-    </script>
+        });
+
+</script>
     <script src="~/Scripts/Customs/Custom_01.js"></script>
     <!-- Scripts for chat hub-->
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
