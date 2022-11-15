@@ -110,7 +110,7 @@ namespace StudentManagementWebApp.Controllers
                     //    Session["Role"] = "Manager";
                     //}
                     FormsAuthentication.SetAuthCookie(data.UserName, false);
-                    var authTicket = new FormsAuthenticationTicket(1, data.UserName, DateTime.Now, DateTime.Now.AddMinutes(1), false, data.RoleId);
+                    var authTicket = new FormsAuthenticationTicket(1, data.UserName, DateTime.Now, DateTime.Now.AddMinutes(20), false, data.RoleId);
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
